@@ -4,7 +4,7 @@ export const StyledDefaultAppLayoutContent = styled('main')(() => ({
   display: 'flex',
   flex: 1,
   overflow: 'hidden',
-  height: '93vh',
+  height: '95vh',
 }));
 
 export const StyledDefaultAppLayoutPageContent = styled('section')(
