@@ -12,11 +12,16 @@ export default [
     languageOptions: { globals: globals.browser },
     rules: {
       "prettier/prettier": "error",
+      "react/jsx-wrap-multilines": ["error", {
+        "declaration": "parens-new-line",
+        "assignment": "parens-new-line",
+        "return": "parens-new-line",
+      }],
     },
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
+  pluginReact.configs.recommended,
   {
     rules: configPrettier.rules,
   },
