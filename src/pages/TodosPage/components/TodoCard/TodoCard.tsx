@@ -19,7 +19,7 @@ export const TodoCard: FC<TodoCardPropsWithActions> = ({
       </TodoCardTypography>
       <TodoCardTypography align="center">{description}</TodoCardTypography>
       <CircularProgressWithLabel progress={progress} />
-      <TodoCardActionBlock actions={actions} currentId={_id || ''} />
+      <TodoCardActionBlock actions={actions} currentId={_id} />
     </TodoCardRoot>
   );
 };

@@ -1,6 +1,17 @@
-import { createTheme, darken, lighten } from '@mui/material/styles';
+import { createTheme, darken, lighten, Theme } from '@mui/material/styles';
 
-export const theme = createTheme({
+export interface MyTheme extends Theme {
+  progress: {
+    notStarted: string;
+    justStarted: string;
+    almostMiddle: string;
+    afterMiddle: string;
+    almostFinish: string;
+    done: string;
+  };
+}
+
+const baseTheme = createTheme({
   palette: {
     primary: {
       dark: darken('#7aa362', 0.2),
@@ -64,3 +75,15 @@ export const theme = createTheme({
     },
   },
 });
+
+export const theme: MyTheme = {
+  ...baseTheme,
+  progress: {
+    notStarted: '#cf1002',
+    justStarted: '#fa643e',
+    almostMiddle: '#eb8b1e',
+    afterMiddle: '#f7d305',
+    almostFinish: '#a2fa3e',
+    done: '#047d00',
+  },
+};
