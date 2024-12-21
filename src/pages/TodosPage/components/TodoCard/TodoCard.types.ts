@@ -4,7 +4,7 @@ export type TodoCardProps = {
   name: string;
   description: string;
   progress: number;
-  _id?: string;
+  _id: string;
 };
 
 export type TodoCardPropsWithActions = TodoCardProps & {
