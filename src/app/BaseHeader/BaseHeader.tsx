@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import {
   StyledBaseHeaderRoot,
@@ -14,7 +13,7 @@ export interface BaseHeaderProps {
 
 export interface BaseHeaderLogoProps {
   logo?: string;
-  href?: string;
+  onClick?: VoidFunction;
 }
 
 export interface BaseHeaderSectionProps {
@@ -29,19 +28,12 @@ const BaseHeaderRoot: React.FC<BaseHeaderProps> = ({ children, ...rest }) => {
   );
 };
 
-const BaseHeaderLogo: React.FC<BaseHeaderLogoProps> = ({ logo, href = '' }) => {
-  const content = (
-    <StyledBaseHeaderLogo>
-      <StyledBaseHeaderLogoImg
-        src={logo}
-        width={62}
-        height={62}
-        alt="logo"
-      />
+const BaseHeaderLogo: React.FC<BaseHeaderLogoProps> = ({ logo, onClick }) => {
+  return (
+    <StyledBaseHeaderLogo onClick={onClick}>
+      <StyledBaseHeaderLogoImg src={logo} width={62} height={62} alt="logo" />
     </StyledBaseHeaderLogo>
   );
-
-  return <Link to={href}>{content}</Link>;
 };
 
 const BaseHeaderSection: React.FC<BaseHeaderSectionProps> = ({ children }) => {

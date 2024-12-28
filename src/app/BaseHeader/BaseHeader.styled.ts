@@ -19,6 +19,7 @@ export const StyledBaseHeaderLogo = styled(Box)(() => ({
   display: 'block',
   width: '62px',
   height: '62px',
+  cursor: 'pointer',
 }));
 
 export const StyledBaseHeaderLogoImg = styled('img')(() => ({
