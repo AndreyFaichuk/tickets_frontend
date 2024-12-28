@@ -7,6 +7,8 @@ export type TodoCardProps = {
   _id: string;
 };
 
+export type TodoCardForCreate = Omit<TodoCardProps, '_id'>;
+
 export type TodoCardPropsWithActions = TodoCardProps & {
   actions: TodoCardActionBlockProps;
 };

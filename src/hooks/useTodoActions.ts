@@ -2,14 +2,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import { TodoApi } from '../api/todo.api';
-import { TodoCardProps } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
+import {
+  TodoCardForCreate,
+  TodoCardProps,
+} from '../pages/TodosPage/components/TodoCard/TodoCard.types';
 import { todosQueryKeys } from './useTodosFetch';
 
 export const useTodoActions = () => {
   const queryClient = useQueryClient();
 
   const createNewToDo = useMutation({
-    mutationFn: async (newToDo: TodoCardProps) => {
+    mutationFn: async (newToDo: TodoCardForCreate) => {
       const response = await TodoApi.addTodo(newToDo);
       return response;
     },

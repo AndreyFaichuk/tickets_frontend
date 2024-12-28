@@ -1,12 +1,15 @@
-import { TodoCardProps } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
+import {
+  TodoCardForCreate,
+  TodoCardProps,
+} from '../pages/TodosPage/components/TodoCard/TodoCard.types';
 
 type ApiResponse<T> = Promise<T>;
 
-const BASE_URL = 'http://localhost:8000/api/todos';
+const BASE_URL = 'http://localhost:3000/todos';
 
 export class TodoApi {
-  static async addTodo(newTodo: TodoCardProps): ApiResponse<TodoCardProps> {
-    const response = await fetch(`${BASE_URL}`, {
+  static async addTodo(newTodo: TodoCardForCreate): ApiResponse<TodoCardProps> {
+    const response = await fetch(`${BASE_URL}/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,8 +22,8 @@ export class TodoApi {
   }
 
   static async updateTodo(todo: TodoCardProps): ApiResponse<TodoCardProps> {
-    const response = await fetch(`${BASE_URL}`, {
-      method: 'PUT',
+    const response = await fetch(`${BASE_URL}/update`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -41,7 +44,7 @@ export class TodoApi {
   }
 
   static async getTodos(): ApiResponse<TodoCardProps[]> {
-    const response = await fetch(`${BASE_URL}`);
+    const response = await fetch(`${BASE_URL}/all`);
     const todos: TodoCardProps[] = await response.json();
     return todos;
   }
