@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 
 import { BaseHeader } from '../BaseHeader';
@@ -8,9 +8,14 @@ import { BaseModal } from '../../components/shared/BaseModal';
 import { ToDoForm } from '../../components/shared/ToDoForm/ToDoForm';
 import { TodoValues } from '../../components/shared/ToDoForm/ToDoForm.schema';
 import { useTodoActions } from '../../hooks/useTodoActions';
-import { APP_ROUTES } from '../../constants/routes';
 
-export const DefaultAppHeader = () => {
+type DefaultAppHeaderProps = {
+  onDrawerOpen: VoidFunction;
+};
+
+export const DefaultAppHeader: FC<DefaultAppHeaderProps> = ({
+  onDrawerOpen,
+}) => {
   const { handleCreateNewToDo } = useTodoActions();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -35,7 +40,7 @@ export const DefaultAppHeader = () => {
   return (
     <>
       <BaseHeader.Root>
-        <BaseHeader.Logo logo={trelloIcon} href={APP_ROUTES.DEFAULT} />
+        <BaseHeader.Logo logo={trelloIcon} onClick={onDrawerOpen} />
         <BaseHeader.Section>
           <StyledDefaultAppHeaderButton
             onClick={handleOpen}
