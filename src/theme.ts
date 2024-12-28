@@ -73,6 +73,13 @@ const baseTheme = createTheme({
         },
       },
     },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          overflowY: 'hidden',
+        },
+      },
+    },
   },
 });
 
