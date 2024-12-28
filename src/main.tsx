@@ -1,6 +1,4 @@
-import { createRoot } from 'react-dom/client'
-import { AppProvider } from './components/AppEntry'
+import { createRoot } from 'react-dom/client';
+import { AppProvider } from './components/AppEntry';
 
-createRoot(document.getElementById('root')!).render(
-  <AppProvider />
-)
+createRoot(document.getElementById('root')!).render(<AppProvider />);

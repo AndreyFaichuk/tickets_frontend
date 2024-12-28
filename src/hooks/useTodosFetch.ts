@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { TodoApi } from '../api/todo.api';
-import { useSocketTodos } from './useSocketToDos';
 
 export const todosQueryKeys = {
   todos: {
@@ -22,10 +21,10 @@ export const useTodosFetch = () => {
     },
   });
 
-  const { isConnected } = useSocketTodos();
+  // const { isConnected } = useSocketTodos();
 
   return {
     allTodos: allTodos ?? [],
-    areAllTodosLoading: isLoading || !isConnected,
+    areAllTodosLoading: isLoading,
   };
 };

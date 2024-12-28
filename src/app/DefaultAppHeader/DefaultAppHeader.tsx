@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import { v4 as uuidv4 } from 'uuid';
 
 import { BaseHeader } from '../BaseHeader';
 import { StyledDefaultAppHeaderButton } from './DefaultAppHeader.styled';
@@ -9,6 +8,7 @@ import { BaseModal } from '../../components/shared/BaseModal';
 import { ToDoForm } from '../../components/shared/ToDoForm/ToDoForm';
 import { TodoValues } from '../../components/shared/ToDoForm/ToDoForm.schema';
 import { useTodoActions } from '../../hooks/useTodoActions';
+import { APP_ROUTES } from '../../constants/routes';
 
 export const DefaultAppHeader = () => {
   const { handleCreateNewToDo } = useTodoActions();
@@ -27,7 +27,6 @@ export const DefaultAppHeader = () => {
       description: values.description.trim(),
       name: values.name,
       progress: values.progress,
-      _id: uuidv4(),
     });
 
     handleClose();
@@ -36,7 +35,7 @@ export const DefaultAppHeader = () => {
   return (
     <>
       <BaseHeader.Root>
-        <BaseHeader.Logo logo={trelloIcon} />
+        <BaseHeader.Logo logo={trelloIcon} href={APP_ROUTES.DEFAULT} />
         <BaseHeader.Section>
           <StyledDefaultAppHeaderButton
             onClick={handleOpen}
