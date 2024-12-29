@@ -9,7 +9,6 @@ import { EditTodoModal } from './components/EditToDoModal';
 import { DeleteModal } from '../../components/shared/DeleteModal';
 import { CURRENT_MODE, CurrentToDoType } from './TodosPage.types';
 import { InfoModal } from '../../components/shared/InfoModal';
-import { Box } from '@mui/material';
 
 export const TodosPage = () => {
   const { id } = useParams();
