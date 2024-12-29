@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {
-  Box,
-  List,
   ListItem,
   ListItemButton,
   ListItemIcon,
@@ -15,11 +13,7 @@ import {
 import { DrawerOption } from './DefaultDrawer.types';
 import { APP_ROUTES } from '../../constants/routes';
 
-export const useDefaultDrawerOptions = ({
-  onClose,
-}: {
-  onClose: VoidFunction;
-}) => {
+export const useDefaultDrawerOptions = () => {
   const navigate = useNavigate();
 
   const DRAWER_OPTIONS: Array<DrawerOption> = useMemo(() => {
@@ -37,20 +31,18 @@ export const useDefaultDrawerOptions = ({
     ];
   }, []);
 
-  const renderDrawerList = () => (
-    <Box sx={{ width: 250 }} role="presentation" onClick={onClose}>
-      <List>
-        {DRAWER_OPTIONS.map(({ Icon, onClick, title }) => (
-          <ListItem onClick={onClick} key={title} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{Icon}</ListItemIcon>
-              <ListItemText primary={title} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+  const renderDrawerListItem = () => (
+    <>
+      {DRAWER_OPTIONS.map(({ Icon, onClick, title }) => (
+        <ListItem onClick={onClick} key={title} disablePadding>
+          <ListItemButton>
+            <ListItemIcon sx={{ margin: '-6px' }}>{Icon}</ListItemIcon>
+            <ListItemText primary={title} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </>
   );
 
-  return renderDrawerList;
+  return renderDrawerListItem;
 };

@@ -7,17 +7,16 @@ import {
 
 import { DefaultAppHeader } from '../DefaultAppHeader';
 import { DefaultDrawer } from '../DefaultDrawer';
+import { Box } from '@mui/material';
 
 export interface DefaultAppLayoutProps {
   children: React.ReactNode;
-  shouldShowHeader?: boolean;
-  shouldShowDrawer?: boolean;
+  isAuthorized?: boolean;
 }
 
 export const DefaultAppLayout: React.FC<DefaultAppLayoutProps> = ({
   children,
-  shouldShowDrawer = true,
-  shouldShowHeader = true,
+  isAuthorized = true,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -30,20 +29,22 @@ export const DefaultAppLayout: React.FC<DefaultAppLayoutProps> = ({
   };
 
   return (
-    <>
-      {shouldShowHeader && <DefaultAppHeader onDrawerOpen={handleDrawerOpen} />}
-      {shouldShowDrawer && (
-        <DefaultDrawer
-          isOpen={isOpen}
-          onClose={handleDrawerClose}
-          onOpen={handleDrawerOpen}
-        />
-      )}
-      <StyledDefaultAppLayoutContent>
-        <StyledDefaultAppLayoutPageContent id="app-content">
-          {children}
-        </StyledDefaultAppLayoutPageContent>
-      </StyledDefaultAppLayoutContent>
-    </>
+    <Box sx={{ display: 'flex' }}>
+      <Box sx={{ flex: 1 }}>
+        {isAuthorized && <DefaultAppHeader />}
+        <StyledDefaultAppLayoutContent>
+          {isAuthorized && (
+            <DefaultDrawer
+              isOpen={isOpen}
+              onClose={handleDrawerClose}
+              onOpen={handleDrawerOpen}
+            />
+          )}
+          <StyledDefaultAppLayoutPageContent id="app-content">
+            {children}
+          </StyledDefaultAppLayoutPageContent>
+        </StyledDefaultAppLayoutContent>
+      </Box>
+    </Box>
   );
 };

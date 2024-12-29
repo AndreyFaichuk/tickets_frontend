@@ -9,13 +9,7 @@ import { ToDoForm } from '../../components/shared/ToDoForm/ToDoForm';
 import { TodoValues } from '../../components/shared/ToDoForm/ToDoForm.schema';
 import { useTodoActions } from '../../hooks/useTodoActions';
 
-type DefaultAppHeaderProps = {
-  onDrawerOpen: VoidFunction;
-};
-
-export const DefaultAppHeader: FC<DefaultAppHeaderProps> = ({
-  onDrawerOpen,
-}) => {
+export const DefaultAppHeader: FC = () => {
   const { handleCreateNewToDo } = useTodoActions();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -40,7 +34,7 @@ export const DefaultAppHeader: FC<DefaultAppHeaderProps> = ({
   return (
     <>
       <BaseHeader.Root>
-        <BaseHeader.Logo logo={trelloIcon} onClick={onDrawerOpen} />
+        <BaseHeader.Logo logo={trelloIcon} />
         <BaseHeader.Section>
           <StyledDefaultAppHeaderButton
             onClick={handleOpen}

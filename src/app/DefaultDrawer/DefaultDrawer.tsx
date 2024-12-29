@@ -1,29 +1,47 @@
 import { FC } from 'react';
 
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Divider, IconButton, List } from '@mui/material';
 
+import { Drawer, DrawerHeader } from './DefaultDrawer.styled';
 import { useDefaultDrawerOptions } from './DefaultDrawer.hooks';
 
 type DefaultDrawerProps = {
+  isOpen: boolean;
   onClose: VoidFunction;
   onOpen: VoidFunction;
-  isOpen: boolean;
 };
 
 export const DefaultDrawer: FC<DefaultDrawerProps> = ({
+  isOpen,
   onClose,
   onOpen,
-  isOpen,
 }) => {
-  const renderDrawerList = useDefaultDrawerOptions({ onClose });
+  const renderDrawerListItem = useDefaultDrawerOptions();
+
+  const actionButton = () => {
+    if (isOpen) {
+      return (
+        <IconButton onClick={onClose}>
+          <ChevronLeftIcon />
+        </IconButton>
+      );
+    }
+
+    return (
+      <IconButton sx={{ margin: '-6px' }} onClick={onOpen}>
+        <ChevronRightIcon />
+      </IconButton>
+    );
+  };
 
   return (
-    <SwipeableDrawer
-      anchor="left"
-      open={isOpen}
-      onClose={onClose}
-      onOpen={onOpen}>
-      {renderDrawerList()}
-    </SwipeableDrawer>
+    <Drawer variant="permanent" open={isOpen}>
+      <DrawerHeader>{actionButton()}</DrawerHeader>
+      <Divider />
+      <List>{renderDrawerListItem()}</List>
+      <Divider />
+    </Drawer>
   );
 };

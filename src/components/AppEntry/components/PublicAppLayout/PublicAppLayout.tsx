@@ -6,7 +6,7 @@ import { AuthPage } from '../../../../pages/AuthPage';
 
 export const PublicAppLayout = () => {
   return (
-    <DefaultAppLayout shouldShowDrawer={false} shouldShowHeader={false}>
+    <DefaultAppLayout isAuthorized={false}>
       <Routes>
         <Route path={APP_ROUTES.AUTH} element={<AuthPage />} />
         <Route path="*" element={<Navigate to={APP_ROUTES.AUTH} />} />
