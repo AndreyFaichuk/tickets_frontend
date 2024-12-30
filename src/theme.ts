@@ -52,6 +52,14 @@ const baseTheme = createTheme({
         },
       },
     },
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          backgroundColor: lighten('#acc2b2', 0.8),
+        },
+      },
+    },
+
     MuiCard: {
       styleOverrides: {
         root: {

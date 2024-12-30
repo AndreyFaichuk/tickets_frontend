@@ -1,0 +1,1 @@
+export { FirstStepRegistrationForm } from './FirstStepRegistrationForm';
