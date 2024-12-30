@@ -12,7 +12,7 @@ import { PublicAppLayout } from './components/PublicAppLayout';
 const queryClient = new QueryClient();
 
 const App = () => {
-  return true ? <LoggedInAppLayout /> : <PublicAppLayout />;
+  return false ? <LoggedInAppLayout /> : <PublicAppLayout />;
 };
 
 export const AppProvider = () => {
