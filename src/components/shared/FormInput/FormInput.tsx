@@ -8,12 +8,12 @@ export const FormInput = ({ name, label, ...rest }: FormInputProps) => {
 
   return (
     <Controller
-      {...rest}
       name={name}
       control={control}
       defaultValue=""
       render={({ field, fieldState: { error } }) => (
         <TextField
+          {...rest}
           {...field}
           label={label}
           variant="outlined"

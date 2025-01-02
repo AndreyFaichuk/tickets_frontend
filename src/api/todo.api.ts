@@ -2,8 +2,7 @@ import {
   TodoCardForCreate,
   TodoCardProps,
 } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
-
-type ApiResponse<T> = Promise<T>;
+import { ApiResponse } from '../types';
 
 const BASE_URL = 'http://localhost:3000/todos';
 

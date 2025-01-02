@@ -22,7 +22,9 @@ export const FormDatePicker = ({ name, label, ...rest }: DatePickerProps) => {
       defaultValue=""
       render={({ field, fieldState: { error } }) => {
         const handleChange = (date: Date) => {
-          field.onChange(date ? date.toISOString() : '');
+          const formattedDate = dayjs(date).format('YYYY-MM-DD');
+
+          field.onChange(formattedDate);
         };
 
         const value = field.value ? dayjs(field.value) : null;

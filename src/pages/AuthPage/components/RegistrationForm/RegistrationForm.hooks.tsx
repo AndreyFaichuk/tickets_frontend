@@ -26,6 +26,7 @@ export const useRegistrationFormManagement = ({
 
   const handleNextStepForm = useCallback(async () => {
     const isValid = await trigger(currentFieldOptions.validate);
+    console.log(29);
 
     if (!isValid || !currentFieldOptions.nextStep) return;
 

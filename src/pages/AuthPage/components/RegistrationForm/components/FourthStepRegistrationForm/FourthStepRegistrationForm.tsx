@@ -7,16 +7,26 @@ import { FormInput } from '../../../../../../components/shared/FormInput';
 
 export const FourthStepRegistrationForm: FC = () => {
   return (
-    <Stack direction="row" justifyContent="space-between">
-      <Stack>
-        <FormDatePicker label="Date of birth" name="dateOfBirth" />
-        <FormCheckBox label="Remember me?" name="isRememberMe" />
-      </Stack>
+    <>
+      <Stack direction="row" justifyContent="space-between" spacing={2}>
+        <Stack spacing={2}>
+          <FormDatePicker label="Date of Birth" name="dateOfBirth" />
+          <FormCheckBox label="Remember Me?" name="isRememberMe" />
+        </Stack>
 
-      <Stack justifyContent="center">
-        <FormInput name="password" label="Password" />
-        <FormInput name="repeatPassword" label="Repeat password" />
+        <Stack
+          justifyContent="center"
+          direction="column"
+          sx={{ minWidth: { xs: '100%', sm: '250px' } }}
+          spacing={2}>
+          <FormInput name="password" label="Password" type="password" />
+          <FormInput
+            name="repeatPassword"
+            label="Repeat Password"
+            type="password"
+          />
+        </Stack>
       </Stack>
-    </Stack>
+    </>
   );
 };
