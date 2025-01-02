@@ -1,5 +1,10 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { Autocomplete, AutocompleteProps, TextField } from '@mui/material';
+import {
+  Autocomplete,
+  AutocompleteProps,
+  FormHelperText,
+  TextField,
+} from '@mui/material';
 
 type SelectOption = {
   value: string;
@@ -30,23 +35,30 @@ export const FormSelectWithSearch = ({
       name={name}
       control={control}
       defaultValue=""
-      render={({ field }) => {
+      render={({ field, fieldState: { error } }) => {
         const { onChange, value } = field;
 
         return (
-          <Autocomplete
-            {...rest}
-            value={options.find((option) => option.value === value) || null}
-            onChange={(_, newValue) => {
-              onChange(newValue ? newValue.value : '');
-            }}
-            options={options}
-            getOptionLabel={(option) => option.label}
-            isOptionEqualToValue={(option, value) =>
-              option.value === value.value
-            }
-            renderInput={(params) => <TextField {...params} label={label} />}
-          />
+          <>
+            <Autocomplete
+              {...rest}
+              value={options.find((option) => option.value === value) || null}
+              onChange={(_, newValue) => {
+                onChange(newValue ? newValue.value : '');
+              }}
+              options={options}
+              getOptionLabel={(option) => option.label}
+              isOptionEqualToValue={(option, value) =>
+                option.value === value.value
+              }
+              renderInput={(params) => <TextField {...params} label={label} />}
+            />
+            {error && (
+              <FormHelperText error sx={{ marginTop: '4px' }}>
+                {error.message}
+              </FormHelperText>
+            )}
+          </>
         );
       }}
     />

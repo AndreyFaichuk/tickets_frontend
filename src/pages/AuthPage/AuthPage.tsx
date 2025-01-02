@@ -8,10 +8,15 @@ import {
 import { APP_ROUTES } from '../../constants/routes';
 import { RegistrationForm } from './components/RegistrationForm';
 import { RegisteredFormValues } from './components/RegistrationForm/RegistrationForm.schema';
+import { useAuthUser } from './hooks/useAuthUser';
 
 export const AuthPage = () => {
+  const { handleRegisterUser } = useAuthUser();
+
   const handleSubmit = (values: RegisteredFormValues) => {
-    console.log(values, 'values 14');
+    const { repeatPassword, ...valuesWithoutRepeatPassword } = values;
+
+    handleRegisterUser(valuesWithoutRepeatPassword);
   };
 
   return (

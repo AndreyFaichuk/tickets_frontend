@@ -16,6 +16,7 @@ import {
 import { AminationWrapper } from '../../../../components/shared/AminationWrapper';
 
 import { useRegistrationFormManagement } from './RegistrationForm.hooks';
+import { REGISTRATIONS_STEPS } from './RegistrationForm.constants';
 
 type RegistrationFormProps = {
   onSubmit: (values: RegisteredFormValues) => void;
@@ -24,6 +25,7 @@ type RegistrationFormProps = {
 export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
   const methods = useForm<RegisteredFormValues>({
     resolver: zodResolver(registeredSchema),
+    mode: 'onChange',
   });
 
   const { currentStep, onBack, onNext, steps, currentStepOptions } =
@@ -41,6 +43,33 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
     },
   );
 
+  const getActionButton = () => {
+    if (currentStep === REGISTRATIONS_STEPS.fourthStep) {
+      return (
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="secondary"
+          disabled={!methods.formState.isValid}>
+          Sign Up
+        </Button>
+      );
+    }
+
+    return (
+      <Button
+        type="button"
+        fullWidth
+        variant="contained"
+        color="secondary"
+        onClick={onNext}
+        endIcon={<SendIcon />}>
+        Next
+      </Button>
+    );
+  };
+
   return (
     <FormProvider {...methods}>
       <StyledRegisteredFormRoot onSubmit={submit}>
@@ -54,15 +83,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
               Back
             </Button>
           )}
-          <Button
-            type={currentStepOptions.nextStep ? 'button' : 'submit'}
-            fullWidth
-            variant="contained"
-            color="secondary"
-            onClick={onNext}
-            endIcon={<SendIcon />}>
-            {currentStepOptions.nextStep ? 'Next' : 'Sign up'}
-          </Button>
+          {getActionButton()}
         </StyledRegisteredFormButtonsWrapper>
       </StyledRegisteredFormRoot>
     </FormProvider>

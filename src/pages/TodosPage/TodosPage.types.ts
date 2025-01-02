@@ -1,4 +1,4 @@
-export type ValuesToType<T> = T[keyof T];
+import { ValuesToType } from '../../types';
 
 export const CURRENT_MODE = {
   view: 'view',
