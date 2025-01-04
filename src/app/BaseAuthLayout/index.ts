@@ -1,0 +1,1 @@
+export { BaseAuthLayout } from './BaseAuthLayout';

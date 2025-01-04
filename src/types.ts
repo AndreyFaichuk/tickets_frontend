@@ -13,3 +13,10 @@ export type AxiosErrorResponse = AxiosError & {
     data: AxiosErrorResponseData;
   };
 };
+
+export type AuthType = 'registration' | 'login';
+
+export type AuthContent = {
+  title: string;
+  subtitle: React.ReactNode;
+};
