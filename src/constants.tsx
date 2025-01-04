@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AuthContent, AuthType } from './types';
+import { AuthContent, AuthType, ValuesToType } from './types';
 import { APP_ROUTES } from './constants/routes';
 
 export const AUTH_CONTENT: Record<AuthType, AuthContent> = {
@@ -20,9 +20,17 @@ export const AUTH_CONTENT: Record<AuthType, AuthContent> = {
       </>
     ),
   },
-};
+} as const;
 
 export const AUTH: Record<AuthType, AuthType> = {
   login: 'login',
   registration: 'registration',
-};
+} as const;
+
+export const PAGES_MAP = {
+  dashboard: 'Dashboard',
+  settings: 'Settings',
+  logout: 'Logout',
+} as const;
+
+export type Pages = ValuesToType<typeof PAGES_MAP>;

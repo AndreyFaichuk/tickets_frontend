@@ -1,8 +1,4 @@
-import { Box, Stack, styled } from '@mui/material';
-
-export const TodosRoot = styled(Box)(() => ({
-  flex: 1,
-}));
+import { Stack, styled } from '@mui/material';
 
 export const TodosStack = styled(Stack)(() => ({
   flexWrap: 'wrap',
