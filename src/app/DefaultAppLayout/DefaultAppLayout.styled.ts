@@ -14,7 +14,7 @@ export const StyledDefaultAppLayoutPageContent = styled('section')(
     overflow: 'auto',
     padding: theme.spacing(4, 2, 2, 2),
     backgroundColor: theme.palette.primary.main,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     borderRadius: theme.shape.borderRadius,
     margin: theme.spacing(1.5),
   }),

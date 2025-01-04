@@ -3,12 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useTodosFetch } from '../../hooks/useTodosFetch';
 import { TodoCard } from './components/TodoCard';
-import { TodosRoot, TodosStack } from './TodosPage.styled';
+import { TodosStack } from './TodosPage.styled';
 import { Skeletons } from '../../components/shared/Skeletons';
 import { EditTodoModal } from './components/EditToDoModal';
 import { DeleteModal } from '../../components/shared/DeleteModal';
 import { CURRENT_MODE, CurrentToDoType } from './TodosPage.types';
 import { InfoModal } from '../../components/shared/InfoModal';
+import { BasePage } from '../../app/BasePage';
+import { PAGES_MAP } from '../../constants';
 
 export const TodosPage = () => {
   const { id } = useParams();
@@ -55,7 +57,8 @@ export const TodosPage = () => {
   );
 
   return (
-    <TodosRoot>
+    <BasePage.Root>
+      <BasePage.Title title={PAGES_MAP.dashboard} />
       <TodosStack spacing={2} useFlexGap>
         {areAllTodosLoading ? (
           <Skeletons numbers={10} />
@@ -79,6 +82,6 @@ export const TodosPage = () => {
 
       {id && <EditTodoModal currentToDoId={id} />}
       {currentToDo.currentId && modals[currentToDo.mode]}
-    </TodosRoot>
+    </BasePage.Root>
   );
 };

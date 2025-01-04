@@ -18,7 +18,7 @@ export const DefaultDrawer: FC<DefaultDrawerProps> = ({
   onClose,
   onOpen,
 }) => {
-  const renderDrawerListItem = useDefaultDrawerOptions();
+  const renderDrawerListItem = useDefaultDrawerOptions({ isOpen });
 
   const actionButton = () => {
     if (isOpen) {
@@ -41,7 +41,6 @@ export const DefaultDrawer: FC<DefaultDrawerProps> = ({
       <DrawerHeader>{actionButton()}</DrawerHeader>
       <Divider />
       <List>{renderDrawerListItem()}</List>
-      <Divider />
     </Drawer>
   );
 };

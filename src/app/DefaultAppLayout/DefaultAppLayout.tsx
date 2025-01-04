@@ -4,19 +4,17 @@ import {
   StyledDefaultAppLayoutContent,
   StyledDefaultAppLayoutPageContent,
 } from './DefaultAppLayout.styled';
+import { Box } from '@mui/material';
 
 import { DefaultAppHeader } from '../DefaultAppHeader';
 import { DefaultDrawer } from '../DefaultDrawer';
-import { Box } from '@mui/material';
 
 export interface DefaultAppLayoutProps {
   children: React.ReactNode;
-  isAuthorized?: boolean;
 }
 
 export const DefaultAppLayout: React.FC<DefaultAppLayoutProps> = ({
   children,
-  isAuthorized = true,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -31,15 +29,13 @@ export const DefaultAppLayout: React.FC<DefaultAppLayoutProps> = ({
   return (
     <Box sx={{ display: 'flex' }}>
       <Box sx={{ flex: 1 }}>
-        {isAuthorized && <DefaultAppHeader />}
+        <DefaultAppHeader />
         <StyledDefaultAppLayoutContent>
-          {isAuthorized && (
-            <DefaultDrawer
-              isOpen={isOpen}
-              onClose={handleDrawerClose}
-              onOpen={handleDrawerOpen}
-            />
-          )}
+          <DefaultDrawer
+            isOpen={isOpen}
+            onClose={handleDrawerClose}
+            onOpen={handleDrawerOpen}
+          />
           <StyledDefaultAppLayoutPageContent id="app-content">
             {children}
           </StyledDefaultAppLayoutPageContent>

@@ -10,6 +10,7 @@ import {
 import { LoginFormValues, loginSchema } from './LoginForm.shema';
 import { FormInput } from '../../../../components/shared/FormInput';
 import { AminationWrapper } from '../../../../components/shared/AminationWrapper';
+import { FormCheckBox } from '../../../../components/shared/FormCheckBox';
 
 type LoginFormProps = {
   onSubmit: (values: LoginFormValues) => void;
@@ -31,6 +32,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
             <FormInput name="email" label="Email" />
             <FormInput name="password" label="Password" />
           </StyledLoginFormInputsWrapper>
+          <FormCheckBox label="Remember Me?" name="isRememberMe" />
         </AminationWrapper>
 
         <Button
