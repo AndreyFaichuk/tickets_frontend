@@ -1,4 +1,5 @@
 import { useMemo, useState, useCallback } from 'react';
+import { UseFormTrigger } from 'react-hook-form';
 import {
   FIELDS,
   FieldsToRegistration,
@@ -8,7 +9,6 @@ import { FirstStepRegistrationForm } from './components/FirstStepRegistrationFor
 import { SecondStepRegistrationForm } from './components/SecondStepRegistrationForm';
 import { ThirdStepRegistrationForm } from './components/ThirdStepRegistrationForm';
 import { FourthStepRegistrationForm } from './components/FourthStepRegistrationForm';
-import { UseFormTrigger } from 'react-hook-form';
 import { RegisteredFormValues } from './RegistrationForm.schema';
 
 type useRegistrationFormManagementProps = {
@@ -22,32 +22,31 @@ export const useRegistrationFormManagement = ({
     REGISTRATIONS_STEPS.firstStep,
   );
 
-  const currentFieldOptions = useMemo(() => FIELDS[currentStep], [currentStep]);
+  const currentFieldOptions = FIELDS[currentStep];
 
-  const handleNextStepForm = useCallback(async () => {
+  const handleNextStepForm = async () => {
+    if (currentStep === REGISTRATIONS_STEPS.fourthStep) {
+      return;
+    }
     const isValid = await trigger(currentFieldOptions.validate);
-    console.log(29);
 
     if (!isValid || !currentFieldOptions.nextStep) return;
 
     setCurrentStep(currentFieldOptions.nextStep);
-  }, [currentFieldOptions]);
+  };
 
-  const handleBack = useCallback(() => {
+  const handleBack = () => {
     if (!currentFieldOptions.backStep) return;
 
     setCurrentStep(currentFieldOptions.backStep);
-  }, [currentFieldOptions]);
+  };
 
-  const STEPS: Record<FieldsToRegistration, { render: JSX.Element }> =
-    useMemo(() => {
-      return {
-        firstStep: { render: <FirstStepRegistrationForm /> },
-        secondStep: { render: <SecondStepRegistrationForm /> },
-        thirdStep: { render: <ThirdStepRegistrationForm /> },
-        fourthStep: { render: <FourthStepRegistrationForm /> },
-      };
-    }, []);
+  const STEPS: Record<FieldsToRegistration, { render: JSX.Element }> = {
+    firstStep: { render: <FirstStepRegistrationForm /> },
+    secondStep: { render: <SecondStepRegistrationForm /> },
+    thirdStep: { render: <ThirdStepRegistrationForm /> },
+    fourthStep: { render: <FourthStepRegistrationForm /> },
+  };
 
   return {
     onNext: handleNextStepForm,

@@ -33,6 +33,8 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
       trigger: methods.trigger,
     });
 
+  const isLastStep = currentStep === REGISTRATIONS_STEPS.fourthStep;
+
   const submit = methods.handleSubmit(
     (data) => {
       console.log('Form submitted successfully:', data);
@@ -42,33 +44,6 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
       console.error('Validation errors:', errors);
     },
   );
-
-  const getActionButton = () => {
-    if (currentStep === REGISTRATIONS_STEPS.fourthStep) {
-      return (
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="secondary"
-          disabled={!methods.formState.isValid}>
-          Sign Up
-        </Button>
-      );
-    }
-
-    return (
-      <Button
-        type="button"
-        fullWidth
-        variant="contained"
-        color="secondary"
-        onClick={onNext}
-        endIcon={<SendIcon />}>
-        Next
-      </Button>
-    );
-  };
 
   return (
     <FormProvider {...methods}>
@@ -83,7 +58,16 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
               Back
             </Button>
           )}
-          {getActionButton()}
+          <Button
+            key={isLastStep ? 'finish' : 'next'}
+            type={isLastStep ? 'submit' : 'button'}
+            fullWidth
+            onClick={isLastStep ? undefined : onNext}
+            endIcon={isLastStep ? <SendIcon /> : null}
+            variant="contained"
+            color="secondary">
+            {isLastStep ? 'Sign Up' : 'Next'}
+          </Button>
         </StyledRegisteredFormButtonsWrapper>
       </StyledRegisteredFormRoot>
     </FormProvider>

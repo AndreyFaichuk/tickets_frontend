@@ -8,11 +8,14 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { theme } from '../../theme';
 import { LoggedInAppLayout } from './components/LoggedInAppLayout';
 import { PublicAppLayout } from './components/PublicAppLayout';
+import { useAuth } from './hooks/useAuth';
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  return false ? <LoggedInAppLayout /> : <PublicAppLayout />;
+  const { isAuthenticated } = useAuth();
+
+  return isAuthenticated ? <LoggedInAppLayout /> : <PublicAppLayout />;
 };
 
 export const AppProvider = () => {
