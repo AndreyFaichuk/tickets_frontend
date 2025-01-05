@@ -18,9 +18,9 @@ export const TodoCardActionBlock = ({
   const handleEdit = () => {
     actions.onEdit(currentId);
   };
-  const handleView = () => {
-    actions.onView(currentId);
-  };
+  // const handleView = () => {
+  //   actions.onView(currentId);
+  // };
 
   return (
     <Stack direction="row" justifyContent="space-between">
@@ -28,9 +28,9 @@ export const TodoCardActionBlock = ({
         <IconButton aria-label="edit" onClick={handleEdit}>
           <ModeOutlinedIcon />
         </IconButton>
-        <IconButton aria-label="view" onClick={handleView}>
+        {/* <IconButton aria-label="view" onClick={handleView}>
           <RemoveRedEyeOutlinedIcon />
-        </IconButton>
+        </IconButton> */}
       </Stack>
       <IconButton aria-label="delete" color="warning" onClick={handleDelete}>
         <DeleteIcon />

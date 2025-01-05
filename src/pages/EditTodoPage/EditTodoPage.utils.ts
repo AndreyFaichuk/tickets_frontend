@@ -1,5 +1,5 @@
-import { TodoValues } from '../../../../components/shared/ToDoForm/ToDoForm.schema';
-import { TodoCardProps } from '../TodoCard/TodoCard.types';
+import { TodoValues } from '../../components/shared/ToDoForm/ToDoForm.schema';
+import { TodoCardProps } from '../TodosPage/components/TodoCard/TodoCard.types';
 
 export const normalizeFormData = (todo: TodoCardProps): TodoValues => {
   return {

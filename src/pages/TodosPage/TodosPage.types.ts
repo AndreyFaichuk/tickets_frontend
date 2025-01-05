@@ -1,7 +1,6 @@
 import { ValuesToType } from '../../types';
 
 export const CURRENT_MODE = {
-  view: 'view',
   delete: 'delete',
 } as const;
 

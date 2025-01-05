@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { RegisterNewUserValues } from '../components/RegistrationForm/RegistrationForm.schema';
 import { AuthApi } from '../../../api/auth.api';
 import { AxiosErrorResponse } from '../../../types';
-import { APP_ROUTES } from '../../../constants/routes';
+import { ADD_LOGGED_IN_ROUTES } from '../../../constants/routes';
 import { LoginFormValues } from '../../LoginPage/components/LoginForm/LoginForm.shema';
 
 export const useAuthUser = () => {
@@ -21,7 +21,7 @@ export const useAuthUser = () => {
     },
     onSuccess: () => {
       toast.success('You successfully logged in!');
-      navigation(APP_ROUTES.DEFAULT);
+      navigation(ADD_LOGGED_IN_ROUTES.TODOS);
     },
   });
 
@@ -35,7 +35,7 @@ export const useAuthUser = () => {
     },
     onSuccess: () => {
       toast.success('You successfully logged in!');
-      navigation(APP_ROUTES.DEFAULT);
+      navigation(ADD_LOGGED_IN_ROUTES.TODOS);
     },
   });
 

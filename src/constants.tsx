@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { AuthContent, AuthType, ValuesToType } from './types';
-import { APP_ROUTES } from './constants/routes';
+import { ADD_PUBLIC_ROUTES } from './constants/routes';
 
 export const AUTH_CONTENT: Record<AuthType, AuthContent> = {
   registration: {
     title: 'Create an account',
     subtitle: (
       <>
-        Already have an account? <Link to={APP_ROUTES.LOGIN}>Log in</Link>
+        Already have an account?{' '}
+        <Link to={ADD_PUBLIC_ROUTES.LOGIN}>Log in</Link>
       </>
     ),
   },
@@ -16,7 +17,7 @@ export const AUTH_CONTENT: Record<AuthType, AuthContent> = {
     subtitle: (
       <>
         Do not have an account?{' '}
-        <Link to={APP_ROUTES.REGISTRATION}>Sign in</Link>
+        <Link to={ADD_PUBLIC_ROUTES.REGISTRATION}>Sign in</Link>
       </>
     ),
   },
@@ -31,6 +32,7 @@ export const PAGES_MAP = {
   dashboard: 'Dashboard',
   settings: 'Settings',
   logout: 'Logout',
+  editTodo: 'Edit Todo',
 } as const;
 
 export type Pages = ValuesToType<typeof PAGES_MAP>;

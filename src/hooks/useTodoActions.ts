@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 import { TodoApi } from '../api/todo.api';
 import {
@@ -7,9 +8,11 @@ import {
   TodoCardProps,
 } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
 import { todosQueryKeys } from './useTodosFetch';
+import { ADD_LOGGED_IN_ROUTES } from '../constants/routes';
 
 export const useTodoActions = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const createNewToDo = useMutation({
     mutationFn: async (newToDo: TodoCardForCreate) => {
@@ -39,6 +42,8 @@ export const useTodoActions = () => {
       queryClient.invalidateQueries({
         queryKey: todosQueryKeys.todos.all(),
       });
+
+      navigate(ADD_LOGGED_IN_ROUTES.TODOS);
     },
   });
 
