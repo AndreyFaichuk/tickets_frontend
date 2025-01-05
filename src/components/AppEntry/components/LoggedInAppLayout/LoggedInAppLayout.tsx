@@ -1,15 +1,23 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { DefaultAppLayout } from '../../../../app/DefaultAppLayout';
-import { APP_ROUTES } from '../../../../constants/routes';
+import { ADD_LOGGED_IN_ROUTES } from '../../../../constants/routes';
 import { TodosPage } from '../../../../pages/TodosPage';
+import { EditTodoPage } from '../../../../pages/EditTodoPage';
 
 export const LoggedInAppLayout = () => {
   return (
     <DefaultAppLayout>
       <Routes>
-        <Route path={APP_ROUTES.TODOS} element={<TodosPage />} />
-        <Route path="*" element={<Navigate to={APP_ROUTES.TODOS} />} />
+        <Route path={ADD_LOGGED_IN_ROUTES.TODOS} element={<TodosPage />} />
+        <Route
+          path={ADD_LOGGED_IN_ROUTES.EDIT_TODO}
+          element={<EditTodoPage />}
+        />
+        <Route
+          path="*"
+          element={<Navigate to={ADD_LOGGED_IN_ROUTES.TODOS} />}
+        />
       </Routes>
     </DefaultAppLayout>
   );

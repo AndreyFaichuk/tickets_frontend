@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 
 import { DrawerOption } from './DefaultDrawer.types';
-import { APP_ROUTES } from '../../constants/routes';
+import { ADD_LOGGED_IN_ROUTES } from '../../constants/routes';
 import { useAuth } from '../../components/AppEntry/hooks/useAuth';
 
 type useDefaultDrawerOptionsProps = {
@@ -33,7 +33,7 @@ export const useDefaultDrawerOptions = ({
       {
         title: 'Dashboard',
         Icon: <DashboardIcon />,
-        onClick: () => navigate(APP_ROUTES.DEFAULT),
+        onClick: () => navigate(ADD_LOGGED_IN_ROUTES.TODOS),
       },
       {
         title: 'Settings',

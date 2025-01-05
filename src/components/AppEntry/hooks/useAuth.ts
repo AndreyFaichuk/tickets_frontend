@@ -1,10 +1,13 @@
 import { useEffect, useCallback } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { APP_ROUTES } from '../../../constants/routes';
+import {
+  ADD_LOGGED_IN_ROUTES,
+  ADD_PUBLIC_ROUTES,
+} from '../../../constants/routes';
 
 const USER_SESSION_COOKIE = 'user_id';
-const PUBLIC_ROUTES = [APP_ROUTES.LOGIN, APP_ROUTES.REGISTRATION];
+const PUBLIC_ROUTES = Object.keys(ADD_PUBLIC_ROUTES);
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -16,13 +19,13 @@ export const useAuth = () => {
 
   useEffect(() => {
     if (isAuthenticated && PUBLIC_ROUTES.includes(location.pathname)) {
-      navigate(APP_ROUTES.TODOS, { replace: true });
+      navigate(ADD_LOGGED_IN_ROUTES.TODOS, { replace: true });
     }
   }, [isAuthenticated, location.pathname]);
 
   const handleLogout = useCallback(() => {
     removeCookie(USER_SESSION_COOKIE, { path: '/' });
-    navigate(APP_ROUTES.LOGIN, { replace: true });
+    navigate(ADD_PUBLIC_ROUTES.LOGIN, { replace: true });
   }, []);
 
   return { isAuthenticated, handleLogout };
