@@ -5,17 +5,17 @@ import {
   ADD_LOGGED_IN_ROUTES,
   ADD_PUBLIC_ROUTES,
 } from '../../../constants/routes';
+import { COOKIE_NAMES } from '../../../constants';
 
-const USER_SESSION_COOKIE = 'user_id';
 const PUBLIC_ROUTES = Object.keys(ADD_PUBLIC_ROUTES);
 
 export const useAuth = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [cookies, _, removeCookie] = useCookies([USER_SESSION_COOKIE]);
+  const [cookies, _, removeCookie] = useCookies([COOKIE_NAMES.sessionId]);
 
-  const isAuthenticated = Boolean(cookies[USER_SESSION_COOKIE]);
+  const isAuthenticated = Boolean(cookies[COOKIE_NAMES.sessionId]);
 
   useEffect(() => {
     if (isAuthenticated && PUBLIC_ROUTES.includes(location.pathname)) {
@@ -24,7 +24,7 @@ export const useAuth = () => {
   }, [isAuthenticated, location.pathname]);
 
   const handleLogout = useCallback(() => {
-    removeCookie(USER_SESSION_COOKIE, { path: '/' });
+    removeCookie(COOKIE_NAMES.sessionId, { path: '/' });
     navigate(ADD_PUBLIC_ROUTES.LOGIN, { replace: true });
   }, []);
 

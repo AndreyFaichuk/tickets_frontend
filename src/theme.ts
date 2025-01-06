@@ -59,25 +59,24 @@ const baseTheme = createTheme({
         },
       },
     },
-
     MuiCard: {
       styleOverrides: {
         root: {
-          padding: '10px',
+          padding: '8px',
         },
       },
     },
     MuiContainer: {
       styleOverrides: {
         root: {
-          padding: '10px',
+          padding: '8px',
         },
       },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          padding: '10px',
+          padding: '8px',
         },
       },
     },

@@ -2,12 +2,16 @@ import { FC, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 
 import { BaseHeader } from '../BaseHeader';
-import { StyledDefaultAppHeaderButton } from './DefaultAppHeader.styled';
+import {
+  StyledDefaultAppHeaderButton,
+  StyledDefaultAppHeaderUserMenu,
+} from './DefaultAppHeader.styled';
 import trelloIcon from '../../assests/icon/todoList.svg';
 import { BaseModal } from '../../components/shared/BaseModal';
 import { ToDoForm } from '../../components/shared/ToDoForm/ToDoForm';
 import { TodoValues } from '../../components/shared/ToDoForm/ToDoForm.schema';
 import { useTodoActions } from '../../hooks/useTodoActions';
+import { DefaultUserMenu } from '../DefaultUserMenu';
 
 export const DefaultAppHeader: FC = () => {
   const { handleCreateNewToDo } = useTodoActions();
@@ -42,6 +46,11 @@ export const DefaultAppHeader: FC = () => {
             startIcon={<AddIcon />}>
             Add new
           </StyledDefaultAppHeaderButton>
+        </BaseHeader.Section>
+        <BaseHeader.Section>
+          <StyledDefaultAppHeaderUserMenu alignItems="flex-end">
+            <DefaultUserMenu />
+          </StyledDefaultAppHeaderUserMenu>
         </BaseHeader.Section>
       </BaseHeader.Root>
 

@@ -28,4 +28,6 @@ export const StyledBaseHeaderLogoImg = styled('img')(() => ({
   objectFit: 'contain',
 }));
 
-export const StyledBaseHeaderSection = styled(Box)(() => ({}));
+export const StyledBaseHeaderSection = styled(Box)(() => ({
+  flex: 1,
+}));
