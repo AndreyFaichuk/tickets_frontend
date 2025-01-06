@@ -36,3 +36,7 @@ export const PAGES_MAP = {
 } as const;
 
 export type Pages = ValuesToType<typeof PAGES_MAP>;
+
+export const COOKIE_NAMES = {
+  sessionId: 'sessionId',
+} as const;
