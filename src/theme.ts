@@ -1,6 +1,12 @@
-import { createTheme, darken, lighten, Theme } from '@mui/material/styles';
+import {
+  createTheme,
+  darken,
+  lighten,
+  Theme,
+  Palette,
+} from '@mui/material/styles';
 
-export interface MyTheme extends Theme {
+export interface MyPalette extends Palette {
   progress: {
     notStarted: string;
     justStarted: string;
@@ -9,6 +15,15 @@ export interface MyTheme extends Theme {
     almostFinish: string;
     done: string;
   };
+  card: {
+    light: string;
+    medium: string;
+    dark: string;
+  };
+}
+
+export interface MyTheme extends Theme {
+  palette: MyPalette;
 }
 
 const baseTheme = createTheme({
@@ -100,12 +115,20 @@ const baseTheme = createTheme({
 
 export const theme: MyTheme = {
   ...baseTheme,
-  progress: {
-    notStarted: '#cf1002',
-    justStarted: '#fa643e',
-    almostMiddle: '#eb8b1e',
-    afterMiddle: '#f7d305',
-    almostFinish: '#a2fa3e',
-    done: '#047d00',
+  palette: {
+    ...baseTheme.palette,
+    progress: {
+      notStarted: '#cf1002',
+      justStarted: '#fa643e',
+      almostMiddle: '#eb8b1e',
+      afterMiddle: '#f7d305',
+      almostFinish: '#a2fa3e',
+      done: '#047d00',
+    },
+    card: {
+      light: lighten('#AEC09A', 0.2),
+      medium: '#AEC09A',
+      dark: darken('#AEC09A', 0.2),
+    },
   },
 };

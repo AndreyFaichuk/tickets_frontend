@@ -1,11 +1,12 @@
-import { MenuItem, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useAuth } from '../../components/AppEntry/hooks/useAuth';
 import { UserMenuOption } from './DefaultUserMenu.types';
+import { StyledDefaultMenuItem } from './DefaultUserMenu.styled';
 
 export const useDefaultUserMenuOptions = () => {
   const { handleLogout } = useAuth();
 
-  const USER_MENU__OPTIONS: Array<UserMenuOption> = [
+  const USER_MENU_OPTIONS: Array<UserMenuOption> = [
     {
       title: 'Logout',
       onClick: () => handleLogout(),
@@ -13,10 +14,10 @@ export const useDefaultUserMenuOptions = () => {
   ];
 
   const renderUserMenuListItem = () => {
-    return USER_MENU__OPTIONS.map(({ onClick, title }) => (
-      <MenuItem key={title} onClick={onClick}>
-        <Typography sx={{ textAlign: 'center' }}>{title}</Typography>
-      </MenuItem>
+    return USER_MENU_OPTIONS.map(({ onClick, title }) => (
+      <StyledDefaultMenuItem key={title} onClick={onClick}>
+        <Typography>{title}</Typography>
+      </StyledDefaultMenuItem>
     ));
   };
 

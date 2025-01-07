@@ -17,7 +17,7 @@ export const useTodoActions = () => {
   const createNewToDo = useMutation({
     mutationFn: async (newToDo: TodoCardForCreate) => {
       const response = await TodoApi.addTodo(newToDo);
-      return response;
+      return response.data;
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -31,7 +31,7 @@ export const useTodoActions = () => {
   const updateToDo = useMutation({
     mutationFn: async (toDo: TodoCardProps) => {
       const response = await TodoApi.updateTodo(toDo);
-      return response;
+      return response.data;
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -50,7 +50,7 @@ export const useTodoActions = () => {
   const deleteToDo = useMutation({
     mutationFn: async (id: string) => {
       const response = await TodoApi.deleteTodo(id);
-      return response;
+      return response.data;
     },
     onError: (error: Error) => {
       toast.error(error.message);

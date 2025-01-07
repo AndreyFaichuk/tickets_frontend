@@ -35,15 +35,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
 
   const isLastStep = currentStep === REGISTRATIONS_STEPS.fourthStep;
 
-  const submit = methods.handleSubmit(
-    (data) => {
-      console.log('Form submitted successfully:', data);
-      onSubmit(data);
-    },
-    (errors) => {
-      console.error('Validation errors:', errors);
-    },
-  );
+  const submit = methods.handleSubmit(onSubmit);
 
   return (
     <FormProvider {...methods}>

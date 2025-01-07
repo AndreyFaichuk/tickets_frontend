@@ -10,7 +10,9 @@ import { LoggedInAppLayout } from './components/LoggedInAppLayout';
 import { PublicAppLayout } from './components/PublicAppLayout';
 import { useAuth } from './hooks/useAuth';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
+});
 
 const App = () => {
   const { isAuthenticated } = useAuth();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   StyledDefaultAppLayoutContent,
@@ -16,26 +16,12 @@ export interface DefaultAppLayoutProps {
 export const DefaultAppLayout: React.FC<DefaultAppLayoutProps> = ({
   children,
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const handleDrawerOpen = () => {
-    setIsOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setIsOpen(false);
-  };
-
   return (
     <Box sx={{ display: 'flex' }}>
       <Box sx={{ flex: 1 }}>
         <DefaultAppHeader />
         <StyledDefaultAppLayoutContent>
-          <DefaultDrawer
-            isOpen={isOpen}
-            onClose={handleDrawerClose}
-            onOpen={handleDrawerOpen}
-          />
+          <DefaultDrawer />
           <StyledDefaultAppLayoutPageContent id="app-content">
             {children}
           </StyledDefaultAppLayoutPageContent>

@@ -1,8 +1,10 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 export type ValuesToType<T> = T[keyof T];
 
 export type ApiResponse<T> = Promise<T>;
+
+export type PromiseAxiosResponse<T> = Promise<AxiosResponse<T>>;
 
 type AxiosErrorResponseData = {
   message: string;

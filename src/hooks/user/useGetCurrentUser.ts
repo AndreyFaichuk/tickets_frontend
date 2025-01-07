@@ -5,6 +5,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { UserApi } from '../../api/user.api';
 import { AxiosErrorResponse } from '../../types';
 import { useAuth } from '../../components/AppEntry/hooks/useAuth';
+import { User } from '../../app/DefaultUserMenu/DefaultUserMenu.types';
 
 export const usersQueryKeys = {
   user: {
@@ -21,7 +22,7 @@ export const useGetCurrentUser = () => {
     data: currentUser,
     isLoading,
     failureReason,
-  }: UseQueryResult<any, AxiosErrorResponse> = useQuery({
+  }: UseQueryResult<User, AxiosErrorResponse> = useQuery({
     queryKey: usersQueryKeys.user.current(),
     queryFn: async () => {
       return await UserApi.getCurrentUser();
@@ -37,7 +38,7 @@ export const useGetCurrentUser = () => {
   }, [failureReason]);
 
   return {
-    currentUser: currentUser ?? {},
+    currentUser: currentUser ?? ({} as User),
     isCurrentUserLoading: isLoading,
   };
 };

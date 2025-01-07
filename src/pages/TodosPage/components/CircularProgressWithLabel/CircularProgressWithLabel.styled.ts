@@ -14,5 +14,5 @@ export const CustomCircularProgress = styled(CircularProgress, {
   color:
     progress !== undefined
       ? getProgressColor(progress)
-      : theme.progress.notStarted,
+      : theme.palette.progress.notStarted,
 }));
