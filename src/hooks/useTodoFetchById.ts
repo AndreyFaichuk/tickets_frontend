@@ -8,7 +8,7 @@ export const useTodoFetchById = (id: string) => {
     queryKey: todosQueryKeys.todos.one(id),
     queryFn: async () => {
       const response = await TodoApi.getTodo(id);
-      return response;
+      return response.data;
     },
   });
 

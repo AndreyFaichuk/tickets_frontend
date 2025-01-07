@@ -1,3 +1,12 @@
 import { DrawerOption } from '../DefaultDrawer/DefaultDrawer.types';
 
-export interface UserMenuOption extends Omit<DrawerOption, 'Icon'> {}
+export type UserMenuOption = Omit<DrawerOption, 'Icon'>;
+
+export type User = {
+  country: string;
+  dateOfBirth: Date;
+  email: string;
+  firstName: string;
+  lastName: string;
+  _id: string;
+};

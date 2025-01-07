@@ -14,10 +14,7 @@ export const useTodosFetch = () => {
     queryFn: async () => {
       const response = await TodoApi.getTodos();
 
-      return response.map((todo) => ({
-        ...todo,
-        progress: Math.min(todo.progress, 100),
-      }));
+      return response.data;
     },
   });
 

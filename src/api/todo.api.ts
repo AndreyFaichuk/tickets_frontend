@@ -2,42 +2,36 @@ import {
   TodoCardForCreate,
   TodoCardProps,
 } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
-import { ApiResponse } from '../types';
 import { securityAxios } from './securityAxios';
+import { PromiseAxiosResponse } from '../types';
 
 const BASE_URL = 'http://localhost:3000/todos';
 
 export class TodoApi {
-  static async addTodo(newTodo: TodoCardForCreate): ApiResponse<TodoCardProps> {
-    const response = await securityAxios.post(`${BASE_URL}/create`, newTodo, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.data;
+  static addTodo(
+    newTodo: TodoCardForCreate,
+  ): PromiseAxiosResponse<TodoCardProps> {
+    const response = securityAxios.post(`${BASE_URL}/create`, newTodo);
+    return response;
   }
 
-  static async updateTodo(todo: TodoCardProps): ApiResponse<TodoCardProps> {
-    const response = await securityAxios.patch(`${BASE_URL}/update`, todo, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.data;
+  static updateTodo(todo: TodoCardProps): PromiseAxiosResponse<TodoCardProps> {
+    const response = securityAxios.patch(`${BASE_URL}/update`, todo, {});
+    return response;
   }
 
-  static async deleteTodo(id: string): ApiResponse<TodoCardProps> {
-    const response = await securityAxios.delete(`${BASE_URL}/${id}`);
-    return response.data;
+  static deleteTodo(id: string): PromiseAxiosResponse<TodoCardProps> {
+    const response = securityAxios.delete(`${BASE_URL}/${id}`);
+    return response;
   }
 
-  static async getTodos(): ApiResponse<TodoCardProps[]> {
-    const response = await securityAxios.get(`${BASE_URL}/all`);
-    return response.data;
+  static getTodos(): PromiseAxiosResponse<TodoCardProps[]> {
+    const response = securityAxios.get(`${BASE_URL}/all`);
+    return response;
   }
 
-  static async getTodo(id: string): ApiResponse<TodoCardProps> {
-    const response = await securityAxios.get(`${BASE_URL}/${id}`);
-    return response.data;
+  static getTodo(id: string): PromiseAxiosResponse<TodoCardProps> {
+    const response = securityAxios.get(`${BASE_URL}/${id}`);
+    return response;
   }
 }

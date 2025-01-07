@@ -6,7 +6,7 @@ const BASE_URL = 'http://localhost:3000/users';
 
 export class UserApi {
   static async getCurrentUser(): ApiResponse<RegisteredFormValues> {
-    const response = await securityAxios(`${BASE_URL}/current`);
+    const response = await securityAxios(`${BASE_URL}/me`);
     return response.data;
   }
 }

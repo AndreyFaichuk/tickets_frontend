@@ -1,11 +1,21 @@
 import { useState } from 'react';
-import { Avatar, IconButton, Menu } from '@mui/material';
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  Menu,
+  Skeleton,
+  Stack,
+  Typography,
+} from '@mui/material';
 
 import { useDefaultUserMenuOptions } from './DefaultUserMenu.hooks';
 import { useGetCurrentUser } from '../../hooks/user/useGetCurrentUser';
+import { MenuList } from './components/MenuList';
 
 export const DefaultUserMenu = () => {
   const { currentUser, isCurrentUserLoading } = useGetCurrentUser();
+
   const renderUserMenuListItem = useDefaultUserMenuOptions();
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -18,14 +28,20 @@ export const DefaultUserMenu = () => {
     setAnchorElUser(null);
   };
 
+  if (isCurrentUserLoading) {
+    return <Skeleton variant="circular" width={40} height={40} />;
+  }
+
   return (
-    <>
-      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+    <Stack direction="row" gap={1} alignItems="center">
+      <Typography variant="h6">
+        {currentUser.firstName} {currentUser.lastName}
+      </Typography>
+      <IconButton onClick={handleOpenUserMenu}>
         <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
       </IconButton>
       <Menu
         sx={{ mt: '45px' }}
-        id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{
           vertical: 'top',
@@ -38,8 +54,14 @@ export const DefaultUserMenu = () => {
         }}
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}>
-        {renderUserMenuListItem()}
+        <MenuList>
+          <Typography textAlign="center" variant="body2" sx={{ color: 'gray' }}>
+            {currentUser.email}
+          </Typography>
+          <Divider />
+          {renderUserMenuListItem()}
+        </MenuList>
       </Menu>
-    </>
+    </Stack>
   );
 };

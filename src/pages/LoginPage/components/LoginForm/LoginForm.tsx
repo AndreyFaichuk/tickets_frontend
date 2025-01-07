@@ -30,7 +30,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
         <AminationWrapper>
           <StyledLoginFormInputsWrapper>
             <FormInput name="email" label="Email" />
-            <FormInput name="password" label="Password" />
+            <FormInput name="password" label="Password" type="password" />
           </StyledLoginFormInputsWrapper>
           <FormCheckBox label="Remember Me?" name="isRememberMe" />
         </AminationWrapper>
