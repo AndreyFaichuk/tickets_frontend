@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 export const StyledDefaultAppLayoutContent = styled('main')(() => ({
   display: 'flex',
   flex: 1,
-  minHeight: '100vh',
+  minHeight: '95vh',
 }));
 
 export const StyledDefaultAppLayoutPageContent = styled('section')(

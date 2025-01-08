@@ -98,8 +98,13 @@ const baseTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          overflowY: 'hidden',
           backgroundColor: lighten('#acc2b2', 0.7),
+        },
+        '::-webkit-scrollbar': {
+          display: 'none',
+        },
+        '*': {
+          scrollbarWidth: 'none',
         },
       },
     },
