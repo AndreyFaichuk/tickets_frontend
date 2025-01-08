@@ -6,6 +6,7 @@ export const CircularProgressWithLabelContent = styled(Box)(() => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  position: 'relative',
 }));
 
 export const CustomCircularProgress = styled(CircularProgress, {

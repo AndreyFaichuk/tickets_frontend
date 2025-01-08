@@ -3,7 +3,7 @@ import { Box, Button, Stack, styled, Typography } from '@mui/material';
 export const StyledBasePageRoot = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing(2),
+  gap: theme.spacing(6),
 }));
 
 export const StyledBasePageTitle = styled(Typography)(({ theme }) => ({

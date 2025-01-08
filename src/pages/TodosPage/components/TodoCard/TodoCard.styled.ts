@@ -1,15 +1,18 @@
 import { Paper, styled, Typography } from '@mui/material';
 import { theme } from '../../../../theme';
 
-export const TodoCardRoot = styled(Paper)(() => ({
-  width: '230px',
-  height: '300px',
+export const TodoCardRoot = styled(Paper, {
+  shouldForwardProp: (prop) => prop !== 'isActiveCard',
+})(({ isActiveCard }: { isActiveCard: boolean }) => ({
+  width: '215px',
+  height: '230px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
   gap: theme.spacing(1.5),
-  backgroundColor: theme.palette.card.medium,
-  borderRadius: '16px',
+  backgroundColor: isActiveCard
+    ? theme.palette.primary.main
+    : theme.palette.card.medium,
 }));
 
 export const TodoCardTypography = styled(Typography)(() => ({
