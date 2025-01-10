@@ -25,14 +25,14 @@ export const TodoCardActionBlock = ({
   return (
     <Stack direction="row" justifyContent="space-between">
       <Stack direction="row">
-        <IconButton aria-label="edit" onClick={handleEdit}>
+        <IconButton onClick={handleEdit}>
           <ModeOutlinedIcon />
         </IconButton>
         {/* <IconButton aria-label="view" onClick={handleView}>
           <RemoveRedEyeOutlinedIcon />
         </IconButton> */}
       </Stack>
-      <IconButton aria-label="delete" color="warning" onClick={handleDelete}>
+      <IconButton color="warning" onClick={handleDelete}>
         <DeleteIcon />
       </IconButton>
     </Stack>

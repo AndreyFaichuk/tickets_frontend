@@ -5,7 +5,7 @@ export const StyledToDoFormRoot = styled('form')(({ theme }) => ({
   flexDirection: 'column',
   gap: theme.spacing(2),
   backgroundColor: theme.palette.secondary.light,
-  width: '35%',
+  width: '100%',
   padding: theme.spacing(2),
   borderRadius: '4px',
 }));
