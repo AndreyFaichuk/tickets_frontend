@@ -1,4 +1,3 @@
-import { useMemo, useState } from 'react';
 import { TodoCardProps } from '../../TodoCard/TodoCard.types';
 import {
   DragEndEvent,
@@ -11,102 +10,17 @@ import {
 } from '@dnd-kit/core';
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
+import { useColumnsManagement } from './useColumnsManagement';
+
 export type ColumnType = {
   id: string;
   title: string;
   cards: TodoCardProps[];
 };
 
-const initialCards1: TodoCardProps[] = [
-  { _id: '1', name: 'One', description: 'Test', progress: 80 },
-  { _id: '2', name: 'Two', description: 'Test', progress: 80 },
-  { _id: '3', name: 'Three', description: 'Test', progress: 80 },
-  { _id: '4', name: 'Four', description: 'Test', progress: 80 },
-];
-
-const initialCards2: TodoCardProps[] = [
-  { _id: '5', name: 'Five', description: 'Test', progress: 80 },
-  { _id: '6', name: 'Six', description: 'Test', progress: 80 },
-  { _id: '7', name: 'Seven', description: 'Test', progress: 80 },
-  { _id: '8', name: 'Eight', description: 'Test', progress: 80 },
-];
-
-const initialCards3: TodoCardProps[] = [
-  { _id: '9', name: '9', description: 'Test', progress: 80 },
-  { _id: '10', name: '10', description: 'Test', progress: 80 },
-  { _id: '11', name: '11', description: 'Test', progress: 80 },
-  { _id: '12', name: '12', description: 'Test', progress: 80 },
-];
-
-const data: ColumnType[] = [
-  {
-    id: 'Column1',
-    title: 'Column 1',
-    cards: initialCards1,
-  },
-  {
-    id: 'Column2',
-    title: 'Column 2',
-    cards: initialCards2,
-  },
-  {
-    id: 'Column3',
-    title: 'Column 3',
-    cards: initialCards3,
-  },
-];
-
 export const useDnDManagement = () => {
-  const [columns, setColumns] = useState<ColumnType[]>(data);
-  const [activeCard, setActiveCard] = useState<TodoCardProps | null>(null);
-
-  const [isAddNewColumn, setIsAddNewColumn] = useState<boolean>(false);
-  const [newColumnTitle, setNewColumnTitle] = useState<string>('');
-
-  const handleAddNewColumnToList = () => {
-    setColumns((prevState) => {
-      return [
-        ...prevState,
-        { title: newColumnTitle, id: newColumnTitle, cards: [] },
-      ];
-    });
-  };
-
-  const handleChangeNewColumnName = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setNewColumnTitle(e.target.value);
-  };
-
-  const handleAddNewColumn = () => {
-    if (!newColumnTitle.trim()) {
-      handleCancelNewColumn();
-      return;
-    }
-
-    handleAddNewColumnToList();
-    handleCancelNewColumn();
-  };
-
-  const handleOpenNewColumn = () => {
-    setIsAddNewColumn(true);
-  };
-
-  const handleCancelNewColumn = () => {
-    setNewColumnTitle('');
-    setIsAddNewColumn(false);
-  };
-
-  const columnMap = useMemo(() => {
-    const map = new Map<string, ColumnType>();
-
-    columns.forEach((col) => {
-      map.set(col.id, col);
-      col.cards.forEach((card) => map.set(card._id, col));
-    });
-
-    return map;
-  }, [columns]);
+  const { columnMap, setActiveCard, setColumns, columns, columnsHandlers } =
+    useColumnsManagement();
 
   const findColumn = (id: string | null): ColumnType | null => {
     return (id && columnMap.get(id)) || null;
@@ -208,18 +122,12 @@ export const useDnDManagement = () => {
 
   return {
     dnd: {
-      columns,
-      activeCard,
       sensors,
       handleDragEnd,
       handleDragOver,
       handleDragStart,
     },
-    isAddNewColumn,
-    newColumnTitle,
-    handleOpenNewColumn,
-    handleCancelNewColumn,
-    handleAddNewColumn,
-    handleChangeNewColumnName,
+    columns,
+    columnsHandlers,
   };
 };

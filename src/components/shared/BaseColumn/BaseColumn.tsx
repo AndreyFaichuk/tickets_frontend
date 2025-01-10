@@ -2,10 +2,18 @@ import { FC } from 'react';
 import { Stack, Typography } from '@mui/material';
 import { useDroppable } from '@dnd-kit/core';
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
+import CloseIcon from '@mui/icons-material/Close';
 
-import { StyledBaseColumnRoot } from './BaseColumn.styled';
+import {
+  StyledBaseColumnAddToDoButton,
+  StyledBaseColumnRoot,
+  StyledCloseIconButton,
+} from './BaseColumn.styled';
 import { TodoCard } from '../../../pages/TodosPage/components/TodoCard';
 import { TodoCardProps } from '../../../pages/TodosPage/components/TodoCard/TodoCard.types';
+
+import { BASE_COLUMN_MODAL_TYPES } from './BaseColumn.constants';
+import { useBaseColumnManagement } from './hooks/useBaseColumnManagement';
 
 type BaseColumn = {
   initialTodos: TodoCardProps[];
@@ -21,6 +29,15 @@ export const BaseColumn: FC<BaseColumn> = ({
   activeCardId,
 }) => {
   const { setNodeRef } = useDroppable({ id: id });
+
+  const {
+    activeModals,
+    modalsList,
+    handlers: { openModal },
+  } = useBaseColumnManagement({
+    columnTitle: title,
+    columnId: id,
+  });
 
   return (
     <Stack direction="column" gap={1}>
@@ -51,7 +68,23 @@ export const BaseColumn: FC<BaseColumn> = ({
             ))}
           </Stack>
         </SortableContext>
+        <StyledCloseIconButton
+          className="childClass"
+          onClick={() => openModal(BASE_COLUMN_MODAL_TYPES.confirmation)}>
+          <CloseIcon />
+        </StyledCloseIconButton>
+        <StyledBaseColumnAddToDoButton
+          onClick={() => openModal(BASE_COLUMN_MODAL_TYPES.createTodo)}
+          type="button"
+          color="info"
+          variant="contained"
+          fullWidth>
+          Add todo
+        </StyledBaseColumnAddToDoButton>
       </StyledBaseColumnRoot>
+
+      {activeModals.createTodo && modalsList.createTodo.render}
+      {activeModals.confirmation && modalsList.confirmation.render}
     </Stack>
   );
 };
