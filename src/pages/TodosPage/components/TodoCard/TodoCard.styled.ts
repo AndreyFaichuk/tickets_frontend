@@ -9,7 +9,6 @@ export const TodoCardRoot = styled(Paper, {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  cursor: 'grab',
   gap: theme.spacing(1.5),
   backgroundColor: isActiveCard
     ? theme.palette.primary.main

@@ -13,8 +13,10 @@ export const TodoCardActionBlock = ({
   currentId: string;
 }) => {
   const handleDelete = () => {
-    actions.onDelete(currentId);
+    console.log('Delete action triggered');
+    actions.onDelete();
   };
+
   const handleEdit = () => {
     actions.onEdit(currentId);
   };

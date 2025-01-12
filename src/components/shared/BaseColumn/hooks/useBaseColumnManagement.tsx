@@ -20,11 +20,17 @@ export const useBaseColumnManagement = ({
   columnTitle,
   columnId,
 }: useBaseColumnManagementProps) => {
-  const { handleDeleteColumn, handleUpdateColumn } = useColumnActions();
+  const { handleDeleteColumn, handleUpdateColumn, handleDeleteToDoInColumn } =
+    useColumnActions();
+
+  const [activeTodoId, setActiveTodoId] = useState<string>('');
+
+  const handleSetActiveTodoId = (todoId: string) => setActiveTodoId(todoId);
 
   const [activeModals, setActiveModals] = useState<BaseColumnModalState>({
     [BASE_COLUMN_MODAL_TYPES.createTodo]: false,
     [BASE_COLUMN_MODAL_TYPES.confirmation]: false,
+    [BASE_COLUMN_MODAL_TYPES.deleteTodo]: false,
   });
 
   const openModal = (key: BaseColumnModalTypes) => {
@@ -38,14 +44,20 @@ export const useBaseColumnManagement = ({
   const handleSubmitCreateNewToDo = (values: TodoValues) => {
     handleUpdateColumn({
       card: {
-        columnId,
         description: values.description.trim(),
         name: values.name,
         progress: values.progress,
       },
+      columnId,
     });
 
     closeModal(BASE_COLUMN_MODAL_TYPES.createTodo);
+  };
+
+  const handleSubmitDeletingToDoInColumn = () => {
+    handleDeleteToDoInColumn({ columnId, toDoId: activeTodoId });
+
+    closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo);
   };
 
   const handleSubmitDeleteColumn = () => {
@@ -92,6 +104,30 @@ export const useBaseColumnManagement = ({
         </BaseModal.Root>
       ),
     },
+    deleteTodo: {
+      render: (
+        <ConfirmationDialog
+          actions={
+            <>
+              <Button
+                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo)}>
+                Close
+              </Button>
+              <Button
+                onClick={handleSubmitDeletingToDoInColumn}
+                autoFocus
+                color="warning">
+                Delete Todo
+              </Button>
+            </>
+          }
+          onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo)}
+          text={`Are you sure that you want to delete this Todo? This action can't be undone!`}
+          title="Confirm deleting Todo"
+          isOpen={activeModals.deleteTodo}
+        />
+      ),
+    },
   };
 
   return {
@@ -99,6 +135,7 @@ export const useBaseColumnManagement = ({
     activeModals,
     handlers: {
       openModal,
+      onActiveTodoId: handleSetActiveTodoId,
     },
   };
 };

@@ -6,6 +6,7 @@ import { TodoCardRoot, TodoCardTypography } from './TodoCard.styled';
 import { TodoCardPropsWithActions } from './TodoCard.types';
 import { CircularProgressWithLabel } from '../CircularProgressWithLabel';
 import { TodoCardActionBlock } from '../TodoCardActionBlock';
+import { Box } from '@mui/material';
 
 interface TodoCardProps extends TodoCardPropsWithActions {
   isDragging?: boolean;
@@ -33,19 +34,26 @@ export const TodoCard: FC<TodoCardProps> = ({
   };
 
   return (
-    <TodoCardRoot
-      id={_id}
-      elevation={isDragging ? 8 : 4}
-      ref={setNodeRef}
-      {...listeners}
-      {...attributes}
-      style={style}
-      isActiveCard={isActiveCard}>
-      <TodoCardTypography variant="h6" align="center">
-        {name}
-      </TodoCardTypography>
-      <TodoCardTypography align="center">{description}</TodoCardTypography>
-      {/* <CircularProgressWithLabel progress={progress} /> */}
+    <TodoCardRoot elevation={isDragging ? 8 : 4} isActiveCard={isActiveCard}>
+      <Box
+        sx={{
+          display: 'flex',
+          minHeight: '120px',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          cursor: 'grab',
+        }}
+        id={_id}
+        ref={setNodeRef}
+        {...listeners}
+        {...attributes}
+        style={style}>
+        <TodoCardTypography variant="h6" align="center">
+          {name}
+        </TodoCardTypography>
+        <TodoCardTypography align="center">{description}</TodoCardTypography>
+        {/* <CircularProgressWithLabel progress={progress} /> */}
+      </Box>
       <TodoCardActionBlock actions={actions} currentId={_id} />
     </TodoCardRoot>
   );

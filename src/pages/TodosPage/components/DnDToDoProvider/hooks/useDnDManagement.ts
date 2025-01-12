@@ -11,6 +11,13 @@ import {
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 import { useColumnsManagement } from './useColumnsManagement';
+import { useState } from 'react';
+import {
+  CURRENT_DND_COLUMN_INITIAL_STATE,
+  CurrentDnDColumnState,
+  CurrentDnDColumnType,
+} from '../DnDToDoProvider.constants';
+import { useColumnActions } from '../../../../../hooks/columns/useColumnsActions';
 
 export type ColumnType = {
   id: string;
@@ -19,16 +26,42 @@ export type ColumnType = {
 };
 
 export const useDnDManagement = () => {
+  const { handleMoveTodoColumns } = useColumnActions();
+
   const { columnMap, setActiveCard, setColumns, columns, columnsHandlers } =
     useColumnsManagement();
+
+  const [currentDnDColumnState, setCurrentDnDColumnState] =
+    useState<CurrentDnDColumnState>({
+      fromColumnId: '',
+      todoId: '',
+      fromTodoIndex: 0,
+    });
+
+  const handleUpdateCurrentDnDColumnState = (
+    values: Partial<CurrentDnDColumnState>,
+  ) => {
+    setCurrentDnDColumnState((prevState) => {
+      return { ...prevState, ...values };
+    });
+  };
 
   const findColumn = (id: string | null): ColumnType | null => {
     return (id && columnMap.get(id)) || null;
   };
 
   const handleDragStart = (event: DragStartEvent) => {
+    const itemIndex = event.active.data.current?.sortable.index;
+    const columnId = event.active.data.current?.sortable.containerId;
+
     const activeId = String(event.active.id);
     const activeColumn = findColumn(activeId);
+
+    handleUpdateCurrentDnDColumnState({
+      [CURRENT_DND_COLUMN_INITIAL_STATE.todoId]: activeId,
+      [CURRENT_DND_COLUMN_INITIAL_STATE.fromTodoIndex]: itemIndex,
+      [CURRENT_DND_COLUMN_INITIAL_STATE.fromColumnId]: columnId,
+    });
 
     if (activeColumn) {
       const activeItem = activeColumn.cards.find(
@@ -80,6 +113,10 @@ export const useDnDManagement = () => {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
+
+    const columnId = event.active.data.current?.sortable.containerId;
+    const itemIndex = event.over?.data.current?.sortable.index;
+
     const activeId = String(active.id);
     const overId = over ? String(over.id) : null;
 
@@ -94,6 +131,12 @@ export const useDnDManagement = () => {
     const activeIndex = activeColumn.cards.findIndex(
       (card) => card._id === activeId,
     );
+
+    handleMoveTodoColumns({
+      ...currentDnDColumnState,
+      toColumnId: columnId,
+      toTodoIndex: itemIndex || 0,
+    } as CurrentDnDColumnType);
 
     const overIndex = overColumn.cards.findIndex((card) => card._id === overId);
 
