@@ -16,47 +16,12 @@ export const useColumnsManagement = () => {
   const [columns, setColumns] = useState<ColumnType[]>(allColumns);
   const [activeCard, setActiveCard] = useState<TodoCardProps | null>(null);
 
-  const [isAddNewColumn, setIsAddNewColumn] = useState<boolean>(false);
-  const [newColumnTitle, setNewColumnTitle] = useState<string>('');
-
   useEffect(() => {
     setColumns(allColumns);
   }, [allColumns]);
 
-  const handleAddNewColumnToList = () => {
-    setColumns((prevState) => {
-      return [
-        ...prevState,
-        { title: newColumnTitle, id: newColumnTitle, cards: [] },
-      ];
-    });
-
-    handleCreateNewColumn(newColumnTitle);
-  };
-
-  const handleChangeNewColumnName = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setNewColumnTitle(e.target.value);
-  };
-
-  const handleAddNewColumn = () => {
-    if (!newColumnTitle.trim()) {
-      handleCancelNewColumn();
-      return;
-    }
-
-    handleAddNewColumnToList();
-    handleCancelNewColumn();
-  };
-
-  const handleOpenNewColumn = () => {
-    setIsAddNewColumn(true);
-  };
-
-  const handleCancelNewColumn = () => {
-    setNewColumnTitle('');
-    setIsAddNewColumn(false);
+  const handleAddNewColumnToList = (columnTitle: string) => {
+    handleCreateNewColumn(columnTitle);
   };
 
   const columnMap = useMemo(() => {
@@ -77,14 +42,9 @@ export const useColumnsManagement = () => {
     columns: {
       currentColumns: columns,
       activeCard,
-      isAddNewColumn,
-      newColumnTitle,
     },
     columnsHandlers: {
-      handleChangeNewColumnName,
-      handleAddNewColumn,
-      handleOpenNewColumn,
-      handleCancelNewColumn,
+      handleAddNewColumnToList,
     },
   };
 };

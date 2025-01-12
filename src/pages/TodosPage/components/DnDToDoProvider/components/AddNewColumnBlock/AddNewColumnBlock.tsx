@@ -1,77 +1,66 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useState } from 'react';
 
-import CloseIcon from '@mui/icons-material/Close';
-import DoneIcon from '@mui/icons-material/Done';
 import AddIcon from '@mui/icons-material/Add';
-import { IconButton, TextField } from '@mui/material';
 
 import {
   StyledDnDToDoProviderButton,
   StyledDnDToDoProviderIconButton,
-  StyledDnDToDoProviderNewColumn,
 } from './AddNewColumnBlock.styled';
+import { SwapComponents } from '../../../../../../components/shared/SwapComponents';
+import { Input } from '../../../../../../components/shared/Input';
 
 type AddNewColumnBlock = {
-  isAddNewColumn: boolean;
-  newColumnTitle: string;
-  onChangeNewColumnName: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  onAddNewColumn: VoidFunction;
-  onCancelNewColumn: VoidFunction;
-  onOpenNewColumn: VoidFunction;
+  onAddNewColumnToList: (columnTitle: string) => void;
 };
 
 export const AddNewColumnBlock: FC<AddNewColumnBlock> = ({
-  isAddNewColumn,
-  newColumnTitle,
-  onAddNewColumn,
-  onCancelNewColumn,
-  onChangeNewColumnName,
-  onOpenNewColumn,
+  onAddNewColumnToList,
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [newColumnTitle, setNewColumnTitle] = useState<string>('');
 
-  useEffect(() => {
-    if (inputRef.current && isAddNewColumn) {
-      inputRef.current.focus();
+  const handleChangeNewColumnName = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setNewColumnTitle(e.target.value);
+  };
+
+  const handleAddNewColumn = () => {
+    if (!newColumnTitle.trim()) {
+      handleCancelNewColumn();
+      return;
     }
-  }, [isAddNewColumn]);
+
+    onAddNewColumnToList(newColumnTitle);
+    handleCancelNewColumn();
+  };
+
+  const handleCancelNewColumn = () => {
+    setNewColumnTitle('');
+  };
 
   return (
-    <StyledDnDToDoProviderButton>
-      {isAddNewColumn ? (
-        <StyledDnDToDoProviderNewColumn elevation={5}>
-          <TextField
+    <SwapComponents
+      shouldCallAfterClickOutside={handleCancelNewColumn}
+      shouldCallAfterApprove={handleAddNewColumn}
+      render={({ shouldSwap, handleSwap }) =>
+        shouldSwap ? (
+          <Input
+            autoFocusOnMount
             value={newColumnTitle}
-            variant="standard"
-            onChange={(e) => onChangeNewColumnName(e)}
-            inputRef={inputRef}
+            onChange={handleChangeNewColumnName}
           />
-          <IconButton
-            autoFocus
-            onClick={onAddNewColumn}
-            sx={{ position: 'absolute', right: '40px', top: '76px' }}>
-            <DoneIcon />
-          </IconButton>
-          <IconButton
-            autoFocus
-            onClick={onCancelNewColumn}
-            sx={{ position: 'absolute', right: '0px', top: '76px' }}>
-            <CloseIcon />
-          </IconButton>
-        </StyledDnDToDoProviderNewColumn>
-      ) : (
-        <>
-          <StyledDnDToDoProviderIconButton
-            onClick={onOpenNewColumn}
-            type="button"
-            size="large"
-            color="secondary">
-            <AddIcon />
-          </StyledDnDToDoProviderIconButton>
-        </>
-      )}
-    </StyledDnDToDoProviderButton>
+        ) : (
+          <StyledDnDToDoProviderButton>
+            <StyledDnDToDoProviderIconButton
+              onMouseDown={handleSwap}
+              type="button"
+              size="large"
+              color="secondary">
+              <AddIcon />
+            </StyledDnDToDoProviderIconButton>
+          </StyledDnDToDoProviderButton>
+        )
+      }
+    />
   );
 };

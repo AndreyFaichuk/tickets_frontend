@@ -13,13 +13,8 @@ type DnDProviderProps = {};
 export const DnDToDoProvider: FC<DnDProviderProps> = () => {
   const {
     dnd: { sensors, handleDragEnd, handleDragOver, handleDragStart },
-    columns: { activeCard, currentColumns, isAddNewColumn, newColumnTitle },
-    columnsHandlers: {
-      handleAddNewColumn,
-      handleCancelNewColumn,
-      handleChangeNewColumnName,
-      handleOpenNewColumn,
-    },
+    columns: { activeCard, currentColumns },
+    columnsHandlers: { handleAddNewColumnToList },
   } = useDnDManagement();
 
   const renderedColumns = useMemo(() => {
@@ -53,14 +48,7 @@ export const DnDToDoProvider: FC<DnDProviderProps> = () => {
             whiteSpace: 'nowrap',
           }}>
           {renderedColumns}
-          <AddNewColumnBlock
-            isAddNewColumn={isAddNewColumn}
-            newColumnTitle={newColumnTitle}
-            onAddNewColumn={handleAddNewColumn}
-            onCancelNewColumn={handleCancelNewColumn}
-            onChangeNewColumnName={handleChangeNewColumnName}
-            onOpenNewColumn={handleOpenNewColumn}
-          />
+          <AddNewColumnBlock onAddNewColumnToList={handleAddNewColumnToList} />
         </Stack>
       </StyledDnDToDoProviderRoot>
       <DragOverlay

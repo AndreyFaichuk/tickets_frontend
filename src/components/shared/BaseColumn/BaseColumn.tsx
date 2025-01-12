@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Stack, Typography } from '@mui/material';
 import { useDroppable } from '@dnd-kit/core';
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
@@ -14,6 +14,9 @@ import { TodoCardProps } from '../../../pages/TodosPage/components/TodoCard/Todo
 
 import { BASE_COLUMN_MODAL_TYPES } from './BaseColumn.constants';
 import { useBaseColumnManagement } from './hooks/useBaseColumnManagement';
+import { SwapComponents } from '../SwapComponents/SwapComponents';
+import { useColumnActions } from '../../../hooks/columns/useColumnsActions';
+import { Input } from '../Input';
 
 type BaseColumn = {
   initialTodos: TodoCardProps[];
@@ -28,20 +31,55 @@ export const BaseColumn: FC<BaseColumn> = ({
   title,
   activeCardId,
 }) => {
+  const { handleUpdateColumn } = useColumnActions();
+
   const { setNodeRef } = useDroppable({ id: id });
+
+  const [columnTitle, setColumnTitle] = useState<string>(title);
 
   const {
     activeModals,
     modalsList,
-    handlers: { openModal },
+    handlers: { openModal, onActiveTodoId },
   } = useBaseColumnManagement({
     columnTitle: title,
     columnId: id,
   });
 
+  const handleResetNewColumntitle = () => {
+    setColumnTitle(title);
+  };
+
+  const handleChangeNewColumnName = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setColumnTitle(e.target.value);
+  };
+
+  const handleSubmitChangeColumnTitle = () => {
+    handleUpdateColumn({ title: columnTitle, columnId: id });
+  };
+
   return (
-    <Stack direction="column" gap={1}>
-      <Typography variant="h6">{title}</Typography>
+    <Stack direction="column" gap={1} position="relative">
+      <SwapComponents
+        shouldCallAfterClickOutside={handleResetNewColumntitle}
+        shouldCallAfterApprove={handleSubmitChangeColumnTitle}
+        render={({ shouldSwap, handleSwap }) =>
+          shouldSwap ? (
+            <Input
+              autoFocusOnMount
+              value={columnTitle}
+              variant="standard"
+              onChange={handleChangeNewColumnName}
+            />
+          ) : (
+            <Typography onClick={handleSwap} variant="h6">
+              {title}
+            </Typography>
+          )
+        }
+      />
       <StyledBaseColumnRoot elevation={5}>
         <SortableContext
           id={id}
@@ -61,7 +99,10 @@ export const BaseColumn: FC<BaseColumn> = ({
                 name={card.name}
                 progress={card.progress}
                 actions={{
-                  onDelete: () => {},
+                  onDelete: () => {
+                    onActiveTodoId(card._id);
+                    openModal(BASE_COLUMN_MODAL_TYPES.deleteTodo);
+                  },
                   onEdit: () => {},
                 }}
               />
@@ -85,6 +126,7 @@ export const BaseColumn: FC<BaseColumn> = ({
 
       {activeModals.createTodo && modalsList.createTodo.render}
       {activeModals.confirmation && modalsList.confirmation.render}
+      {activeModals.deleteTodo && modalsList.deleteTodo.render}
     </Stack>
   );
 };
