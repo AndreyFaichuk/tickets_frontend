@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useColumnActions } from '../../../../../hooks/columns/useColumnsActions';
-import { useColumnsFetch } from '../../../../../hooks/columns/useColumnsFetch';
 import { TodoCardProps } from '../../TodoCard/TodoCard.types';
 
 export type ColumnType = {
@@ -9,16 +8,15 @@ export type ColumnType = {
   cards: TodoCardProps[];
 };
 
-export const useColumnsManagement = () => {
-  const { allColumns } = useColumnsFetch();
+export const useColumnsManagement = (data: ColumnType[]) => {
   const { handleCreateNewColumn } = useColumnActions();
 
-  const [columns, setColumns] = useState<ColumnType[]>(allColumns);
+  const [columns, setColumns] = useState<ColumnType[]>(data);
   const [activeCard, setActiveCard] = useState<TodoCardProps | null>(null);
 
   useEffect(() => {
-    setColumns(allColumns);
-  }, [allColumns]);
+    setColumns(data);
+  }, [data]);
 
   const handleAddNewColumnToList = (columnTitle: string) => {
     handleCreateNewColumn(columnTitle);

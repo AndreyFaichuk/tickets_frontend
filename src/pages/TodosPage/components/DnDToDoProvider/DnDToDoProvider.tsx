@@ -7,15 +7,18 @@ import { BaseColumn } from '../../../../components/shared/BaseColumn';
 import { useDnDManagement } from './hooks/useDnDManagement';
 import { AddNewColumnBlock } from './components/AddNewColumnBlock';
 import { StyledDnDToDoProviderRoot } from './DnDToDoProvider.styled';
+import { ColumnType } from './hooks/useColumnsManagement';
 
-type DnDProviderProps = {};
+type DnDProviderProps = {
+  data: ColumnType[];
+};
 
-export const DnDToDoProvider: FC<DnDProviderProps> = () => {
+export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
   const {
     dnd: { sensors, handleDragEnd, handleDragOver, handleDragStart },
     columns: { activeCard, currentColumns },
     columnsHandlers: { handleAddNewColumnToList },
-  } = useDnDManagement();
+  } = useDnDManagement(data);
 
   const renderedColumns = useMemo(() => {
     return currentColumns.map((column) => (

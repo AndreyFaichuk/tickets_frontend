@@ -3,10 +3,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 import { TodoApi } from '../api/todo.api';
-import {
-  TodoCardForCreate,
-  TodoCardProps,
-} from '../pages/TodosPage/components/TodoCard/TodoCard.types';
+import { TodoCardForCreate } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
 import { todosQueryKeys } from './useTodosFetch';
 import { ADD_LOGGED_IN_ROUTES } from '../constants/routes';
 
@@ -14,23 +11,17 @@ export const useTodoActions = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const createNewToDo = useMutation({
-    mutationFn: async (newToDo: TodoCardForCreate) => {
-      const response = await TodoApi.addTodo(newToDo);
-      return response.data;
-    },
-    onError: (error: Error) => {
-      toast.error(error.message);
-    },
-    onSuccess: () => {
-      toast('New ToDo has been added!');
-      queryClient.invalidateQueries({ queryKey: todosQueryKeys.todos.all() });
-    },
-  });
-
   const updateToDo = useMutation({
-    mutationFn: async (toDo: TodoCardProps) => {
-      const response = await TodoApi.updateTodo(toDo);
+    mutationFn: async ({
+      columnId,
+      id,
+      todo,
+    }: {
+      columnId: string;
+      id: string;
+      todo: TodoCardForCreate;
+    }) => {
+      const response = await TodoApi.updateTodo({ columnId, id, todo });
       return response.data;
     },
     onError: (error: Error) => {
@@ -65,7 +56,6 @@ export const useTodoActions = () => {
   });
 
   return {
-    handleCreateNewToDo: createNewToDo.mutate,
     handleUpdateToDo: updateToDo.mutate,
     handleDeleteToDo: deleteToDo.mutate,
   };

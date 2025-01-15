@@ -9,6 +9,8 @@ import {
 export const StyledBaseModal = styled(Dialog)(({ theme }) => ({
   '& .MuiDialog-paper': {
     minWidth: '400px',
+    maxWidth: '1000px',
+    height: 'fit-content',
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(2),

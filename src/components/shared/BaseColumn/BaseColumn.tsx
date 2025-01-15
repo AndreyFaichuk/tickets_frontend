@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Stack, Typography } from '@mui/material';
 import { useDroppable } from '@dnd-kit/core';
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
@@ -31,6 +32,7 @@ export const BaseColumn: FC<BaseColumn> = ({
   title,
   activeCardId,
 }) => {
+  const navigate = useNavigate();
   const { handleUpdateColumn } = useColumnActions();
 
   const { setNodeRef } = useDroppable({ id: id });
@@ -103,7 +105,9 @@ export const BaseColumn: FC<BaseColumn> = ({
                     onActiveTodoId(card._id);
                     openModal(BASE_COLUMN_MODAL_TYPES.deleteTodo);
                   },
-                  onEdit: () => {},
+                  onEdit: () => {
+                    navigate(`/app/edit/${id}/${card._id}`);
+                  },
                 }}
               />
             ))}

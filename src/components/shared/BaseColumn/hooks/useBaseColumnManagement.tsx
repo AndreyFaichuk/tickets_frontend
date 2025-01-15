@@ -6,7 +6,7 @@ import {
 } from '../BaseColumn.constants';
 import { TodoValues } from '../../ToDoForm/ToDoForm.schema';
 import { ConfirmationDialog } from '../../ConfirmationDialog';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { BaseModal } from '../../BaseModal';
 import { ToDoForm } from '../../ToDoForm/ToDoForm';
 import { useColumnActions } from '../../../../hooks/columns/useColumnsActions';
@@ -99,7 +99,9 @@ export const useBaseColumnManagement = ({
           onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.createTodo)}>
           <BaseModal.Header title="Create new ToDo" />
           <BaseModal.Body>
-            <ToDoForm onSubmit={handleSubmitCreateNewToDo} />
+            <Box sx={{ width: '900px', height: '600px' }}>
+              <ToDoForm onSubmit={handleSubmitCreateNewToDo} />
+            </Box>
           </BaseModal.Body>
         </BaseModal.Root>
       ),

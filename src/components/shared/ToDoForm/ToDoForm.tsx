@@ -2,7 +2,11 @@ import { FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { StyledToDoFormRoot } from './ToDoForm.styled';
+import {
+  StyledToDoFormMainSection,
+  StyledToDoFormRoot,
+  StyledToDoFormSection,
+} from './ToDoForm.styled';
 import { FormInput } from '../FormInput';
 import { Button, Typography } from '@mui/material';
 import { FormTextArea } from '../FormTextArea';
@@ -27,22 +31,28 @@ export const ToDoForm: FC<ToDoFormProps> = ({ onSubmit, defaultValues }) => {
   return (
     <FormProvider {...methods}>
       <StyledToDoFormRoot onSubmit={submit}>
-        <FormInput name="name" label="Name" />
-        <FormTextArea name="description" label="Description" />
+        <StyledToDoFormMainSection>
+          <FormInput name="name" label="Name" />
+          <FormTextArea name="description" label="Description" />
 
-        <Typography variant="body1">
-          Specify the progress of the task by moving the slider
-        </Typography>
+          <Typography variant="body1">
+            Specify the progress of the task by moving the slider
+          </Typography>
 
-        <FormProgressSlider name="progress" />
+          <FormProgressSlider name="progress" />
 
-        <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
-          disabled={!methods.formState.isDirty}>
-          {buttonText}
-        </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            disabled={!methods.formState.isDirty}>
+            {buttonText}
+          </Button>
+        </StyledToDoFormMainSection>
+        <StyledToDoFormSection>
+          <FormInput name="name" label="Name" />
+          <FormTextArea name="description" label="Description" />
+        </StyledToDoFormSection>
       </StyledToDoFormRoot>
     </FormProvider>
   );

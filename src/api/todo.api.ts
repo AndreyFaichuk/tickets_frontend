@@ -5,18 +5,19 @@ import {
 import { securityAxios } from './securityAxios';
 import { PromiseAxiosResponse } from '../types';
 
-const BASE_URL = 'http://localhost:3000/todos';
+const BASE_URL = 'http://localhost:3000/columns/card';
 
 export class TodoApi {
-  static addTodo(
-    newTodo: TodoCardForCreate,
-  ): PromiseAxiosResponse<TodoCardProps> {
-    const response = securityAxios.post(`${BASE_URL}/create`, newTodo);
-    return response;
-  }
-
-  static updateTodo(todo: TodoCardProps): PromiseAxiosResponse<TodoCardProps> {
-    const response = securityAxios.patch(`${BASE_URL}/update`, todo, {});
+  static updateTodo({
+    columnId,
+    id,
+    todo,
+  }: {
+    columnId: string;
+    id: string;
+    todo: TodoCardForCreate;
+  }): PromiseAxiosResponse<TodoCardProps> {
+    const response = securityAxios.patch(`${BASE_URL}/${columnId}/${id}`, todo);
     return response;
   }
 
@@ -25,13 +26,11 @@ export class TodoApi {
     return response;
   }
 
-  static getTodos(): PromiseAxiosResponse<TodoCardProps[]> {
-    const response = securityAxios.get(`${BASE_URL}/all`);
-    return response;
-  }
-
-  static getTodo(id: string): PromiseAxiosResponse<TodoCardProps> {
-    const response = securityAxios.get(`${BASE_URL}/${id}`);
+  static getTodo(
+    columnId: string,
+    id: string,
+  ): PromiseAxiosResponse<TodoCardProps> {
+    const response = securityAxios.get(`${BASE_URL}/${columnId}/${id}`);
     return response;
   }
 }
