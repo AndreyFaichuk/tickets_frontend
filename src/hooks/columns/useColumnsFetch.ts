@@ -15,6 +15,7 @@ export const useColumnsFetch = () => {
       const response = await ColumnApi.getColumns();
       return response.data;
     },
+    retry: false,
   });
 
   // const { isConnected } = useSocketTodos();
