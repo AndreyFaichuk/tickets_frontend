@@ -1,4 +1,4 @@
-import { Paper, styled, Typography } from '@mui/material';
+import { Box, Paper, styled, Typography } from '@mui/material';
 import { theme } from '../../../../theme';
 
 export const TodoCardRoot = styled(Paper, {
@@ -19,6 +19,16 @@ export const TodoCardTypography = styled(Typography)(() => ({
   display: '-webkit-box',
   WebkitBoxOrient: 'vertical',
   overflow: 'hidden',
-  WebkitLineClamp: 2,
+  WebkitLineClamp: 4,
   textOverflow: 'ellipsis',
+}));
+
+export const TodoCardContentWrapper = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  minHeight: '120px',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  cursor: 'grab',
+  gap: theme.spacing(1),
+  paddingRight: theme.spacing(1),
 }));

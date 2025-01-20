@@ -97,6 +97,7 @@ export const BaseColumn: FC<BaseColumn> = ({
             alignItems="center">
             {initialTodos.map((card) => (
               <TodoCard
+                created_at={card.created_at}
                 isActiveCard={activeCardId === card._id}
                 key={card._id}
                 _id={card._id}

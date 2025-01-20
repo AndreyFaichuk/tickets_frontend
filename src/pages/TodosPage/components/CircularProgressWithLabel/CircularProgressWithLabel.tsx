@@ -7,8 +7,6 @@ import {
   CustomCircularProgress,
 } from './CircularProgressWithLabel.styled';
 
-import { useProgress } from './hooks';
-
 const CircularWithValueLabel: FC<CircularProgressWithLabelProps> = (
   props: CircularProgressWithLabelProps,
 ) => {
@@ -17,12 +15,14 @@ const CircularWithValueLabel: FC<CircularProgressWithLabelProps> = (
       <CustomCircularProgress
         {...props}
         variant="determinate"
-        size="115px"
-        thickness={5}
+        size="50px"
+        thickness={3}
         value={props.progress}
         progress={props.progress}
       />
-      <Typography position="absolute">{props.progress}%</Typography>
+      <Typography position="absolute" variant="caption">
+        {props.progress}%
+      </Typography>
     </CircularProgressWithLabelContent>
   );
 };
@@ -30,7 +30,5 @@ const CircularWithValueLabel: FC<CircularProgressWithLabelProps> = (
 export const CircularProgressWithLabel: FC<CircularProgressWithLabelProps> = (
   props: CircularProgressWithLabelProps,
 ) => {
-  const progress = useProgress({ value: props.progress });
-
-  return <CircularWithValueLabel progress={progress} />;
+  return <CircularWithValueLabel progress={props.progress} />;
 };

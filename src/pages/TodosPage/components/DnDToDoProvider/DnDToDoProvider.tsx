@@ -48,7 +48,6 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
           sx={{
             width: 'max-content',
             minWidth: '100%',
-            whiteSpace: 'nowrap',
           }}>
           {renderedColumns}
           <AddNewColumnBlock onAddNewColumnToList={handleAddNewColumnToList} />
@@ -61,6 +60,7 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
         }}>
         {activeCard && (
           <TodoCard
+            created_at={activeCard.created_at}
             _id={activeCard._id}
             name={activeCard.name}
             description={activeCard.description}

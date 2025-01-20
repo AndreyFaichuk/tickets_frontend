@@ -43,6 +43,18 @@ const baseTheme = createTheme({
       main: '#fa695f',
       light: lighten('#fa695f', 0.2),
     },
+    grey: {
+      50: '#f9f9f9',
+      100: '#f0f0f0',
+      200: '#e0e0e0',
+      300: '#d0d0d0',
+      400: '#bdbdbd',
+      500: '#9e9e9e',
+      600: '#757575',
+      700: '#616161',
+      800: '#424242',
+      900: '#212121',
+    },
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -50,6 +62,9 @@ const baseTheme = createTheme({
       fontSize: '1.125rem',
       lineHeight: '1.2',
       fontWeight: 500,
+    },
+    body2: {
+      color: '#616161',
     },
   },
   components: {
