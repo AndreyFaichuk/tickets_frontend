@@ -59,7 +59,10 @@ export const BaseColumn: FC<BaseColumn> = ({
   };
 
   const handleSubmitChangeColumnTitle = () => {
-    handleUpdateColumn({ title: columnTitle, columnId: id });
+    handleUpdateColumn({
+      columnForUpdate: { title: columnTitle },
+      columnId: id,
+    });
   };
 
   return (
@@ -106,7 +109,7 @@ export const BaseColumn: FC<BaseColumn> = ({
                     openModal(BASE_COLUMN_MODAL_TYPES.deleteTodo);
                   },
                   onEdit: () => {
-                    navigate(`/app/edit/${id}/${card._id}`);
+                    navigate(`/app/edit/${card._id}`);
                   },
                 }}
               />

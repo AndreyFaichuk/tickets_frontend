@@ -17,9 +17,10 @@ export class ColumnApi {
 
   static updateColumn(
     columnForUpdate: ColumnForUpdate,
+    columnId: string,
   ): PromiseAxiosResponse<ColumnType> {
     const response = securityAxios.patch(
-      `${BASE_URL}/${columnForUpdate.columnId}`,
+      `${BASE_URL}/${columnId}`,
       columnForUpdate,
     );
 
@@ -33,15 +34,6 @@ export class ColumnApi {
 
   static deleteColumn(id: string): PromiseAxiosResponse<ColumnType> {
     const response = securityAxios.delete(`${BASE_URL}/${id}`);
-
-    return response;
-  }
-
-  static deleteToDoInColumn(
-    columnId: string,
-    toDoId: string,
-  ): PromiseAxiosResponse<ColumnType> {
-    const response = securityAxios.delete(`${BASE_URL}/${columnId}/${toDoId}`);
 
     return response;
   }
