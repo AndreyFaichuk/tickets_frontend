@@ -10,6 +10,7 @@ import { Box, Button } from '@mui/material';
 import { BaseModal } from '../../BaseModal';
 import { ToDoForm } from '../../ToDoForm/ToDoForm';
 import { useColumnActions } from '../../../../hooks/columns/useColumnsActions';
+import { useTodoActions } from '../../../../hooks/useTodoActions';
 
 type useBaseColumnManagementProps = {
   columnTitle: string;
@@ -20,8 +21,8 @@ export const useBaseColumnManagement = ({
   columnTitle,
   columnId,
 }: useBaseColumnManagementProps) => {
-  const { handleDeleteColumn, handleUpdateColumn, handleDeleteToDoInColumn } =
-    useColumnActions();
+  const { handleDeleteColumn } = useColumnActions();
+  const { handleCreateToDo, handleDeleteToDo } = useTodoActions();
 
   const [activeTodoId, setActiveTodoId] = useState<string>('');
 
@@ -42,8 +43,8 @@ export const useBaseColumnManagement = ({
   };
 
   const handleSubmitCreateNewToDo = (values: TodoValues) => {
-    handleUpdateColumn({
-      card: {
+    handleCreateToDo({
+      newTodo: {
         description: values.description.trim(),
         name: values.name,
         progress: values.progress,
@@ -55,7 +56,7 @@ export const useBaseColumnManagement = ({
   };
 
   const handleSubmitDeletingToDoInColumn = () => {
-    handleDeleteToDoInColumn({ columnId, toDoId: activeTodoId });
+    handleDeleteToDo({ id: activeTodoId, columnId });
 
     closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo);
   };

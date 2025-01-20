@@ -10,18 +10,17 @@ import { useTodoActions } from '../../hooks/useTodoActions';
 import { DefaultAppPage } from '../../app/DefaultAppPage';
 
 export const EditTodoPage = () => {
-  const { columnId, id } = useParams<{ columnId: string; id: string }>();
+  const { id } = useParams<{ id: string }>();
 
-  if (!columnId || !id) return null;
+  if (!id) return null;
 
-  const { oneTodo, isOneToDoLoading } = useTodoFetchById(columnId, id);
+  const { oneTodo, isOneToDoLoading } = useTodoFetchById(id);
   const { handleUpdateToDo } = useTodoActions();
 
   const isLoading = isOneToDoLoading || !oneTodo;
 
   const handleSubmit = (values: TodoValues) => {
     handleUpdateToDo({
-      columnId,
       id,
       todo: {
         description: values.description.trim(),

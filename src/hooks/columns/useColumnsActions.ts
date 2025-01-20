@@ -3,13 +3,10 @@ import { toast } from 'react-toastify';
 
 import { ColumnApi } from '../../api/column.api';
 import { columnsQueryKeys } from './useColumnsFetch';
-import { TodoValues } from '../../components/shared/ToDoForm/ToDoForm.schema';
 import { CurrentDnDColumnType } from '../../pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.constants';
 
 export type ColumnForUpdate = {
-  columnId: string;
   title?: string;
-  card?: TodoValues;
 };
 
 export const useColumnActions = () => {
@@ -32,8 +29,14 @@ export const useColumnActions = () => {
   });
 
   const updateColumn = useMutation({
-    mutationFn: async (columnForUpdate: ColumnForUpdate) => {
-      const response = await ColumnApi.updateColumn(columnForUpdate);
+    mutationFn: async ({
+      columnForUpdate,
+      columnId,
+    }: {
+      columnForUpdate: ColumnForUpdate;
+      columnId: string;
+    }) => {
+      const response = await ColumnApi.updateColumn(columnForUpdate, columnId);
       return response.data;
     },
     onError: (error: Error) => {
@@ -52,28 +55,6 @@ export const useColumnActions = () => {
     mutationFn: async (id: string) => {
       const response = await ColumnApi.deleteColumn(id);
       return response.data;
-    },
-    onError: (error: Error) => {
-      toast.error(error.message);
-    },
-    onSuccess: () => {
-      toast('Column has been deleted!');
-
-      queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
-      });
-    },
-  });
-
-  const deleteTodoInColumn = useMutation({
-    mutationFn: async ({
-      columnId,
-      toDoId,
-    }: {
-      columnId: string;
-      toDoId: string;
-    }) => {
-      await ColumnApi.deleteToDoInColumn(columnId, toDoId);
     },
     onError: (error: Error) => {
       toast.error(error.message);
@@ -107,7 +88,6 @@ export const useColumnActions = () => {
     handleCreateNewColumn: createNewColumn.mutate,
     handleUpdateColumn: updateColumn.mutate,
     handleDeleteColumn: deleteColumn.mutate,
-    handleDeleteToDoInColumn: deleteTodoInColumn.mutate,
     handleMoveTodoColumns: moveTodoColumns.mutate,
   };
 };

@@ -6,6 +6,8 @@ import { TodoApi } from '../api/todo.api';
 import { TodoCardForCreate } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
 import { todosQueryKeys } from './useTodosFetch';
 import { ADD_LOGGED_IN_ROUTES } from '../constants/routes';
+import { TodoValues } from '../components/shared/ToDoForm/ToDoForm.schema';
+import { columnsQueryKeys } from './columns/useColumnsFetch';
 
 export const useTodoActions = () => {
   const queryClient = useQueryClient();
@@ -13,15 +15,13 @@ export const useTodoActions = () => {
 
   const updateToDo = useMutation({
     mutationFn: async ({
-      columnId,
       id,
       todo,
     }: {
-      columnId: string;
       id: string;
       todo: TodoCardForCreate;
     }) => {
-      const response = await TodoApi.updateTodo({ columnId, id, todo });
+      const response = await TodoApi.updateTodo({ id, todo });
       return response.data;
     },
     onError: (error: Error) => {
@@ -39,8 +39,8 @@ export const useTodoActions = () => {
   });
 
   const deleteToDo = useMutation({
-    mutationFn: async (id: string) => {
-      const response = await TodoApi.deleteTodo(id);
+    mutationFn: async ({ id, columnId }: { id: string; columnId: string }) => {
+      const response = await TodoApi.deleteTodo(id, columnId);
       return response.data;
     },
     onError: (error: Error) => {
@@ -50,7 +50,30 @@ export const useTodoActions = () => {
       toast('ToDo has been deleted!');
 
       queryClient.invalidateQueries({
-        queryKey: todosQueryKeys.todos.all(),
+        queryKey: columnsQueryKeys.columns.all(),
+      });
+    },
+  });
+
+  const createToDo = useMutation({
+    mutationFn: async ({
+      newTodo,
+      columnId,
+    }: {
+      newTodo: TodoValues;
+      columnId: string;
+    }) => {
+      const response = await TodoApi.createTodo(newTodo, columnId);
+      return response.data;
+    },
+    onError: (error: Error) => {
+      toast.error(error.message);
+    },
+    onSuccess: () => {
+      toast('ToDo has been created!');
+
+      queryClient.invalidateQueries({
+        queryKey: columnsQueryKeys.columns.all(),
       });
     },
   });
@@ -58,5 +81,6 @@ export const useTodoActions = () => {
   return {
     handleUpdateToDo: updateToDo.mutate,
     handleDeleteToDo: deleteToDo.mutate,
+    handleCreateToDo: createToDo.mutate,
   };
 };
