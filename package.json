@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "tsc:build": "tsc -b",
-    "check-lint": "npm run format && npm run tsc:build",
+    "check-lint": "npm run tsc:build",
     "precommit": "husky run pre-commit",
     "prepare": "husky"
   },

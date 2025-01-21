@@ -2,6 +2,7 @@ import { FC } from 'react';
 import dayjs from 'dayjs';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { Stack } from '@mui/material';
 import {
   TodoCardContentWrapper,
   TodoCardIconWrapper,
@@ -11,7 +12,6 @@ import {
 import { TodoCardPropsWithActions } from './TodoCard.types';
 import { CircularProgressWithLabel } from '../CircularProgressWithLabel';
 import { TodoCardActionBlock } from '../TodoCardActionBlock';
-import { Stack } from '@mui/material';
 import { PRIORITY_ICON_MAP } from '../../../../components/shared/ToDoForm/ToDoForm.constants';
 
 interface TodoCardProps extends TodoCardPropsWithActions {
@@ -50,16 +50,14 @@ export const TodoCard: FC<TodoCardProps> = ({
         id={_id}
         ref={setNodeRef}
         {...listeners}
-        {...attributes}
-      >
+        {...attributes}>
         <TodoCardTypography variant="h6">{name}</TodoCardTypography>
         <TodoCardTypography variant="body2">{description}</TodoCardTypography>
       </TodoCardContentWrapper>
       <Stack
         direction="row"
         alignItems="flex-end"
-        justifyContent="space-between"
-      >
+        justifyContent="space-between">
         <TodoCardIconWrapper>
           <img
             src={PRIORITY_ICON_MAP[priority]}
