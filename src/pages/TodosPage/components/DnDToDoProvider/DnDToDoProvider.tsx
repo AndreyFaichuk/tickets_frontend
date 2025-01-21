@@ -60,6 +60,7 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
         }}>
         {activeCard && (
           <TodoCard
+            priority={activeCard.priority}
             created_at={activeCard.created_at}
             _id={activeCard._id}
             name={activeCard.name}

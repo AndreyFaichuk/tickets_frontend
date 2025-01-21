@@ -1,16 +1,18 @@
 import { FC } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
-
+import { CSS } from '@dnd-kit/utilities';
 import {
   TodoCardContentWrapper,
+  TodoCardIconWrapper,
   TodoCardRoot,
   TodoCardTypography,
 } from './TodoCard.styled';
 import { TodoCardPropsWithActions } from './TodoCard.types';
 import { CircularProgressWithLabel } from '../CircularProgressWithLabel';
 import { TodoCardActionBlock } from '../TodoCardActionBlock';
-import { Stack } from '@mui/material';
+import { Paper, Stack } from '@mui/material';
 import dayjs from 'dayjs';
+import { PRIORITY_ICON_MAP } from '../../../../components/shared/ToDoForm/ToDoForm.constants';
 
 interface TodoCardProps extends TodoCardPropsWithActions {
   isDragging?: boolean;
@@ -24,18 +26,27 @@ export const TodoCard: FC<TodoCardProps> = ({
   progress,
   actions,
   created_at,
+  priority,
   isDragging = false,
   isActiveCard = false,
 }) => {
-  const { attributes, listeners, setNodeRef } = useSortable({
-    id: _id,
-  });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: _id,
+    });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition: isDragging ? 'none' : transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
 
   const formattedDate = dayjs(created_at).format('YYYY/MM/DD');
 
   return (
     <TodoCardRoot elevation={isDragging ? 8 : 4} isActiveCard={isActiveCard}>
       <TodoCardContentWrapper
+        style={style}
         id={_id}
         ref={setNodeRef}
         {...listeners}
@@ -47,6 +58,15 @@ export const TodoCard: FC<TodoCardProps> = ({
         direction="row"
         alignItems="flex-end"
         justifyContent="space-between">
+        <TodoCardIconWrapper>
+          <img
+            src={PRIORITY_ICON_MAP[priority]}
+            style={{
+              width: '20px',
+              height: '20px',
+            }}
+          />
+        </TodoCardIconWrapper>
         <CircularProgressWithLabel progress={progress} />
         <Stack flexDirection="column" alignItems="flex-end">
           <TodoCardActionBlock actions={actions} currentId={_id} />

@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { TodoApi } from '../api/todo.api';
 import { TodoCardForCreate } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
-import { todosQueryKeys } from './useTodosFetch';
 import { ADD_LOGGED_IN_ROUTES } from '../constants/routes';
 import { TodoValues } from '../components/shared/ToDoForm/ToDoForm.schema';
 import { columnsQueryKeys } from './columns/useColumnsFetch';
@@ -31,7 +30,7 @@ export const useTodoActions = () => {
       toast('ToDo has been updated!');
 
       queryClient.invalidateQueries({
-        queryKey: todosQueryKeys.todos.all(),
+        queryKey: columnsQueryKeys.columns.all(),
       });
 
       navigate(ADD_LOGGED_IN_ROUTES.TODOS);

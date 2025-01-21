@@ -6,5 +6,6 @@ export const normalizeFormData = (todo: TodoCardProps): TodoValues => {
     description: todo.description,
     name: todo.name,
     progress: Math.min(todo.progress, 100),
+    priority: todo.priority,
   };
 };

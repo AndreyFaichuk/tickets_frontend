@@ -91,6 +91,7 @@ export const useDnDManagement = (data: ColumnType[]) => {
       const activeIndex = activeColumn.cards.findIndex(
         (card) => card._id === activeId,
       );
+
       const overIndex = overItems.findIndex((card) => card._id === overId);
 
       const newOverItems = [
@@ -123,7 +124,14 @@ export const useDnDManagement = (data: ColumnType[]) => {
       toTodoIndex: itemIndex || 0,
     } as CurrentDnDColumnType;
 
-    handleMoveTodoColumns(movePayload);
+    if (
+      !(
+        movePayload.fromColumnId === movePayload.toColumnId &&
+        movePayload.fromTodoIndex === movePayload.toTodoIndex
+      )
+    ) {
+      handleMoveTodoColumns(movePayload);
+    }
 
     const activeId = String(active.id);
     const overId = over ? String(over.id) : null;

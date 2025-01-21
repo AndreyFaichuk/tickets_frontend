@@ -48,6 +48,7 @@ export const useBaseColumnManagement = ({
         description: values.description.trim(),
         name: values.name,
         progress: values.progress,
+        priority: values.priority,
       },
       columnId,
     });
