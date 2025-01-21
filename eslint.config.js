@@ -13,7 +13,6 @@ export default [
     plugins: {
       react: pluginReact,
       prettier: pluginPrettier,
-      // добавьте другие плагины, если нужно
     },
     rules: {
       'prettier/prettier': 'error',

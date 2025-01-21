@@ -1,6 +1,8 @@
 import { FC } from 'react';
+import dayjs from 'dayjs';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { Stack } from '@mui/material';
 import {
   TodoCardContentWrapper,
   TodoCardIconWrapper,
@@ -10,8 +12,6 @@ import {
 import { TodoCardPropsWithActions } from './TodoCard.types';
 import { CircularProgressWithLabel } from '../CircularProgressWithLabel';
 import { TodoCardActionBlock } from '../TodoCardActionBlock';
-import { Stack } from '@mui/material';
-import dayjs from 'dayjs';
 import { PRIORITY_ICON_MAP } from '../../../../components/shared/ToDoForm/ToDoForm.constants';
 
 interface TodoCardProps extends TodoCardPropsWithActions {
