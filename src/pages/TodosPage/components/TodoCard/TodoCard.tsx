@@ -2,7 +2,7 @@ import { FC } from 'react';
 import dayjs from 'dayjs';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Stack } from '@mui/material';
+import { Stack, Accordion } from '@mui/material';
 import {
   TodoCardContentWrapper,
   TodoCardIconWrapper,
