@@ -10,7 +10,7 @@ import {
 import { TodoCardPropsWithActions } from './TodoCard.types';
 import { CircularProgressWithLabel } from '../CircularProgressWithLabel';
 import { TodoCardActionBlock } from '../TodoCardActionBlock';
-import { Paper, Stack } from '@mui/material';
+import { Paper, Stack, Accordion, AccordionClasses } from '@mui/material';
 import dayjs from 'dayjs';
 import { PRIORITY_ICON_MAP } from '../../../../components/shared/ToDoForm/ToDoForm.constants';
 
