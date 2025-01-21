@@ -26,6 +26,7 @@ export const EditTodoPage = () => {
         description: values.description.trim(),
         name: values.name,
         progress: values.progress,
+        priority: values.priority,
       },
     });
   };

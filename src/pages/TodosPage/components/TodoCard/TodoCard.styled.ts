@@ -13,6 +13,7 @@ export const TodoCardRoot = styled(Paper, {
   backgroundColor: isActiveCard
     ? theme.palette.primary.main
     : theme.palette.card.medium,
+  position: 'relative',
 }));
 
 export const TodoCardTypography = styled(Typography)(() => ({
@@ -31,4 +32,16 @@ export const TodoCardContentWrapper = styled(Box)(({ theme }) => ({
   cursor: 'grab',
   gap: theme.spacing(1),
   paddingRight: theme.spacing(1),
+}));
+
+export const TodoCardIconWrapper = styled(Paper)(() => ({
+  width: '25px',
+  height: '25px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 'unset',
+  position: 'absolute',
+  top: '4px',
+  right: '4px',
 }));

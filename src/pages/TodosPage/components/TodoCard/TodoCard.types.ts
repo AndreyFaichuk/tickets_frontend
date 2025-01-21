@@ -1,3 +1,4 @@
+import { PriorityType } from '../../../../components/shared/ToDoForm/ToDoForm.constants';
 import { TodoCardActionBlockProps } from '../TodoCardActionBlock/TodoCardActionBlock.types';
 
 export type TodoCardProps = {
@@ -6,6 +7,7 @@ export type TodoCardProps = {
   progress: number;
   _id: string;
   created_at: Date;
+  priority: PriorityType;
 };
 
 export type TodoCardForCreate = Omit<TodoCardProps, '_id' | 'created_at'>;

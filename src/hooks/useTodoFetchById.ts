@@ -1,7 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { TodoApi } from '../api/todo.api';
-import { todosQueryKeys } from './useTodosFetch';
+
+export const todosQueryKeys = {
+  todos: {
+    all: () => ['todos', 'all'],
+    one: (id: string) => ['todos', 'one', id],
+  },
+};
 
 export const useTodoFetchById = (id: string) => {
   const { data: oneTodo, isLoading: isOneToDoLoading } = useQuery({

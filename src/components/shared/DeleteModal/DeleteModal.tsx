@@ -3,15 +3,15 @@ import { Button, Stack, Typography } from '@mui/material';
 
 import { BaseModal } from '../BaseModal';
 import { BaseModalProps } from '../BaseModal/BaseModal';
-import { useTodoActions } from '../../../hooks/useTodoActions';
+// import { useTodoActions } from '../../../hooks/useTodoActions';
 
 type DeleteModalProps = BaseModalProps & { id: string };
 
 export const DeleteModal: FC<DeleteModalProps> = ({ id, ...rest }) => {
-  const { handleDeleteToDo } = useTodoActions();
+  // const { handleDeleteToDo } = useTodoActions();
 
   const handleDelete = () => {
-    handleDeleteToDo(id);
+    // handleDeleteToDo(id);
     rest.onClose();
   };
 
