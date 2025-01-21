@@ -18,7 +18,8 @@ export const FourthStepRegistrationForm: FC = () => {
           justifyContent="center"
           direction="column"
           sx={{ minWidth: { xs: '100%', sm: '250px' } }}
-          spacing={2}>
+          spacing={2}
+        >
           <FormInput name="password" label="Password" type="password" />
           <FormInput
             name="repeatPassword"

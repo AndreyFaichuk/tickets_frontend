@@ -57,7 +57,8 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
             onClick={isLastStep ? undefined : onNext}
             endIcon={isLastStep ? <SendIcon /> : null}
             variant="contained"
-            color="secondary">
+            color="secondary"
+          >
             {isLastStep ? 'Sign Up' : 'Next'}
           </Button>
         </StyledRegisteredFormButtonsWrapper>

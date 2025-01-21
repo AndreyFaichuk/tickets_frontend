@@ -1,1 +1,1 @@
-export { DefaultAppLayout } from './DefaultAppLayout'
+export { DefaultAppLayout } from './DefaultAppLayout';

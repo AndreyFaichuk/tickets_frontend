@@ -59,7 +59,8 @@ const BasePageGoBackButton: React.FC<BasePageGoBackButtonProps> = ({
       size="small"
       onClick={onClick}
       variant="text"
-      startIcon={<ArrowBackIosNewIcon />}>
+      startIcon={<ArrowBackIosNewIcon />}
+    >
       {text}
     </StyledBasePageGoBackButton>
   );

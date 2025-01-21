@@ -1,1 +1,1 @@
-export { CircularProgressWithLabel } from './CircularProgressWithLabel'
+export { CircularProgressWithLabel } from './CircularProgressWithLabel';

@@ -38,7 +38,8 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
       collisionDetection={closestCorners}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
-      onDragEnd={handleDragEnd}>
+      onDragEnd={handleDragEnd}
+    >
       <StyledDnDToDoProviderRoot>
         <Stack
           direction="row"
@@ -48,7 +49,8 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
           sx={{
             width: 'max-content',
             minWidth: '100%',
-          }}>
+          }}
+        >
           {renderedColumns}
           <AddNewColumnBlock onAddNewColumnToList={handleAddNewColumnToList} />
         </Stack>
@@ -57,7 +59,8 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
         dropAnimation={{
           duration: 400,
           easing: 'ease-out',
-        }}>
+        }}
+      >
         {activeCard && (
           <TodoCard
             priority={activeCard.priority}
