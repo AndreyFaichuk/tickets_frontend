@@ -49,13 +49,15 @@ export const FormProgressSlider = ({
             <Typography
               variant="body2"
               onClick={() => field.onChange(MIN)}
-              sx={{ cursor: 'pointer' }}>
+              sx={{ cursor: 'pointer' }}
+            >
               Not started
             </Typography>
             <Typography
               variant="body2"
               onClick={() => field.onChange(MAX)}
-              sx={{ cursor: 'pointer' }}>
+              sx={{ cursor: 'pointer' }}
+            >
               Completed
             </Typography>
           </Box>

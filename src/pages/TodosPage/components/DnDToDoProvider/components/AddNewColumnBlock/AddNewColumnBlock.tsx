@@ -55,7 +55,8 @@ export const AddNewColumnBlock: FC<AddNewColumnBlock> = ({
               onMouseDown={handleSwap}
               type="button"
               size="large"
-              color="secondary">
+              color="secondary"
+            >
               <AddIcon />
             </StyledDnDToDoProviderIconButton>
           </StyledDnDToDoProviderButton>

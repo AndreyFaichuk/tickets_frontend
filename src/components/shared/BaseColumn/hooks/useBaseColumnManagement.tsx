@@ -74,15 +74,15 @@ export const useBaseColumnManagement = ({
           actions={
             <>
               <Button
-                onClick={() =>
-                  closeModal(BASE_COLUMN_MODAL_TYPES.confirmation)
-                }>
+                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.confirmation)}
+              >
                 Close
               </Button>
               <Button
                 onClick={handleSubmitDeleteColumn}
                 autoFocus
-                color="warning">
+                color="warning"
+              >
                 Delete
               </Button>
             </>
@@ -98,7 +98,8 @@ export const useBaseColumnManagement = ({
       render: (
         <BaseModal.Root
           open={activeModals.createTodo}
-          onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.createTodo)}>
+          onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.createTodo)}
+        >
           <BaseModal.Header title="Create new ToDo" />
           <BaseModal.Body>
             <Box sx={{ width: '900px', height: '600px' }}>
@@ -114,13 +115,15 @@ export const useBaseColumnManagement = ({
           actions={
             <>
               <Button
-                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo)}>
+                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo)}
+              >
                 Close
               </Button>
               <Button
                 onClick={handleSubmitDeletingToDoInColumn}
                 autoFocus
-                color="warning">
+                color="warning"
+              >
                 Delete Todo
               </Button>
             </>

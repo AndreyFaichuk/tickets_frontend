@@ -89,12 +89,14 @@ export const BaseColumn: FC<BaseColumn> = ({
         <SortableContext
           id={id}
           items={initialTodos.map((todo) => todo._id)}
-          strategy={rectSortingStrategy}>
+          strategy={rectSortingStrategy}
+        >
           <Stack
             ref={setNodeRef}
             direction="column"
             gap={2}
-            alignItems="center">
+            alignItems="center"
+          >
             {initialTodos.map((card) => (
               <TodoCard
                 priority={card.priority}
@@ -120,7 +122,8 @@ export const BaseColumn: FC<BaseColumn> = ({
         </SortableContext>
         <StyledCloseIconButton
           className="childClass"
-          onClick={() => openModal(BASE_COLUMN_MODAL_TYPES.confirmation)}>
+          onClick={() => openModal(BASE_COLUMN_MODAL_TYPES.confirmation)}
+        >
           <CloseIcon />
         </StyledCloseIconButton>
         <StyledBaseColumnAddToDoButton
@@ -128,7 +131,8 @@ export const BaseColumn: FC<BaseColumn> = ({
           type="button"
           color="info"
           variant="contained"
-          fullWidth>
+          fullWidth
+        >
           Add todo
         </StyledBaseColumnAddToDoButton>
       </StyledBaseColumnRoot>

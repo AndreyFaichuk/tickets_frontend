@@ -16,7 +16,8 @@ export const AuthPage = () => {
   return (
     <DefaultAuthLayout
       subTitle={AUTH_CONTENT[AUTH.registration].subtitle}
-      title={AUTH_CONTENT[AUTH.registration].title}>
+      title={AUTH_CONTENT[AUTH.registration].title}
+    >
       <RegistrationForm onSubmit={handleSubmit} />
     </DefaultAuthLayout>
   );
