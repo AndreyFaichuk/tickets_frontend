@@ -18,11 +18,13 @@ const marks = [
 
 type FormSliderProps = {
   name: string;
+  label: string;
   disabled?: boolean;
 };
 
 export const FormProgressSlider = ({
   name,
+  label,
   disabled = false,
 }: FormSliderProps) => {
   const { control } = useFormContext();
@@ -34,6 +36,9 @@ export const FormProgressSlider = ({
       defaultValue={MIN}
       render={({ field, fieldState: { error } }) => (
         <Box>
+          <Typography variant="subtitle2" gutterBottom>
+            {label}
+          </Typography>
           <Slider
             {...field}
             marks={marks}
@@ -47,14 +52,14 @@ export const FormProgressSlider = ({
           />
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Typography
-              variant="body2"
+              variant="subtitle2"
               onClick={() => field.onChange(MIN)}
               sx={{ cursor: 'pointer' }}
             >
               Not started
             </Typography>
             <Typography
-              variant="body2"
+              variant="subtitle2"
               onClick={() => field.onChange(MAX)}
               sx={{ cursor: 'pointer' }}
             >

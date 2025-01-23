@@ -2,8 +2,10 @@ import { Controller, useFormContext } from 'react-hook-form';
 import {
   Autocomplete,
   AutocompleteProps,
+  Box,
   FormHelperText,
   TextField,
+  Typography,
 } from '@mui/material';
 
 type SelectOption = {
@@ -37,9 +39,11 @@ export const FormSelectWithSearch = ({
       defaultValue=""
       render={({ field, fieldState: { error } }) => {
         const { onChange, value } = field;
-
         return (
-          <>
+          <Box>
+            <Typography variant="subtitle2" gutterBottom>
+              {label}
+            </Typography>
             <Autocomplete
               {...rest}
               value={options.find((option) => option.value === value) || null}
@@ -51,14 +55,14 @@ export const FormSelectWithSearch = ({
               isOptionEqualToValue={(option, value) =>
                 option.value === value.value
               }
-              renderInput={(params) => <TextField {...params} label={label} />}
+              renderInput={(params) => <TextField {...params} />}
             />
             {error && (
               <FormHelperText error sx={{ marginTop: '4px' }}>
                 {error.message}
               </FormHelperText>
             )}
-          </>
+          </Box>
         );
       }}
     />

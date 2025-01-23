@@ -130,6 +130,20 @@ const baseTheme = createTheme({
         },
       },
     },
+    MuiDialogContent: {
+      styleOverrides: {
+        root: {
+          padding: 'unset',
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        subtitle2: {
+          fontSize: '0.75rem',
+        },
+      },
+    },
   },
 });
 

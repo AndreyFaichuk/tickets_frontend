@@ -1,5 +1,10 @@
 import { z } from 'zod';
-import { PRIORITY_VARIANT } from './ToDoForm.constants';
+import { ALLOWED_FILE_TYPES_MAP, PRIORITY_VARIANT } from './ToDoForm.constants';
+
+const fileSizeLimit = 1024 * 1024; // 1MB
+
+const fileTypesMap = Object.keys(ALLOWED_FILE_TYPES_MAP);
+const fileTypes = Object.values(ALLOWED_FILE_TYPES_MAP);
 
 export const todoSchema = z.object({
   name: z.string().min(1, 'Name must consist of at least 1 character'),
@@ -21,6 +26,19 @@ export const todoSchema = z.object({
       }),
     },
   ),
+  attachments: z
+    .instanceof(FileList)
+    .optional()
+    .transform((list) => (list ? Array.from(list) : []))
+    .refine((files) => files.every((file) => fileTypes.includes(file.type)), {
+      message: `Invalid file type. Allowed types: ${fileTypesMap.join(', ')}`,
+    })
+    .refine((files) => files.every((file) => file.size <= fileSizeLimit), {
+      message: 'File size should not exceed 1MB',
+    })
+    .refine((files) => files.length <= 5, {
+      message: 'Maximum 5 files allowed',
+    }),
 });
 
 export type TodoValues = z.infer<typeof todoSchema>;

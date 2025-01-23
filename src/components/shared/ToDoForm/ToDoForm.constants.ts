@@ -30,3 +30,11 @@ export const PRIORITY_ICON_MAP: Record<PriorityType, string> = {
   [PRIORITY_VARIANT.middle]: MiddlePriorityIcon,
   [PRIORITY_VARIANT.high]: HighPriorityIcon,
 };
+
+export const ALLOWED_FILE_TYPES_MAP = {
+  JPG: 'image/jpeg',
+  PNG: 'image/png',
+  PDF: 'application/pdf',
+  DOC: 'application/msword',
+  DOCX: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+};

@@ -9,4 +9,5 @@ export type User = {
   firstName: string;
   lastName: string;
   _id: string;
+  avatarUrl: string;
 };
