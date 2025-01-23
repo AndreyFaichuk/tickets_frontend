@@ -68,7 +68,8 @@ export const FormAttachmentBlock: FC<FormAttachmentBlockProps> = ({
 
               field.onChange(dataTransfer.files);
             }}
-            onDragOver={onStartDragHandler}>
+            onDragOver={onStartDragHandler}
+          >
             {isDragging && (
               <StyledFormAttachmentPlaceholderWrapper>
                 <Typography textAlign="center" variant="h5">

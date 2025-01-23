@@ -68,7 +68,8 @@ export const FormSelect = ({
                   </Stack>
                 );
               }}
-              labelId={`${name}-label`}>
+              labelId={`${name}-label`}
+            >
               {options.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.icon && (

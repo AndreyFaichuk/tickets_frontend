@@ -45,7 +45,8 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
           fullWidth
           endIcon={<SendIcon />}
           variant="contained"
-          color="secondary">
+          color="secondary"
+        >
           Log in
         </Button>
       </StyledLoginFormRoot>

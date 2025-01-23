@@ -30,7 +30,8 @@ export const FileUploadButton: FC<FileUploadButtonProps> = ({
       tabIndex={-1}
       startIcon={<FileUploadIcon />}
       fullWidth={fullWidth}
-      {...rest}>
+      {...rest}
+    >
       Upload files
       <VisuallyHiddenInput type="file" multiple onChange={onChange} />
     </Button>
