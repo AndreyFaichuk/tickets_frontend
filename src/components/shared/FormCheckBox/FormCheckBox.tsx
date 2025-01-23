@@ -1,5 +1,10 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { Checkbox, CheckboxProps, FormControlLabel } from '@mui/material';
+import {
+  Checkbox,
+  CheckboxProps,
+  FormControlLabel,
+  Typography,
+} from '@mui/material';
 
 type LabelPlacementUnion = 'bottom' | 'top' | 'start' | 'end';
 
@@ -31,7 +36,7 @@ export const FormCheckBox = ({
               {...rest}
             />
           }
-          label={label}
+          label={<Typography variant="subtitle2">{label}</Typography>}
           labelPlacement={labelPlace}
         />
       )}

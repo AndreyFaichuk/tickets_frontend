@@ -31,7 +31,7 @@ export const FormDatePicker = ({ name, label, ...rest }: DatePickerProps) => {
 
         return (
           <Box display="flex" flexDirection="column" gap={1}>
-            <Typography variant="subtitle1">{label}</Typography>
+            <Typography variant="subtitle2">{label}</Typography>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateCalendar
                 {...field}

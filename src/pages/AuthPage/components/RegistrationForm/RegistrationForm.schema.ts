@@ -4,14 +4,17 @@ export const registeredSchema = z
   .object({
     firstName: z
       .string()
-      .min(1, 'First name must consist of at least 1 character'),
+      .min(1, 'First name must consist of at least 1 character')
+      .trim(),
     lastName: z
       .string()
-      .min(1, 'Last name must consist of at least 1 character'),
+      .min(1, 'Last name must consist of at least 1 character')
+      .trim(),
     email: z
       .string()
       .email({ message: 'Enter a valid email.' })
-      .min(1, 'This field is required.'),
+      .min(1, 'This field is required.')
+      .trim(),
     password: z
       .string()
       .trim()

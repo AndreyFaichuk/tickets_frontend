@@ -43,17 +43,19 @@ export const useBaseColumnManagement = ({
   };
 
   const handleSubmitCreateNewToDo = (values: TodoValues) => {
-    handleCreateToDo({
-      newTodo: {
-        description: values.description.trim(),
-        name: values.name,
-        progress: values.progress,
-        priority: values.priority,
-      },
-      columnId,
-    });
+    console.log(values, 'values');
 
-    closeModal(BASE_COLUMN_MODAL_TYPES.createTodo);
+    // handleCreateToDo({
+    //   newTodo: {
+    //     description: values.description.trim(),
+    //     name: values.name,
+    //     progress: values.progress,
+    //     priority: values.priority,
+    //   },
+    //   columnId,
+    // });
+
+    // closeModal(BASE_COLUMN_MODAL_TYPES.createTodo);
   };
 
   const handleSubmitDeletingToDoInColumn = () => {
@@ -74,15 +76,15 @@ export const useBaseColumnManagement = ({
           actions={
             <>
               <Button
-                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.confirmation)}
-              >
+                onClick={() =>
+                  closeModal(BASE_COLUMN_MODAL_TYPES.confirmation)
+                }>
                 Close
               </Button>
               <Button
                 onClick={handleSubmitDeleteColumn}
                 autoFocus
-                color="warning"
-              >
+                color="warning">
                 Delete
               </Button>
             </>
@@ -98,11 +100,15 @@ export const useBaseColumnManagement = ({
       render: (
         <BaseModal.Root
           open={activeModals.createTodo}
-          onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.createTodo)}
-        >
+          onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.createTodo)}>
           <BaseModal.Header title="Create new ToDo" />
           <BaseModal.Body>
-            <Box sx={{ width: '900px', height: '600px' }}>
+            <Box
+              sx={{
+                width: '100%',
+                minWidth: '1200px',
+                height: 'max-content',
+              }}>
               <ToDoForm onSubmit={handleSubmitCreateNewToDo} />
             </Box>
           </BaseModal.Body>
@@ -115,15 +121,13 @@ export const useBaseColumnManagement = ({
           actions={
             <>
               <Button
-                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo)}
-              >
+                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo)}>
                 Close
               </Button>
               <Button
                 onClick={handleSubmitDeletingToDoInColumn}
                 autoFocus
-                color="warning"
-              >
+                color="warning">
                 Delete Todo
               </Button>
             </>

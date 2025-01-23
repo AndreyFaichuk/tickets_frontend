@@ -1,9 +1,15 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
+import { Box, Typography } from '@mui/material';
 
 type FormInputProps = TextFieldProps & { name: string; label: string };
 
-export const FormInput = ({ name, label, ...rest }: FormInputProps) => {
+export const FormInput = ({
+  name,
+  label,
+  fullWidth,
+  ...rest
+}: FormInputProps) => {
   const { control } = useFormContext();
 
   return (
@@ -12,15 +18,19 @@ export const FormInput = ({ name, label, ...rest }: FormInputProps) => {
       control={control}
       defaultValue=""
       render={({ field, fieldState: { error } }) => (
-        <TextField
-          {...rest}
-          {...field}
-          label={label}
-          variant="outlined"
-          fullWidth
-          error={!!error}
-          helperText={error ? error.message : ''}
-        />
+        <Box sx={{ width: fullWidth ? '100%' : 'unset' }}>
+          <Typography variant="subtitle2" gutterBottom>
+            {label}
+          </Typography>
+          <TextField
+            {...rest}
+            {...field}
+            variant="outlined"
+            fullWidth={fullWidth}
+            error={!!error}
+            helperText={error ? error.message : ''}
+          />
+        </Box>
       )}
     />
   );

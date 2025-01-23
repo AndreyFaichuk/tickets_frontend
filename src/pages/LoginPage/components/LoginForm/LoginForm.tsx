@@ -29,8 +29,13 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
       <StyledLoginFormRoot onSubmit={submit}>
         <AminationWrapper>
           <StyledLoginFormInputsWrapper>
-            <FormInput name="email" label="Email" />
-            <FormInput name="password" label="Password" type="password" />
+            <FormInput name="email" label="Email" fullWidth />
+            <FormInput
+              name="password"
+              label="Password"
+              type="password"
+              fullWidth
+            />
           </StyledLoginFormInputsWrapper>
           <FormCheckBox label="Remember Me?" name="isRememberMe" />
         </AminationWrapper>
@@ -40,8 +45,7 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
           fullWidth
           endIcon={<SendIcon />}
           variant="contained"
-          color="secondary"
-        >
+          color="secondary">
           Log in
         </Button>
       </StyledLoginFormRoot>

@@ -35,10 +35,10 @@ export const DefaultUserMenu = () => {
   return (
     <Stack direction="row" gap={1} alignItems="center">
       <Typography variant="h6">
-        {currentUser.firstName} {currentUser.lastName}
+        {`${currentUser.firstName}  ${currentUser.lastName}`}
       </Typography>
       <IconButton onClick={handleOpenUserMenu}>
-        <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+        <Avatar alt="Remy Sharp" src={currentUser.avatarUrl} />
       </IconButton>
       <Menu
         sx={{ mt: '45px' }}
@@ -53,8 +53,7 @@ export const DefaultUserMenu = () => {
           horizontal: 'right',
         }}
         open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
+        onClose={handleCloseUserMenu}>
         <MenuList>
           <Typography textAlign="center" variant="body2" sx={{ color: 'gray' }}>
             {currentUser.email}
