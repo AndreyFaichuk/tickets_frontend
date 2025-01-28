@@ -2,7 +2,7 @@ import { FC } from 'react';
 import dayjs from 'dayjs';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Stack } from '@mui/material';
+import { Stack, Tooltip } from '@mui/material';
 import {
   TodoCardContentWrapper,
   TodoCardIconWrapper,
@@ -60,15 +60,17 @@ export const TodoCard: FC<TodoCardProps> = ({
         alignItems="flex-end"
         justifyContent="space-between"
       >
-        <TodoCardIconWrapper>
-          <img
-            src={PRIORITY_ICON_MAP[priority]}
-            style={{
-              width: '20px',
-              height: '20px',
-            }}
-          />
-        </TodoCardIconWrapper>
+        <Tooltip title={`${priority} priority`} placement="top">
+          <TodoCardIconWrapper>
+            <img
+              src={PRIORITY_ICON_MAP[priority]}
+              style={{
+                width: '20px',
+                height: '20px',
+              }}
+            />
+          </TodoCardIconWrapper>
+        </Tooltip>
         <CircularProgressWithLabel progress={progress} />
         <Stack flexDirection="column" alignItems="flex-end">
           <TodoCardActionBlock actions={actions} currentId={_id} />

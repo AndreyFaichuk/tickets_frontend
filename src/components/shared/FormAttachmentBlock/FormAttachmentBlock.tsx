@@ -1,13 +1,18 @@
-import { FC, useState } from 'react';
-import { Box, Typography } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
+import { FC } from 'react';
+import { Box, Stack, Typography } from '@mui/material';
+import { Controller } from 'react-hook-form';
 import {
   StyledFormAttachmentButtonWrapper,
   StyledFormAttachmentPlaceholderWrapper,
   StyledFormAttachmentRoot,
 } from './FormAttachmentBlock.styled';
-import { checkIfCursorOutsideDropZone } from './FormAttachmentBlock.utils';
+import {
+  convertFilesToFileList,
+  mergeFiles,
+} from './FormAttachmentBlock.utils';
 import { FileUploadButton } from '../FileUploadButton';
+import { AttachmentPreview } from './components/AttachmentPreview';
+import { useAttachmentBlock } from './hooks/useAttachmentBlock';
 
 type FormAttachmentBlockProps = {
   name: string;
@@ -18,23 +23,13 @@ export const FormAttachmentBlock: FC<FormAttachmentBlockProps> = ({
   name,
   label,
 }) => {
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-  const { control } = useFormContext();
-
-  const onStartDragHandler = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    setIsDragging(true);
-  };
-
-  const onLeaveDragHandler = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-
-    const isCursorOutsideDropZone = checkIfCursorOutsideDropZone(event);
-
-    if (isCursorOutsideDropZone) {
-      setIsDragging(false);
-    }
-  };
+  const {
+    handlers: { onLeaveDragHandler, onRemoveAttachment, onStartDragHandler },
+    attachments,
+    isDragging,
+    control,
+    setIsDragging,
+  } = useAttachmentBlock();
 
   return (
     <Controller
@@ -54,19 +49,10 @@ export const FormAttachmentBlock: FC<FormAttachmentBlockProps> = ({
             onDrop={(event) => {
               event.preventDefault();
               setIsDragging(false);
-
               const existingFiles = Array.from(field.value || []) as File[];
-
               const newFiles = Array.from(event.dataTransfer.files);
-
-              const updatedFiles = [...existingFiles, ...newFiles];
-
-              const dataTransfer = new DataTransfer();
-              updatedFiles.forEach((file) =>
-                dataTransfer.items.add(file as File),
-              );
-
-              field.onChange(dataTransfer.files);
+              const mergedFiles = mergeFiles(newFiles, existingFiles);
+              field.onChange(mergedFiles);
             }}
             onDragOver={onStartDragHandler}
           >
@@ -77,6 +63,27 @@ export const FormAttachmentBlock: FC<FormAttachmentBlockProps> = ({
                 </Typography>
               </StyledFormAttachmentPlaceholderWrapper>
             )}
+            <Stack direction="row" gap={1.5} flexWrap="wrap">
+              {attachments &&
+                attachments.map((attachment, i) => {
+                  const index = `${attachment.name}_${i}`;
+
+                  const handleRemoveAttachment = (i: number) => {
+                    const newAttachments = onRemoveAttachment(i);
+
+                    const fileList = convertFilesToFileList(newAttachments);
+                    field.onChange(fileList);
+                  };
+
+                  return (
+                    <AttachmentPreview
+                      file={attachment}
+                      key={index}
+                      onRemove={() => handleRemoveAttachment(i)}
+                    />
+                  );
+                })}
+            </Stack>
           </StyledFormAttachmentRoot>
 
           <StyledFormAttachmentButtonWrapper>
@@ -84,20 +91,10 @@ export const FormAttachmentBlock: FC<FormAttachmentBlockProps> = ({
               onChange={(event) => {
                 const input = event.target as HTMLInputElement;
                 const files = input.files;
+                if (!files) return;
 
-                if (files) {
-                  const existingFiles = Array.from(field.value || []);
-
-                  const newFiles = Array.from(files);
-                  const updatedFiles = [...existingFiles, ...newFiles];
-
-                  const dataTransfer = new DataTransfer();
-                  updatedFiles.forEach((file) =>
-                    dataTransfer.items.add(file as File),
-                  );
-
-                  field.onChange(dataTransfer.files);
-                }
+                const mergedFiles = mergeFiles(files, field.value);
+                field.onChange(mergedFiles);
               }}
             />
           </StyledFormAttachmentButtonWrapper>
