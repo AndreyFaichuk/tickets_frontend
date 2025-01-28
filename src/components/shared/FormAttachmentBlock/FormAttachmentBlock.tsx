@@ -54,7 +54,8 @@ export const FormAttachmentBlock: FC<FormAttachmentBlockProps> = ({
               const mergedFiles = mergeFiles(newFiles, existingFiles);
               field.onChange(mergedFiles);
             }}
-            onDragOver={onStartDragHandler}>
+            onDragOver={onStartDragHandler}
+          >
             {isDragging && (
               <StyledFormAttachmentPlaceholderWrapper>
                 <Typography textAlign="center" variant="h5">

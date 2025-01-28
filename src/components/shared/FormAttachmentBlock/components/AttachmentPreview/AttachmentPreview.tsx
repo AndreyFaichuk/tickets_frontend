@@ -64,7 +64,8 @@ export const AttachmentPreview: React.FC<DocumentPreviewProps> = ({
         className="deleteButton"
         disableRipple
         size="small"
-        onClick={onRemove}>
+        onClick={onRemove}
+      >
         <CloseIcon />
       </StyledFormAttachmentButton>
     </StyledFormAttachmentRoot>
