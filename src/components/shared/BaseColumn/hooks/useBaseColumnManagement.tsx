@@ -45,17 +45,18 @@ export const useBaseColumnManagement = ({
   const handleSubmitCreateNewToDo = (values: TodoValues) => {
     console.log(values, 'values');
 
-    // handleCreateToDo({
-    //   newTodo: {
-    //     description: values.description.trim(),
-    //     name: values.name,
-    //     progress: values.progress,
-    //     priority: values.priority,
-    //   },
-    //   columnId,
-    // });
+    handleCreateToDo({
+      newTodo: {
+        description: values.description.trim(),
+        name: values.name,
+        progress: values.progress,
+        priority: values.priority,
+        attachments: values.attachments,
+      },
+      columnId,
+    });
 
-    // closeModal(BASE_COLUMN_MODAL_TYPES.createTodo);
+    closeModal(BASE_COLUMN_MODAL_TYPES.createTodo);
   };
 
   const handleSubmitDeletingToDoInColumn = () => {

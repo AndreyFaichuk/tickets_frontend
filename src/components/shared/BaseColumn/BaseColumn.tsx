@@ -99,6 +99,7 @@ export const BaseColumn: FC<BaseColumn> = ({
           >
             {initialTodos.map((card) => (
               <TodoCard
+                attachmentsUrls={card.attachmentsUrls}
                 priority={card.priority}
                 created_at={card.created_at}
                 isActiveCard={activeCardId === card._id}

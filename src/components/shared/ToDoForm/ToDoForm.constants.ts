@@ -32,9 +32,9 @@ export const PRIORITY_ICON_MAP: Record<PriorityType, string> = {
 };
 
 export const ALLOWED_FILE_TYPES_MAP = {
-  JPG: 'image/jpeg',
-  PNG: 'image/png',
-  PDF: 'application/pdf',
-  DOC: 'application/msword',
-  DOCX: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  jpg: 'image/jpeg',
+  png: 'image/png',
+  pdf: 'application/pdf',
+  doc: 'application/msword',
+  docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 };
