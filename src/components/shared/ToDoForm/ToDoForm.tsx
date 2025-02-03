@@ -59,7 +59,8 @@ export const ToDoForm: FC<ToDoFormProps> = ({ onSubmit, defaultValues }) => {
               type="submit"
               variant="contained"
               color="secondary"
-              disabled={!methods.formState.isDirty}>
+              disabled={!methods.formState.isDirty}
+            >
               {buttonText}
             </Button>
           </Stack>
