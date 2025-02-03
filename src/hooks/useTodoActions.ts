@@ -62,7 +62,18 @@ export const useTodoActions = () => {
       newTodo: TodoValues;
       columnId: string;
     }) => {
-      const response = await TodoApi.createTodo(newTodo, columnId);
+      const formData = new FormData();
+
+      newTodo.attachments.forEach((attachment) => {
+        formData.append('attachments', attachment);
+      });
+
+      formData.append('name', newTodo.name);
+      formData.append('description', newTodo.description);
+      formData.append('priority', newTodo.priority);
+      formData.append('progress', String(newTodo.progress));
+
+      const response = await TodoApi.createTodo(formData, columnId);
       return response.data;
     },
     onError: (error: Error) => {

@@ -2,7 +2,9 @@ import { FC } from 'react';
 import dayjs from 'dayjs';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Stack, Tooltip } from '@mui/material';
+import { Badge, Stack, Tooltip } from '@mui/material';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+
 import {
   TodoCardContentWrapper,
   TodoCardIconWrapper,
@@ -27,6 +29,7 @@ export const TodoCard: FC<TodoCardProps> = ({
   actions,
   created_at,
   priority,
+  attachmentsUrls,
   isDragging = false,
   isActiveCard = false,
 }) => {
@@ -42,6 +45,7 @@ export const TodoCard: FC<TodoCardProps> = ({
   };
 
   const formattedDate = dayjs(created_at).format('YYYY/MM/DD');
+  const attachmentsCount = attachmentsUrls.length;
 
   return (
     <TodoCardRoot elevation={isDragging ? 8 : 4} isActiveCard={isActiveCard}>
@@ -50,16 +54,14 @@ export const TodoCard: FC<TodoCardProps> = ({
         id={_id}
         ref={setNodeRef}
         {...listeners}
-        {...attributes}
-      >
+        {...attributes}>
         <TodoCardTypography variant="h6">{name}</TodoCardTypography>
         <TodoCardTypography variant="body2">{description}</TodoCardTypography>
       </TodoCardContentWrapper>
       <Stack
         direction="row"
         alignItems="flex-end"
-        justifyContent="space-between"
-      >
+        justifyContent="space-between">
         <Tooltip title={`${priority} priority`} placement="top">
           <TodoCardIconWrapper>
             <img
@@ -74,9 +76,18 @@ export const TodoCard: FC<TodoCardProps> = ({
         <CircularProgressWithLabel progress={progress} />
         <Stack flexDirection="column" alignItems="flex-end">
           <TodoCardActionBlock actions={actions} currentId={_id} />
-          <TodoCardTypography variant="body2">
-            {formattedDate}
-          </TodoCardTypography>
+          <Stack direction="row" gap={3} alignItems="flex-end">
+            {attachmentsCount > 0 && (
+              <Tooltip title="attachments" placement="top">
+                <Badge color="info" badgeContent={attachmentsCount}>
+                  <AttachFileIcon />
+                </Badge>
+              </Tooltip>
+            )}
+            <TodoCardTypography variant="body2">
+              {formattedDate}
+            </TodoCardTypography>
+          </Stack>
         </Stack>
       </Stack>
     </TodoCardRoot>

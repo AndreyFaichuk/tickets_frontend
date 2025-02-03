@@ -4,7 +4,6 @@ import {
 } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
 import { securityAxios } from './securityAxios';
 import { PromiseAxiosResponse } from '../types';
-import { TodoValues } from '../components/shared/ToDoForm/ToDoForm.schema';
 
 const BASE_URL = 'http://localhost:3000/todos';
 
@@ -29,10 +28,12 @@ export class TodoApi {
   }
 
   static createTodo(
-    newTodo: TodoValues,
+    newTodo: FormData,
     columnId: string,
   ): PromiseAxiosResponse<TodoCardProps> {
-    const response = securityAxios.post(`${BASE_URL}/${columnId}`, newTodo);
+    const response = securityAxios
+      .create({ isFormData: true })
+      .post(`${BASE_URL}/${columnId}`, newTodo);
     return response;
   }
 

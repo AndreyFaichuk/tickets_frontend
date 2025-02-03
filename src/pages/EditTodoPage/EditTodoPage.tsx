@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
@@ -11,17 +12,27 @@ import { DefaultAppPage } from '../../app/DefaultAppPage';
 
 export const EditTodoPage = () => {
   const { id } = useParams<{ id: string }>();
-
-  if (!id) return null;
-
-  const { oneTodo, isOneToDoLoading } = useTodoFetchById(id);
+  const { oneTodo, isOneToDoLoading } = useTodoFetchById(id!);
   const { handleUpdateToDo } = useTodoActions();
 
-  const isLoading = isOneToDoLoading || !oneTodo;
+  const [defaultValues, setDefaultValues] = useState<TodoValues | null>(null);
+  const [isNormalizing, setIsNormalizing] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (oneTodo) {
+      setIsNormalizing(true);
+      normalizeFormData(oneTodo).then((values) => {
+        setDefaultValues(values);
+        setIsNormalizing(false);
+      });
+    }
+  }, [oneTodo]);
+
+  const isLoading = isOneToDoLoading || isNormalizing || !defaultValues;
 
   const handleSubmit = (values: TodoValues) => {
     handleUpdateToDo({
-      id,
+      id: id!,
       todo: {
         description: values.description.trim(),
         name: values.name,
@@ -36,10 +47,7 @@ export const EditTodoPage = () => {
       {isLoading ? (
         <CircularProgress />
       ) : (
-        <ToDoForm
-          onSubmit={handleSubmit}
-          defaultValues={normalizeFormData(oneTodo)}
-        />
+        <ToDoForm onSubmit={handleSubmit} defaultValues={defaultValues} />
       )}
     </DefaultAppPage>
   );

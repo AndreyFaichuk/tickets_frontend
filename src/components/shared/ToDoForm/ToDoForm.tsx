@@ -23,6 +23,8 @@ export const ToDoForm: FC<ToDoFormProps> = ({ onSubmit, defaultValues }) => {
     resolver: zodResolver(todoSchema),
   });
 
+  console.log(defaultValues, 'defaultValues');
+
   const buttonText = defaultValues ? 'Update ToDo' : 'Create ToDo';
 
   const submit = methods.handleSubmit(onSubmit);
@@ -57,8 +59,7 @@ export const ToDoForm: FC<ToDoFormProps> = ({ onSubmit, defaultValues }) => {
               type="submit"
               variant="contained"
               color="secondary"
-              disabled={!methods.formState.isDirty}
-            >
+              disabled={!methods.formState.isDirty}>
               {buttonText}
             </Button>
           </Stack>
