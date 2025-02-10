@@ -27,7 +27,7 @@ export const todoSchema = z.object({
     },
   ),
   attachments: z
-    .instanceof(FileList)
+    .union([z.instanceof(FileList), z.array(z.instanceof(File))])
     .optional()
     .transform((list) => (list ? Array.from(list) : []))
     .refine((files) => files.every((file) => fileTypes.includes(file.type)), {

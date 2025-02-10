@@ -1,21 +1,17 @@
-import {
-  TodoCardForCreate,
-  TodoCardProps,
-} from '../pages/TodosPage/components/TodoCard/TodoCard.types';
+import { TodoCardProps } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
 import { securityAxios } from './securityAxios';
 import { PromiseAxiosResponse } from '../types';
 
 const BASE_URL = 'http://localhost:3000/todos';
 
 export class TodoApi {
-  static updateTodo({
-    id,
-    todo,
-  }: {
-    id: string;
-    todo: TodoCardForCreate;
-  }): PromiseAxiosResponse<TodoCardProps> {
-    const response = securityAxios.patch(`${BASE_URL}/${id}`, todo);
+  static updateTodo(
+    id: string,
+    todo: FormData,
+  ): PromiseAxiosResponse<TodoCardProps> {
+    const response = securityAxios
+      .create({ isFormData: true })
+      .patch(`${BASE_URL}/${id}`, todo);
     return response;
   }
 

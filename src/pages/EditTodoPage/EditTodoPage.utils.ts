@@ -7,7 +7,12 @@ const getFileNameFromUrl = (url: string): string => {
 };
 
 const urlToFile = async (url: string): Promise<File> => {
-  const response = await fetch(url);
+  const response = await fetch(url, { cache: 'no-cache' });
+
+  if (!response.ok) {
+    throw new Error('Error while donwloading attachment!');
+  }
+
   const blob = await response.blob();
   const fileName = getFileNameFromUrl(url);
   const fileType = fileName.split('.').pop();
@@ -22,17 +27,21 @@ const urlToFile = async (url: string): Promise<File> => {
 export const normalizeFormData = async (
   todo: TodoCardProps,
 ): Promise<TodoValues> => {
-  const attachmentsPromises = todo.attachmentsUrls.map((attachment) =>
-    urlToFile(attachment),
-  );
-
-  const attachmentsFiles = await Promise.all(attachmentsPromises);
-
-  return {
+  const baseData = {
     description: todo.description,
     name: todo.name,
     progress: todo.progress,
     priority: todo.priority,
-    attachments: attachmentsFiles,
+    attachments: [] as File[],
   };
+
+  const attachmentsPromises = todo.attachmentsUrls.map((attachment) =>
+    urlToFile(attachment),
+  );
+
+  try {
+    baseData.attachments = await Promise.all(attachmentsPromises);
+  } catch {}
+
+  return baseData;
 };

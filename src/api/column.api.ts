@@ -1,7 +1,10 @@
 import { securityAxios } from './securityAxios';
 import { PromiseAxiosResponse } from '../types';
 import { ColumnType } from '../pages/TodosPage/components/DnDToDoProvider/hooks/useDnDManagement';
-import { ColumnForUpdate } from '../hooks/columns/useColumnsActions';
+import {
+  ColumnForReplace,
+  ColumnForUpdate,
+} from '../hooks/columns/useColumnsActions';
 import { CurrentDnDColumnType } from '../pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.constants';
 
 const BASE_URL = 'http://localhost:3000/columns';
@@ -42,6 +45,14 @@ export class ColumnApi {
     moveTodo: CurrentDnDColumnType,
   ): PromiseAxiosResponse<ColumnType> {
     const response = securityAxios.post(`${BASE_URL}/move`, moveTodo);
+
+    return response;
+  }
+
+  static replaceAllTodosToColumn(
+    body: ColumnForReplace,
+  ): PromiseAxiosResponse<ColumnType> {
+    const response = securityAxios.put(`${BASE_URL}/replace`, body);
 
     return response;
   }

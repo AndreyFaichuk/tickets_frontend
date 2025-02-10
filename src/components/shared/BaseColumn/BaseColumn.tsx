@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Stack, Typography } from '@mui/material';
+import { CircularProgress, Stack, Typography } from '@mui/material';
 import { useDroppable } from '@dnd-kit/core';
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,6 +24,7 @@ type BaseColumn = {
   id: string;
   title: string;
   activeCardId: string;
+  shouldShowDeleteButton: boolean;
 };
 
 export const BaseColumn: FC<BaseColumn> = ({
@@ -31,6 +32,7 @@ export const BaseColumn: FC<BaseColumn> = ({
   id,
   title,
   activeCardId,
+  shouldShowDeleteButton,
 }) => {
   const navigate = useNavigate();
   const { handleUpdateColumn } = useColumnActions();
@@ -43,6 +45,7 @@ export const BaseColumn: FC<BaseColumn> = ({
     activeModals,
     modalsList,
     handlers: { openModal, onActiveTodoId },
+    isCreatingNewToDo,
   } = useBaseColumnManagement({
     columnTitle: title,
     columnId: id,
@@ -89,14 +92,12 @@ export const BaseColumn: FC<BaseColumn> = ({
         <SortableContext
           id={id}
           items={initialTodos.map((todo) => todo._id)}
-          strategy={rectSortingStrategy}
-        >
+          strategy={rectSortingStrategy}>
           <Stack
             ref={setNodeRef}
             direction="column"
             gap={2}
-            alignItems="center"
-          >
+            alignItems="center">
             {initialTodos.map((card) => (
               <TodoCard
                 attachmentsUrls={card.attachmentsUrls}
@@ -119,27 +120,36 @@ export const BaseColumn: FC<BaseColumn> = ({
                 }}
               />
             ))}
+            {isCreatingNewToDo && (
+              <CircularProgress
+                size="150px"
+                color="secondary"
+                thickness={1.6}
+              />
+            )}
           </Stack>
         </SortableContext>
-        <StyledCloseIconButton
-          className="childClass"
-          onClick={() => openModal(BASE_COLUMN_MODAL_TYPES.confirmation)}
-        >
-          <CloseIcon />
-        </StyledCloseIconButton>
-        <StyledBaseColumnAddToDoButton
-          onClick={() => openModal(BASE_COLUMN_MODAL_TYPES.createTodo)}
-          type="button"
-          color="info"
-          variant="contained"
-          fullWidth
-        >
-          Add todo
-        </StyledBaseColumnAddToDoButton>
+        {shouldShowDeleteButton && (
+          <StyledCloseIconButton
+            className="childClass"
+            onClick={() => openModal(BASE_COLUMN_MODAL_TYPES.deleteColumn)}>
+            <CloseIcon />
+          </StyledCloseIconButton>
+        )}
+        {!isCreatingNewToDo && (
+          <StyledBaseColumnAddToDoButton
+            onClick={() => openModal(BASE_COLUMN_MODAL_TYPES.createTodo)}
+            type="button"
+            color="info"
+            variant="contained"
+            fullWidth>
+            Add todo
+          </StyledBaseColumnAddToDoButton>
+        )}
       </StyledBaseColumnRoot>
 
       {activeModals.createTodo && modalsList.createTodo.render}
-      {activeModals.confirmation && modalsList.confirmation.render}
+      {activeModals.deleteColumn && modalsList.deleteColumn.render}
       {activeModals.deleteTodo && modalsList.deleteTodo.render}
     </Stack>
   );

@@ -11,6 +11,9 @@ import { BaseModal } from '../../BaseModal';
 import { ToDoForm } from '../../ToDoForm/ToDoForm';
 import { useColumnActions } from '../../../../hooks/columns/useColumnsActions';
 import { useTodoActions } from '../../../../hooks/useTodoActions';
+import { DeleteColumnForm } from '../../DeleteColumnForm';
+import { DeleteColumnValues } from '../../DeleteColumnForm/DeleteColumnForm.schema';
+import { useColumnsFetch } from '../../../../hooks/columns/useColumnsFetch';
 
 type useBaseColumnManagementProps = {
   columnTitle: string;
@@ -21,8 +24,17 @@ export const useBaseColumnManagement = ({
   columnTitle,
   columnId,
 }: useBaseColumnManagementProps) => {
-  const { handleDeleteColumn } = useColumnActions();
-  const { handleCreateToDo, handleDeleteToDo } = useTodoActions();
+  const { handleDeleteColumn, handleReplaceAllTodosToColumn } =
+    useColumnActions();
+
+  const { handleCreateToDo, handleDeleteToDo, isCreatingNewToDo } =
+    useTodoActions();
+
+  const { columnsOptions } = useColumnsFetch();
+
+  const COLUMNS_OPTIONS = columnsOptions.filter((column) => {
+    return column.label !== columnTitle;
+  });
 
   const [activeTodoId, setActiveTodoId] = useState<string>('');
 
@@ -30,7 +42,7 @@ export const useBaseColumnManagement = ({
 
   const [activeModals, setActiveModals] = useState<BaseColumnModalState>({
     [BASE_COLUMN_MODAL_TYPES.createTodo]: false,
-    [BASE_COLUMN_MODAL_TYPES.confirmation]: false,
+    [BASE_COLUMN_MODAL_TYPES.deleteColumn]: false,
     [BASE_COLUMN_MODAL_TYPES.deleteTodo]: false,
   });
 
@@ -43,8 +55,6 @@ export const useBaseColumnManagement = ({
   };
 
   const handleSubmitCreateNewToDo = (values: TodoValues) => {
-    console.log(values, 'values');
-
     handleCreateToDo({
       newTodo: {
         description: values.description.trim(),
@@ -65,44 +75,44 @@ export const useBaseColumnManagement = ({
     closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo);
   };
 
-  const handleSubmitDeleteColumn = () => {
-    handleDeleteColumn(columnId);
-    closeModal(BASE_COLUMN_MODAL_TYPES.confirmation);
+  const handleSubmitDeleteColumn = async (values: DeleteColumnValues) => {
+    try {
+      const column = await handleReplaceAllTodosToColumn({
+        fromColumnId: columnId,
+        toColumnId: values.moveToDosToColumnId,
+      });
+
+      if (!column) {
+        return;
+      }
+
+      await handleDeleteColumn(columnId);
+      closeModal(BASE_COLUMN_MODAL_TYPES.deleteColumn);
+    } catch (error) {}
   };
 
   const MODALS: Record<BaseColumnModalTypes, { render: JSX.Element }> = {
-    confirmation: {
+    deleteColumn: {
       render: (
-        <ConfirmationDialog
-          actions={
-            <>
-              <Button
-                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.confirmation)}
-              >
-                Close
-              </Button>
-              <Button
-                onClick={handleSubmitDeleteColumn}
-                autoFocus
-                color="warning"
-              >
-                Delete
-              </Button>
-            </>
-          }
-          onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.confirmation)}
-          text={`Are you sure that you want to delete column ${columnTitle}? This action can't be undone!`}
-          title="Confirm deleting column"
-          isOpen={activeModals.confirmation}
-        />
+        <BaseModal.Root
+          open={activeModals.deleteColumn}
+          onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.deleteColumn)}>
+          <BaseModal.Header title="Delete column" />
+          <BaseModal.Body>
+            <DeleteColumnForm
+              columnTitle={columnTitle}
+              options={COLUMNS_OPTIONS}
+              onSubmit={handleSubmitDeleteColumn}
+            />
+          </BaseModal.Body>
+        </BaseModal.Root>
       ),
     },
     createTodo: {
       render: (
         <BaseModal.Root
           open={activeModals.createTodo}
-          onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.createTodo)}
-        >
+          onClose={() => closeModal(BASE_COLUMN_MODAL_TYPES.createTodo)}>
           <BaseModal.Header title="Create new ToDo" />
           <BaseModal.Body>
             <Box
@@ -110,8 +120,7 @@ export const useBaseColumnManagement = ({
                 width: '100%',
                 minWidth: '1200px',
                 height: 'max-content',
-              }}
-            >
+              }}>
               <ToDoForm onSubmit={handleSubmitCreateNewToDo} />
             </Box>
           </BaseModal.Body>
@@ -124,15 +133,13 @@ export const useBaseColumnManagement = ({
           actions={
             <>
               <Button
-                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo)}
-              >
+                onClick={() => closeModal(BASE_COLUMN_MODAL_TYPES.deleteTodo)}>
                 Close
               </Button>
               <Button
                 onClick={handleSubmitDeletingToDoInColumn}
                 autoFocus
-                color="warning"
-              >
+                color="warning">
                 Delete Todo
               </Button>
             </>
@@ -153,5 +160,6 @@ export const useBaseColumnManagement = ({
       openModal,
       onActiveTodoId: handleSetActiveTodoId,
     },
+    isCreatingNewToDo,
   };
 };

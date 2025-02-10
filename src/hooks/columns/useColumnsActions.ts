@@ -9,6 +9,11 @@ export type ColumnForUpdate = {
   title?: string;
 };
 
+export type ColumnForReplace = {
+  fromColumnId: string;
+  toColumnId: string;
+};
+
 export const useColumnActions = () => {
   const queryClient = useQueryClient();
 
@@ -84,10 +89,26 @@ export const useColumnActions = () => {
     },
   });
 
+  const replaceAllTodosToColumn = useMutation({
+    mutationFn: async (body: ColumnForReplace) => {
+      const response = await ColumnApi.replaceAllTodosToColumn(body);
+      return response.data;
+    },
+    onError: (error: Error) => {
+      toast.error(error.message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: columnsQueryKeys.columns.all(),
+      });
+    },
+  });
+
   return {
     handleCreateNewColumn: createNewColumn.mutate,
     handleUpdateColumn: updateColumn.mutate,
-    handleDeleteColumn: deleteColumn.mutate,
     handleMoveTodoColumns: moveTodoColumns.mutate,
+    handleDeleteColumn: deleteColumn.mutateAsync,
+    handleReplaceAllTodosToColumn: replaceAllTodosToColumn.mutateAsync,
   };
 };
