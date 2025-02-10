@@ -2,7 +2,7 @@ import { ValuesToType } from '../../../types';
 
 export const BASE_COLUMN_MODAL_TYPES = {
   createTodo: 'createTodo',
-  confirmation: 'confirmation',
+  deleteColumn: 'deleteColumn',
   deleteTodo: 'deleteTodo',
 } as const;
 

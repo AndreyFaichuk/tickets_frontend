@@ -14,20 +14,25 @@ import { FormAttachmentBlock } from '../FormAttachmentBlock';
 
 type ToDoFormProps = {
   onSubmit: (values: TodoValues) => void;
+  isLoading?: boolean;
   defaultValues?: TodoValues;
 };
 
-export const ToDoForm: FC<ToDoFormProps> = ({ onSubmit, defaultValues }) => {
+export const ToDoForm: FC<ToDoFormProps> = ({
+  onSubmit,
+  defaultValues,
+  isLoading = false,
+}) => {
   const methods = useForm<TodoValues>({
     values: defaultValues,
     resolver: zodResolver(todoSchema),
   });
 
-  console.log(defaultValues, 'defaultValues');
-
   const buttonText = defaultValues ? 'Update ToDo' : 'Create ToDo';
 
   const submit = methods.handleSubmit(onSubmit);
+
+  const shouldDisableSubmitButton = isLoading || !methods.formState.isDirty;
 
   return (
     <FormProvider {...methods}>
@@ -59,8 +64,7 @@ export const ToDoForm: FC<ToDoFormProps> = ({ onSubmit, defaultValues }) => {
               type="submit"
               variant="contained"
               color="secondary"
-              disabled={!methods.formState.isDirty}
-            >
+              disabled={shouldDisableSubmitButton}>
               {buttonText}
             </Button>
           </Stack>

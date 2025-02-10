@@ -11,10 +11,7 @@ export type TodoCardProps = {
   attachmentsUrls: string[];
 };
 
-export type TodoCardForCreate = Omit<
-  TodoCardProps,
-  '_id' | 'created_at' | 'attachmentsUrls'
->;
+export type TodoCardForCreate = Omit<TodoCardProps, '_id' | 'created_at'>;
 
 export type TodoCardPropsWithActions = TodoCardProps & {
   actions: TodoCardActionBlockProps;

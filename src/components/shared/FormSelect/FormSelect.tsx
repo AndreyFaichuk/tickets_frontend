@@ -20,8 +20,8 @@ export type SelectOptions = Array<SelectOption>;
 
 type FormSelectProps = SelectProps & {
   name: string;
-  label: string;
   options: SelectOptions;
+  label?: string;
 };
 
 export const FormSelect = ({
@@ -41,9 +41,11 @@ export const FormSelect = ({
       defaultValue=""
       render={({ field, fieldState: { error } }) => (
         <Box sx={{ width: fullWidth ? '100%' : 'unset' }}>
-          <Typography variant="subtitle2" gutterBottom>
-            {label}
-          </Typography>
+          {label && (
+            <Typography variant="subtitle2" gutterBottom>
+              {label}
+            </Typography>
+          )}
           <FormControl fullWidth={fullWidth} error={!!error}>
             <Select
               {...field}
@@ -68,8 +70,7 @@ export const FormSelect = ({
                   </Stack>
                 );
               }}
-              labelId={`${name}-label`}
-            >
+              labelId={`${name}-label`}>
               {options.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.icon && (

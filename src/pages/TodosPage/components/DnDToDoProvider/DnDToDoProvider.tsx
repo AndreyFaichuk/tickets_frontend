@@ -21,15 +21,20 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
   } = useDnDManagement(data);
 
   const renderedColumns = useMemo(() => {
-    return currentColumns.map((column) => (
-      <BaseColumn
-        id={column.id}
-        key={column.id}
-        initialTodos={column.cards}
-        title={column.title}
-        activeCardId={activeCard?._id ?? ''}
-      />
-    ));
+    return currentColumns.map((column) => {
+      const shouldShowDeleteButton = currentColumns.length > 1;
+
+      return (
+        <BaseColumn
+          id={column.id}
+          key={column.id}
+          initialTodos={column.cards}
+          title={column.title}
+          activeCardId={activeCard?._id ?? ''}
+          shouldShowDeleteButton={shouldShowDeleteButton}
+        />
+      );
+    });
   }, [currentColumns, activeCard]);
 
   return (
@@ -38,8 +43,7 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
       collisionDetection={closestCorners}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
-      onDragEnd={handleDragEnd}
-    >
+      onDragEnd={handleDragEnd}>
       <StyledDnDToDoProviderRoot>
         <Stack
           direction="row"
@@ -49,8 +53,7 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
           sx={{
             width: 'max-content',
             minWidth: '100%',
-          }}
-        >
+          }}>
           {renderedColumns}
           <AddNewColumnBlock onAddNewColumnToList={handleAddNewColumnToList} />
         </Stack>
@@ -59,8 +62,7 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
         dropAnimation={{
           duration: 400,
           easing: 'ease-out',
-        }}
-      >
+        }}>
         {activeCard && (
           <TodoCard
             attachmentsUrls={activeCard.attachmentsUrls}

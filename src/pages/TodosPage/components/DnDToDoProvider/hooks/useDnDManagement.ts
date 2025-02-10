@@ -112,7 +112,7 @@ export const useDnDManagement = (data: ColumnType[]) => {
     });
   };
 
-  const handleDragEnd = (event: DragEndEvent) => {
+  const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
     const columnId = event.active.data.current?.sortable.containerId;

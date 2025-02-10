@@ -3,34 +3,39 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 import { TodoApi } from '../api/todo.api';
-import { TodoCardForCreate } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
 import { ADD_LOGGED_IN_ROUTES } from '../constants/routes';
 import { TodoValues } from '../components/shared/ToDoForm/ToDoForm.schema';
 import { columnsQueryKeys } from './columns/useColumnsFetch';
+import { todosQueryKeys } from './useTodoFetchById';
 
 export const useTodoActions = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const updateToDo = useMutation({
-    mutationFn: async ({
-      id,
-      todo,
-    }: {
-      id: string;
-      todo: TodoCardForCreate;
-    }) => {
-      const response = await TodoApi.updateTodo({ id, todo });
+    mutationFn: async ({ id, todo }: { id: string; todo: TodoValues }) => {
+      const formData = new FormData();
+
+      todo.attachments.forEach((attachment) => {
+        formData.append('attachments', attachment);
+      });
+
+      formData.append('name', todo.name);
+      formData.append('description', todo.description);
+      formData.append('priority', todo.priority);
+      formData.append('progress', String(todo.progress));
+
+      const response = await TodoApi.updateTodo(id, formData);
       return response.data;
     },
     onError: (error: Error) => {
       toast.error(error.message);
     },
-    onSuccess: () => {
+    onSuccess: ({ _id }) => {
       toast('ToDo has been updated!');
 
       queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
+        queryKey: todosQueryKeys.todos.one(_id),
       });
 
       navigate(ADD_LOGGED_IN_ROUTES.TODOS);
@@ -92,5 +97,7 @@ export const useTodoActions = () => {
     handleUpdateToDo: updateToDo.mutate,
     handleDeleteToDo: deleteToDo.mutate,
     handleCreateToDo: createToDo.mutate,
+    isCreatingNewToDo: createToDo.isPending,
+    isUpdatingToDo: updateToDo.isPending,
   };
 };
