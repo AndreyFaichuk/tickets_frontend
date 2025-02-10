@@ -59,7 +59,11 @@ export const DeleteColumnForm: FC<DeleteColumnFormProps> = ({
           </Stack>
         </Stack>
         <Stack alignItems="center">
-          <Button type="submit" variant="contained" color="secondary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            disabled={isLoading}>
             Delete column
           </Button>
         </Stack>
