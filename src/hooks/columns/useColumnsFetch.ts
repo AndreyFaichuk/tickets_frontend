@@ -7,7 +7,7 @@ import { SelectOptions } from '../../components/shared/FormSelect/FormSelect';
 export const columnsQueryKeys = {
   columns: {
     all: () => ['columns', 'all'],
-    one: (id: string) => ['columns', 'one', id],
+    one: (id: string) => ['column', 'one', id],
   },
 };
 

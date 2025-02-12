@@ -39,7 +39,7 @@ export const ToDoForm: FC<ToDoFormProps> = ({
       <StyledToDoFormRoot onSubmit={submit}>
         <StyledToDoFormSection>
           <Stack direction="row" gap={3} marginBottom={5}>
-            <Stack flex={1} gap={2}>
+            <Stack gap={2} width="100%">
               <Stack direction="row" gap={1} alignItems="center">
                 <FormInput name="name" label="Name" fullWidth />
                 <FormSelect
@@ -57,7 +57,6 @@ export const ToDoForm: FC<ToDoFormProps> = ({
               />
               <FormAttachmentBlock name="attachments" label="Attachments" />
             </Stack>
-            <Stack flex={1} gap={2}></Stack>
           </Stack>
           <Stack alignItems="center">
             <Button
