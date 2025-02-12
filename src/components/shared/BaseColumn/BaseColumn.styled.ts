@@ -2,7 +2,6 @@ import { Button, IconButton, Paper, styled } from '@mui/material';
 
 export const StyledBaseColumnRoot = styled(Paper)(({ theme }) => ({
   width: '235px',
-  minHeight: '215px',
   position: 'relative',
   padding: theme.spacing(1, 1, 2, 1),
   '&:hover .childClass': {

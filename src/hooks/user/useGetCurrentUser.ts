@@ -10,8 +10,8 @@ import { User } from '../../app/DefaultUserMenu/DefaultUserMenu.types';
 export const usersQueryKeys = {
   user: {
     all: () => ['users', 'all'],
-    one: (id: string) => ['users', 'one', id],
-    current: () => ['users', 'current'],
+    one: (id: string) => ['user', 'one', id],
+    current: () => ['user', 'current'],
   },
 };
 
@@ -27,7 +27,9 @@ export const useGetCurrentUser = () => {
     queryFn: async () => {
       return await UserApi.getCurrentUser();
     },
+
     retry: false,
+    staleTime: 1000 * 60 * 10, // 10 min
   });
 
   useEffect(() => {
