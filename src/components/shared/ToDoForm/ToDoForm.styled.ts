@@ -3,7 +3,7 @@ import { Paper, styled } from '@mui/material';
 export const StyledToDoFormRoot = styled('form')(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(2),
-  width: '100%',
+  flex: 1,
   height: '100%',
   justifyContent: 'space-between',
   borderRadius: '4px',

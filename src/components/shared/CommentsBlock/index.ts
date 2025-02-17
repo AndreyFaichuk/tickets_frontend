@@ -1,1 +1,1 @@
-export { CommentsBlock } from './CommentsBlock';
+export { AddNewComment } from './AddNewComment';

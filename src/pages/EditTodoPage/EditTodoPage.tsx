@@ -9,19 +9,28 @@ import { useTodoFetchById } from '../../hooks/useTodoFetchById';
 import { useTodoActions } from '../../hooks/useTodoActions';
 import { DefaultAppPage } from '../../app/DefaultAppPage';
 import { DisplayWithLoader } from '../../components/shared/DisplayWithLoader';
-import { CommentsBlock } from '../../components/shared/CommentsBlock';
 import { StyledEditTodoPageRoot } from './EditTodoPage.styled';
+import { useCommentsFetch } from '../../hooks/comments/useCommentsFetch';
+import { AddNewComment } from '../../components/shared/CommentsBlock';
+import { Stack } from '@mui/material';
 import { useGetCurrentUser } from '../../hooks/user/useGetCurrentUser';
 
 export const EditTodoPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { currentUser } = useGetCurrentUser();
 
-  const { oneTodo, isOneToDoLoading } = useTodoFetchById(id ?? '');
+  const { currentUser, isCurrentUserLoading } = useGetCurrentUser();
+
   const { handleUpdateToDo, isUpdatingToDo } = useTodoActions();
 
   const [defaultValues, setDefaultValues] = useState<TodoValues>();
   const [isNormalizing, setIsNormalizing] = useState<boolean>(true);
+
+  const [activeComment, setIsActiveComment] = useState<string>('');
+
+  if (!id) return null;
+
+  const { oneTodo, isOneToDoLoading } = useTodoFetchById(id);
+  const { allComments, areAllCommentsLoading } = useCommentsFetch(id);
 
   useEffect(() => {
     const prepareDefaultValues = async () => {
@@ -37,11 +46,12 @@ export const EditTodoPage = () => {
     prepareDefaultValues();
   }, [oneTodo]);
 
-  const isLoading = isOneToDoLoading || isNormalizing || !defaultValues;
+  const isLoading =
+    isOneToDoLoading || isNormalizing || !defaultValues || isCurrentUserLoading;
 
   const handleSubmit = (values: TodoValues) => {
     handleUpdateToDo({
-      id: id ?? '',
+      id,
       todo: {
         description: values.description.trim(),
         name: values.name,
@@ -52,6 +62,9 @@ export const EditTodoPage = () => {
     });
   };
 
+  const handleOpenEdit = (commentId: string) => setIsActiveComment(commentId);
+  const handleCloseEdit = () => setIsActiveComment('');
+
   return (
     <DefaultAppPage title={PAGES_MAP.editTodo}>
       <DisplayWithLoader isloading={isLoading}>
@@ -61,7 +74,27 @@ export const EditTodoPage = () => {
             defaultValues={defaultValues}
             isLoading={isUpdatingToDo}
           />
-          <CommentsBlock avatarUrl={currentUser.avatarUrl} />
+          <Stack flex={1} gap={3} sx={{ maxHeight: '70vh', overflowY: 'auto' }}>
+            <DisplayWithLoader isloading={areAllCommentsLoading}>
+              {allComments.map((content, i) => {
+                const { todoId } = content;
+
+                const key = `${todoId}-${i}`;
+                const isActiveComment = activeComment === content.commentId;
+
+                return (
+                  <AddNewComment
+                    currentUserId={currentUser._id}
+                    key={key}
+                    content={content}
+                    isEditing={isActiveComment}
+                    onEdit={handleOpenEdit}
+                    onClose={handleCloseEdit}
+                  />
+                );
+              })}
+            </DisplayWithLoader>
+          </Stack>
         </StyledEditTodoPageRoot>
       </DisplayWithLoader>
     </DefaultAppPage>
