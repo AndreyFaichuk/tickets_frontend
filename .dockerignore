@@ -1,0 +1,16 @@
+node_modules
+
+.vscode
+.idea
+
+.git
+.gitignore
+
+*.log
+npm-debug.log
+
+.cache
+.DS_Store
+.env
+
+build
