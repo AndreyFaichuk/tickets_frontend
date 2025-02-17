@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import dayjs from 'dayjs';
 import DOMPurify from 'dompurify';
 
 import { Avatar, Box, Button, Stack, Tooltip, Typography } from '@mui/material';
