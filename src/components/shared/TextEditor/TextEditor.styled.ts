@@ -10,7 +10,7 @@ export const StyledTextEditorRoot = styled(Stack)(() => ({
 export const StyledTextEditorMenuRoot = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
-  alignItems: 'baseline',
+  alignItems: 'center',
   gap: theme.spacing(0.5),
 }));
 

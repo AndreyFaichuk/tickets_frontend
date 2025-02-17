@@ -33,6 +33,7 @@
     "@tiptap/starter-kit": "^2.11.5",
     "axios": "^1.7.9",
     "dayjs": "^1.11.13",
+    "dompurify": "^3.2.4",
     "motion": "^11.15.0",
     "react": "^18.3.1",
     "react-cookie": "^7.2.2",

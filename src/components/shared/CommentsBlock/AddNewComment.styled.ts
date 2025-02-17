@@ -1,18 +1,16 @@
 import { Box, Paper, styled } from '@mui/material';
 
-export const StyledCommentsBlockRoot = styled(Box)(({ theme }) => ({
+export const StyledAddNewCommentRoot = styled(Box)(({ theme }) => ({
   display: 'flex',
-  width: '100%',
-  height: '100%',
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
   gap: theme.spacing(1.5),
+  marginBottom: theme.spacing(2),
 }));
 
-export const StyledCommentsBlockAddSection = styled(Paper, {
+export const StyledAddNewCommentSection = styled(Paper, {
   shouldForwardProp: (prop) => prop !== 'isActiveHover',
 })<{ isActiveHover: boolean }>(({ theme, isActiveHover }) => ({
-  width: '60%',
   minHeight: '80px',
   cursor: 'text',
   display: 'flex',
