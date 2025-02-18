@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '16'
 
       - name: Install dependencies
         run: npm install
@@ -26,6 +26,8 @@ jobs:
 
       - name: Deploy to VPS
         run: |
+          mkdir -p ~/.ssh
+
           echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/tickets-pair.pem
           chmod 600 ~/.ssh/tickets-pair.pem
 
