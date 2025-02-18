@@ -4,7 +4,7 @@ import { ADD_PUBLIC_ROUTES } from './constants/routes';
 
 export const AUTH_CONTENT: Record<AuthType, AuthContent> = {
   registration: {
-    title: 'Create an account11',
+    title: 'Create an account',
     subtitle: (
       <>
         Already have an account?{' '}
