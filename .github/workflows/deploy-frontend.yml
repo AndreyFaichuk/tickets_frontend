@@ -30,9 +30,8 @@ jobs:
           printf "%s" "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/tickets-pair.pem
           chmod 600 ~/.ssh/tickets-pair.pem
           ssh-keyscan -t rsa -H ec2-18-214-91-17.compute-1.amazonaws.com >> ~/.ssh/known_hosts
-          sed -i 's/\r//' ~/.ssh/tickets-pair.pem
 
       - name: Deploy to VPS
         run: |
           scp -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no -r ./dist/ ubuntu@ec2-18-214-91-17.compute-1.amazonaws.com:project/tickets_frontend
-          ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-18-214-91-17.compute-1.amazonaws.com "cd project/tickets_frontend && git pull origin main && docker-compose up -d"
+          ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-18-214-91-17.compute-1.amazonaws.com "cd project/tickets_frontend && docker-compose up -d"
