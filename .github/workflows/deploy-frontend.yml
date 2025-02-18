@@ -24,7 +24,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Setup SSH key for  VPS
+      - name: Setup SSH key for VPS
         run: |
           mkdir -p ~/.ssh
           printf "%s" "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/tickets-pair.pem
