@@ -30,6 +30,7 @@ jobs:
           printf "%s" "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/tickets-pair.pem
           chmod 600 ~/.ssh/tickets-pair.pem
           ssh-keyscan -t rsa -H ec2-54-166-148-228.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+          sed -i 's/\r//' ~/.ssh/tickets-pair.pem
 
       - name: Deploy to  VPS
         run: |
