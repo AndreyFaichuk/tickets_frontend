@@ -27,10 +27,9 @@ jobs:
       - name: Deploy to VPS
         run: |
           mkdir -p ~/.ssh
-
           echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/tickets-pair.pem
           chmod 600 ~/.ssh/tickets-pair.pem
 
-          scp -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no -r ./dist/ ubuntu@ec2-18-206-225-209.compute-1.amazonaws.com:/path/to/your/project/tickets_frontend
+          scp -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no -r ./dist/ ubuntu@ec2-18-206-225-209.compute-1.amazonaws.com:project/tickets_frontend
 
-          ssh -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no ubuntu@ec2-18-206-225-209.compute-1.amazonaws.com "cd /path/to/your/project && docker-compose up -d"
+          ssh -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no ubuntu@ec2-18-206-225-209.compute-1.amazonaws.com "cd project && docker-compose up -d"
