@@ -34,5 +34,5 @@ jobs:
 
       - name: Deploy to  VPS
         run: |
-          scp -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no -r ./dist/ ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com:/project/tickets_frontend
+          scp -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no -r ./dist/ ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com:project/tickets_frontend
           ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com "cd project && docker-compose up -d"
