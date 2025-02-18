@@ -32,15 +32,7 @@ jobs:
           ssh-keyscan -t rsa -H ec2-54-166-148-228.compute-1.amazonaws.com >> ~/.ssh/known_hosts
           sed -i 's/\r//' ~/.ssh/tickets-pair.pem
 
-      - name: Pull the latest code on the server
-        run: |
-          ssh -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com "cd project/tickets_frontend && git pull origin main"
-
-      - name: Stop and remove old containers and images
-        run: |
-          ssh -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com "cd project/tickets_frontend && docker-compose down && docker system prune -af --volumes"
-
       - name: Deploy to VPS
         run: |
           scp -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no -r ./dist/ ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com:project/tickets_frontend
-          ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com "cd project/tickets_frontend && docker-compose up -d"
+          ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com "cd project/tickets_frontend && git pull origin main && docker-compose up -d"
