@@ -24,6 +24,9 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Verify dist contents
+        run: ls -la ./dist
+
       - name: Setup SSH key for VPS
         run: |
           mkdir -p ~/.ssh
@@ -32,7 +35,7 @@ jobs:
           ssh-keyscan -t rsa -H ec2-54-166-148-228.compute-1.amazonaws.com >> ~/.ssh/known_hosts
           sed -i 's/\r//' ~/.ssh/tickets-pair.pem
 
-      - name: Deploy to  VPS
+      - name: Deploy to VPS
         run: |
           scp -i ~/.ssh/tickets-pair.pem -o StrictHostKeyChecking=no -r ./dist/ ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com:project/tickets_frontend
-          ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com "cd project && docker-compose up -d"
+          ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-54-166-148-228.compute-1.amazonaws.com "cd project && docker-compose down && docker-compose build --no-cache && docker-compose up -d --force-recreate"
