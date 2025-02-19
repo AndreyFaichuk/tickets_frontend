@@ -26,5 +26,6 @@ jobs:
             cd project/tickets_frontend
             git pull origin main
             cd ..
+            chmod +x ./start-prod.sh  # Добавьте права на выполнение
             ./start-prod.sh
           EOF
