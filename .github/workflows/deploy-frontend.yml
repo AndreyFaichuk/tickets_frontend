@@ -25,5 +25,6 @@ jobs:
           ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-18-214-91-17.compute-1.amazonaws.com << 'EOF'
             cd project/tickets_frontend
             git pull origin main
-            docker-compose up -d --build --no-cache
+            cd ..
+            ./start-prod.sh
           EOF
