@@ -26,6 +26,7 @@ jobs:
             cd project/tickets_frontend
             git pull origin main
             cd ..
+            docker-compose down --rmi all
             chmod +x ./start-prod.sh
             ./start-prod.sh
           EOF
