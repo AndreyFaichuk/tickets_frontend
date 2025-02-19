@@ -10,7 +10,7 @@ export const AuthPage = () => {
   if (import.meta.env.MODE === 'development') {
     console.log('dev!');
   } else {
-    console.log('prod!!');
+    console.log('prod! !');
   }
 
   const handleSubmit = (values: RegisteredFormValues) => {
