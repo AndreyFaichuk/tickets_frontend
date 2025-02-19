@@ -8,12 +8,6 @@ import { useColumnsFetch } from '../../hooks/columns/useColumnsFetch';
 export const TodosPage = () => {
   const { allColumns, areAllColumnsLoading } = useColumnsFetch();
 
-  if (import.meta.env.MODE === 'development') {
-    console.log('dev!');
-  } else {
-    console.log('prod!!');
-  }
-
   return (
     <BasePage.Root>
       <BasePage.Title title={PAGES_MAP.dashboard} />

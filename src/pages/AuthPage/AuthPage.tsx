@@ -7,6 +7,12 @@ import { AUTH, AUTH_CONTENT } from '../../constants';
 export const AuthPage = () => {
   const { handleRegisterUser } = useAuthUser();
 
+  if (import.meta.env.MODE === 'development') {
+    console.log('dev!');
+  } else {
+    console.log('prod!!');
+  }
+
   const handleSubmit = (values: RegisteredFormValues) => {
     const { repeatPassword, ...valuesWithoutRepeatPassword } = values;
 
@@ -16,8 +22,7 @@ export const AuthPage = () => {
   return (
     <DefaultAuthLayout
       subTitle={AUTH_CONTENT[AUTH.registration].subtitle}
-      title={AUTH_CONTENT[AUTH.registration].title}
-    >
+      title={AUTH_CONTENT[AUTH.registration].title}>
       <RegistrationForm onSubmit={handleSubmit} />
     </DefaultAuthLayout>
   );
