@@ -8,7 +8,7 @@ export const AuthPage = () => {
   const { handleRegisterUser } = useAuthUser();
 
   if (import.meta.env.MODE === 'development') {
-    console.log('dev!');
+    console.log('dev!3434554364563');
   } else {
     console.log('prod! !!!!!!!!!');
   }
