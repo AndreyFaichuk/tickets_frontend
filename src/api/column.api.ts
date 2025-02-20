@@ -6,12 +6,13 @@ import {
   ColumnForUpdate,
 } from '../hooks/columns/useColumnsActions';
 import { CurrentDnDColumnType } from '../pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.constants';
+import { BASE_URL } from '../constants';
 
-const BASE_URL = 'http://localhost:3000/columns';
+const COLUMN_URL = `${BASE_URL}/columns`;
 
 export class ColumnApi {
   static addColumn(columnName: string): PromiseAxiosResponse<ColumnType> {
-    const response = securityAxios.post(`${BASE_URL}/create`, {
+    const response = securityAxios.post(`${COLUMN_URL}/create`, {
       title: columnName,
     });
 
@@ -23,7 +24,7 @@ export class ColumnApi {
     columnId: string,
   ): PromiseAxiosResponse<ColumnType> {
     const response = securityAxios.patch(
-      `${BASE_URL}/${columnId}`,
+      `${COLUMN_URL}/${columnId}`,
       columnForUpdate,
     );
 
@@ -31,12 +32,12 @@ export class ColumnApi {
   }
 
   static getColumns(): PromiseAxiosResponse<ColumnType[]> {
-    const response = securityAxios.get(`${BASE_URL}/all`);
+    const response = securityAxios.get(`${COLUMN_URL}/all`);
     return response;
   }
 
   static deleteColumn(id: string): PromiseAxiosResponse<ColumnType> {
-    const response = securityAxios.delete(`${BASE_URL}/${id}`);
+    const response = securityAxios.delete(`${COLUMN_URL}/${id}`);
 
     return response;
   }
@@ -44,7 +45,7 @@ export class ColumnApi {
   static moveTodoColumns(
     moveTodo: CurrentDnDColumnType,
   ): PromiseAxiosResponse<ColumnType> {
-    const response = securityAxios.post(`${BASE_URL}/move`, moveTodo);
+    const response = securityAxios.post(`${COLUMN_URL}/move`, moveTodo);
 
     return response;
   }
@@ -52,7 +53,7 @@ export class ColumnApi {
   static replaceAllTodosToColumn(
     body: ColumnForReplace,
   ): PromiseAxiosResponse<ColumnType> {
-    const response = securityAxios.put(`${BASE_URL}/replace`, body);
+    const response = securityAxios.put(`${COLUMN_URL}/replace`, body);
 
     return response;
   }

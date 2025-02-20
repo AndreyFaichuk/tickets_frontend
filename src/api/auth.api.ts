@@ -1,3 +1,4 @@
+import { BASE_URL } from '../constants';
 import {
   RegisteredFormValues,
   RegisterNewUserValues,
@@ -6,14 +7,14 @@ import { LoginFormValues } from '../pages/LoginPage/components/LoginForm/LoginFo
 import { ApiResponse } from '../types';
 import { securityAxios } from './securityAxios';
 
-const BASE_URL = 'http://localhost:3000/auth';
+const AUTH_URL = `${BASE_URL}/auth`;
 
 export class AuthApi {
   static async registerUser(
     newUser: RegisterNewUserValues,
   ): ApiResponse<RegisteredFormValues> {
     const response = await securityAxios.post(
-      `${BASE_URL}/registration`,
+      `${AUTH_URL}/registration`,
       newUser,
     );
 
@@ -23,7 +24,7 @@ export class AuthApi {
   static async loginUser(
     user: LoginFormValues,
   ): ApiResponse<RegisteredFormValues> {
-    const response = await securityAxios.post(`${BASE_URL}/login`, user);
+    const response = await securityAxios.post(`${AUTH_URL}/login`, user);
 
     return response.data;
   }

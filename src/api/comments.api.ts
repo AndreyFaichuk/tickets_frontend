@@ -1,14 +1,15 @@
 import { RawComment } from '../components/shared/CommentsBlock/AddNewComment.types';
+import { BASE_URL } from '../constants';
 import { CreateCommentValues } from '../hooks/comments/useCommentsActions';
 import { PromiseAxiosResponse } from '../types';
 import { securityAxios } from './securityAxios';
 
-const BASE_URL = 'http://localhost:3000/comments';
+const COMMENT_URL = `${BASE_URL}/comments`;
 
 export class CommentsApi {
   static async createComment(commentValues: CreateCommentValues) {
     const response = await securityAxios.post(
-      `${BASE_URL}/create`,
+      `${COMMENT_URL}/create`,
       commentValues,
     );
 
@@ -16,7 +17,7 @@ export class CommentsApi {
   }
 
   static async updateComment(comment: string, commentId: string) {
-    const response = await securityAxios.patch(`${BASE_URL}/${commentId}`, {
+    const response = await securityAxios.patch(`${COMMENT_URL}/${commentId}`, {
       comment,
     });
 
@@ -24,12 +25,12 @@ export class CommentsApi {
   }
 
   static getComments(todoId: string): PromiseAxiosResponse<RawComment[]> {
-    const response = securityAxios.get(`${BASE_URL}/all/${todoId}`);
+    const response = securityAxios.get(`${COMMENT_URL}/all/${todoId}`);
     return response;
   }
 
   static deleteComment(commentId: string): PromiseAxiosResponse<RawComment> {
-    const response = securityAxios.delete(`${BASE_URL}/${commentId}`);
+    const response = securityAxios.delete(`${COMMENT_URL}/${commentId}`);
     return response;
   }
 }

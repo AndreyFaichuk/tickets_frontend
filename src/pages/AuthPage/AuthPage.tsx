@@ -7,12 +7,6 @@ import { AUTH, AUTH_CONTENT } from '../../constants';
 export const AuthPage = () => {
   const { handleRegisterUser } = useAuthUser();
 
-  if (import.meta.env.MODE === 'development') {
-    console.log('dev!3434554364563');
-  } else {
-    console.log('prod! 999999');
-  }
-
   const handleSubmit = (values: RegisteredFormValues) => {
     const { repeatPassword, ...valuesWithoutRepeatPassword } = values;
 
