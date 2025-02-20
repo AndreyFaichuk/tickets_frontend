@@ -4,30 +4,38 @@ import { Stack } from '@mui/material';
 import { FormCheckBox } from '../../../../../../components/shared/FormCheckBox';
 import { FormDatePicker } from '../../../../../../components/shared/FormDatePicker';
 import { FormInput } from '../../../../../../components/shared/FormInput';
+import {
+  FourthStepRegistrationFormInputsWrapper,
+  FourthStepRegistrationFormRoot,
+} from './FourthStepRegistrationForm.styled';
+import { useBreakpoint } from '../../../../../../hooks/useBreakpoint';
 
 export const FourthStepRegistrationForm: FC = () => {
+  const isLessThanMobile = useBreakpoint('down', 'mobile');
+
   return (
     <>
-      <Stack direction="row" justifyContent="space-between" spacing={2}>
+      <FourthStepRegistrationFormRoot>
         <Stack spacing={2}>
           <FormDatePicker label="Date of Birth" name="dateOfBirth" />
           <FormCheckBox label="Remember Me?" name="isRememberMe" />
         </Stack>
 
-        <Stack
-          justifyContent="center"
-          direction="column"
-          sx={{ minWidth: { xs: '100%', sm: '250px' } }}
-          spacing={2}
-        >
-          <FormInput name="password" label="Password" type="password" />
+        <FourthStepRegistrationFormInputsWrapper>
+          <FormInput
+            name="password"
+            label="Password"
+            type="password"
+            fullWidth={isLessThanMobile ? true : false}
+          />
           <FormInput
             name="repeatPassword"
             label="Repeat Password"
             type="password"
+            fullWidth={isLessThanMobile ? true : false}
           />
-        </Stack>
-      </Stack>
+        </FourthStepRegistrationFormInputsWrapper>
+      </FourthStepRegistrationFormRoot>
     </>
   );
 };

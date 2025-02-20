@@ -6,6 +6,20 @@ import {
   Palette,
 } from '@mui/material/styles';
 
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: false;
+    sm: false;
+    md: false;
+    lg: false;
+    xl: false;
+    mobile: true;
+    tablet: true;
+    laptop: true;
+    desktop: true;
+  }
+}
+
 export interface MyPalette extends Palette {
   progress: {
     notStarted: string;
@@ -54,6 +68,14 @@ const baseTheme = createTheme({
       700: '#616161',
       800: '#424242',
       900: '#212121',
+    },
+  },
+  breakpoints: {
+    values: {
+      mobile: 400,
+      tablet: 640,
+      laptop: 1024,
+      desktop: 1200,
     },
   },
   typography: {
