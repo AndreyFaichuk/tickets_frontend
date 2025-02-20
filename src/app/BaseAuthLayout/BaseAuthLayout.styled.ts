@@ -10,6 +10,11 @@ export const StyledBaseAuthLayoutRoot = styled(Paper)(({ theme }) => ({
   gap: theme.spacing(2),
   justifyContent: 'flex-start',
   alignItems: 'center',
+  [theme.breakpoints.down('mobile')]: {
+    width: '95%',
+    padding: theme.spacing(3, 0, 3, 0),
+    margin: theme.spacing(1),
+  },
 }));
 
 export const StyledBaseAuthContent = styled(Box)(() => ({
