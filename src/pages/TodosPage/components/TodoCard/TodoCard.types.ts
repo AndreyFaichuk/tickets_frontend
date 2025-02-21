@@ -9,6 +9,7 @@ export type TodoCardProps = {
   created_at: Date;
   priority: PriorityType;
   attachmentsUrls: string[];
+  columnId: string;
 };
 
 export type TodoCardForCreate = Omit<TodoCardProps, '_id' | 'created_at'>;
