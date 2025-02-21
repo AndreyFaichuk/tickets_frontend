@@ -54,16 +54,14 @@ export const TodoCard: FC<TodoCardProps> = ({
         id={_id}
         ref={setNodeRef}
         {...listeners}
-        {...attributes}
-      >
+        {...attributes}>
         <TodoCardTypography variant="h6">{name}</TodoCardTypography>
         <TodoCardTypography variant="body2">{description}</TodoCardTypography>
       </TodoCardContentWrapper>
       <Stack
         direction="row"
         alignItems="flex-end"
-        justifyContent="space-between"
-      >
+        justifyContent="space-between">
         <Tooltip title={`${priority} priority`} placement="top">
           <TodoCardIconWrapper>
             <img

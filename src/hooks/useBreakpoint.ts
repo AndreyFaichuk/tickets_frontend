@@ -10,23 +10,24 @@ export const useBreakpoint = (
 ): boolean => {
   const theme = useTheme();
 
-  if (query === 'between') {
-    if (!endBreakpoint) {
-      throw new Error(
-        "useBreakpoint: 'between' requires both start and end breakpoints.",
-      );
+  const getBreakpointQuery = () => {
+    switch (query) {
+      case 'between':
+        if (!endBreakpoint) {
+          throw new Error(
+            "useBreakpoint: 'between' requires both start and end breakpoints.",
+          );
+        }
+        return theme.breakpoints.between(
+          startBreakpoint as Breakpoint,
+          endBreakpoint as Breakpoint,
+        );
+      case 'only':
+        return theme.breakpoints.only(startBreakpoint as Breakpoint);
+      default:
+        return theme.breakpoints[query](startBreakpoint as Breakpoint);
     }
-    return useMediaQuery(
-      theme.breakpoints.between(
-        startBreakpoint as Breakpoint,
-        endBreakpoint as Breakpoint,
-      ),
-    );
-  }
+  };
 
-  if (query === 'only') {
-    return useMediaQuery(theme.breakpoints.only(startBreakpoint as Breakpoint));
-  }
-
-  return useMediaQuery(theme.breakpoints[query](startBreakpoint as Breakpoint));
+  return useMediaQuery(getBreakpointQuery());
 };

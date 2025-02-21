@@ -16,7 +16,7 @@ import { Stack } from '@mui/material';
 import { useGetCurrentUser } from '../../hooks/user/useGetCurrentUser';
 
 export const EditTodoPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id = '' } = useParams<{ id: string }>();
 
   const { currentUser, isCurrentUserLoading } = useGetCurrentUser();
 
@@ -26,8 +26,6 @@ export const EditTodoPage = () => {
   const [isNormalizing, setIsNormalizing] = useState<boolean>(true);
 
   const [activeComment, setIsActiveComment] = useState<string>('');
-
-  if (!id) return null;
 
   const { oneTodo, isOneToDoLoading } = useTodoFetchById(id);
   const { allComments, areAllCommentsLoading } = useCommentsFetch(id);

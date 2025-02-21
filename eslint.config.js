@@ -1,35 +1,30 @@
+import js from '@eslint/js';
 import globals from 'globals';
-import pluginJs from '@eslint/js';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import pluginPrettier from 'eslint-plugin-prettier';
-import configPrettier from 'eslint-config-prettier';
+import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  {
-    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-    languageOptions: { globals: globals.browser },
-    plugins: {
-      react: pluginReact,
-      prettier: pluginPrettier,
+export default tseslint
+  .config(
+    { ignores: ['dist'] },
+    {
+      extends: [js.configs.recommended, ...tseslint.configs.recommended],
+      files: ['**/*.{ts,tsx}'],
+      languageOptions: {
+        ecmaVersion: 2020,
+        globals: globals.browser,
+      },
+      plugins: {
+        'react-hooks': reactHooks,
+        'react-refresh': reactRefresh,
+      },
+      rules: {
+        ...reactHooks.configs.recommended.rules,
+        'react-refresh/only-export-components': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-expressions': 'off',
+      },
     },
-    rules: {
-      'prettier/prettier': 'error',
-      'react/jsx-wrap-multilines': [
-        'error',
-        {
-          declaration: 'parens-new-line',
-          assignment: 'parens-new-line',
-          return: 'parens-new-line',
-        },
-      ],
-    },
-  },
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  pluginReact.configs.recommended,
-  {
-    rules: configPrettier.rules,
-  },
-];
+  )
+  .concat(eslintPluginPrettier);

@@ -88,7 +88,9 @@ export const useBaseColumnManagement = ({
 
       await handleDeleteColumn(columnId);
       closeModal(BASE_COLUMN_MODAL_TYPES.deleteColumn);
-    } catch (error) {}
+    } catch (error) {
+      // empty
+    }
   };
 
   const MODALS: Record<BaseColumnModalTypes, { render: JSX.Element }> = {

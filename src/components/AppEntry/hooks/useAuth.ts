@@ -21,12 +21,12 @@ export const useAuth = () => {
     if (isAuthenticated && PUBLIC_ROUTES.includes(location.pathname)) {
       navigate(ADD_LOGGED_IN_ROUTES.TODOS, { replace: true });
     }
-  }, [isAuthenticated, location.pathname]);
+  }, [isAuthenticated, location.pathname, navigate]);
 
   const handleLogout = useCallback(() => {
     removeCookie(COOKIE_NAMES.sessionId, { path: '/' });
     navigate(ADD_PUBLIC_ROUTES.LOGIN, { replace: true });
-  }, []);
+  }, [navigate, removeCookie]);
 
   return { isAuthenticated, handleLogout };
 };
