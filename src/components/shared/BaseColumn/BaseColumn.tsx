@@ -118,6 +118,7 @@ export const BaseColumn: FC<BaseColumn> = ({
                     navigate(`/app/edit/${card._id}`);
                   },
                 }}
+                columnId=""
               />
             ))}
             {isCreatingNewToDo && (
