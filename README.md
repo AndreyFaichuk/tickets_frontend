@@ -7,7 +7,34 @@ project/
   tickets_backend/
   tickets_frontend/
   docker-compose.yml
+  start-dev.sh
+  start-prod.sh
 ```
+
+## Scripts
+start-dev.sh
+```
+docker-compose up -d --build tickets_frontend_dev tickets_backend_dev
+```
+start-prod.sh
+```
+docker-compose up -d --build tickets_frontend_prod tickets_backend_prod
+```
+
+## Services Included
+
+This setup includes the following services:
+
+- **Frontend**: React application running with Vite.
+- **Backend**: Node.js application using NestJS.
+- **Database Dev**: Local instance of MongoDB.
+- **Database Prod**: Cloud instance of MongoDB Atlas.
+
+## Flow (CI/CD)
+
+1. **CI Process**: Check PRs before merging into the **main** branch, including linting, and types checks.
+2. **CD Process**: Once the prepared PR is merged into the main branch, the CD process begins, deploying to the AWS VPS instance.
+
 
 ## Docker Compose Configuration
 
@@ -75,46 +102,6 @@ services:
 volumes:
   mongo-data:
 
-```
-
-## Services Included
-
-This setup includes the following services:
-
-- **Frontend**: React application running with Vite.
-- **Backend**: Node.js application using NestJS.
-- **Database**: Local instance of MongoDB.
-
-## Useful Commands
-
-### Start the services
-
-```sh
-docker-compose up -d --build
-```
-
-### Stop the services
-
-```sh
-docker-compose down
-```
-
-### View logs
-
-```sh
-docker-compose logs -f
-```
-
-### Restart the services
-
-```sh
-docker-compose restart
-```
-
-### Remove all containers, networks, and volumes
-
-```sh
-docker-compose down -v
 ```
 
 ## Repositories
