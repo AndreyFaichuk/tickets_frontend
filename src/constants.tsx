@@ -29,7 +29,7 @@ export const AUTH: Record<AuthType, AuthType> = {
 } as const;
 
 export const PAGES_MAP = {
-  dashboard: 'Dashboard1',
+  dashboard: 'Dashboard',
   settings: 'Settings',
   logout: 'Logout',
   editTodo: 'Edit Todo',
