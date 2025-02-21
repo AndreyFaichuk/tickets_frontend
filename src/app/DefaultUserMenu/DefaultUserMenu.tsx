@@ -53,8 +53,7 @@ export const DefaultUserMenu = () => {
           horizontal: 'right',
         }}
         open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
+        onClose={handleCloseUserMenu}>
         <MenuList>
           <Typography textAlign="center" variant="body2" sx={{ color: 'gray' }}>
             {currentUser.email}

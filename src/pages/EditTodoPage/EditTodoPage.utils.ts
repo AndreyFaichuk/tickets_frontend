@@ -41,7 +41,9 @@ export const normalizeFormData = async (
 
   try {
     baseData.attachments = await Promise.all(attachmentsPromises);
-  } catch {}
+  } catch {
+    throw new Error('Error with attachments');
+  }
 
   return baseData;
 };

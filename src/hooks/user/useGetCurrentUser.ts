@@ -37,7 +37,7 @@ export const useGetCurrentUser = () => {
       toast.error(failureReason.response.data.message);
       handleLogout();
     }
-  }, [failureReason]);
+  }, [failureReason, handleLogout]);
 
   return {
     currentUser: currentUser ?? ({} as User),

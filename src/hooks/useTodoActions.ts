@@ -31,11 +31,11 @@ export const useTodoActions = () => {
     onError: (error: Error) => {
       toast.error(error.message);
     },
-    onSuccess: ({ _id }) => {
+    onSuccess: () => {
       toast('ToDo has been updated!');
 
       queryClient.invalidateQueries({
-        queryKey: todosQueryKeys.todos.one(_id),
+        queryKey: columnsQueryKeys.columns.all(),
       });
 
       navigate(ADD_LOGGED_IN_ROUTES.TODOS);

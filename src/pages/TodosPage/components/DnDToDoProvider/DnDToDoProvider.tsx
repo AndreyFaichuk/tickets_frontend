@@ -72,6 +72,7 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
             name={activeCard.name}
             description={activeCard.description}
             progress={activeCard.progress}
+            columnId=""
             actions={{ onDelete: () => {}, onEdit: () => {} }}
             isDragging
           />

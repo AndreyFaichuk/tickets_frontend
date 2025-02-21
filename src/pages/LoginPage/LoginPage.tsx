@@ -14,8 +14,7 @@ export const LoginPage = () => {
   return (
     <DefaultAuthLayout
       subTitle={AUTH_CONTENT[AUTH.login].subtitle}
-      title={AUTH_CONTENT[AUTH.login].title}
-    >
+      title={AUTH_CONTENT[AUTH.login].title}>
       <LoginForm onSubmit={handleSubmit} />
     </DefaultAuthLayout>
   );

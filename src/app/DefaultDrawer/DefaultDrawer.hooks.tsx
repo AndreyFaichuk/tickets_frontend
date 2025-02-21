@@ -47,7 +47,7 @@ export const useDefaultDrawerOptions = ({
         onClick: () => handleLogout(),
       },
     ];
-  }, []);
+  }, [handleLogout, navigate]);
 
   const renderDrawerListItem = () => (
     <>
