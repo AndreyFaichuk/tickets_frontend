@@ -27,7 +27,7 @@ export const useAttachmentBlock = () => {
   });
 
   const onRemoveAttachment = (index: number) => {
-    const copyAttachments = [...attachments];
+    const copyAttachments = Array.from(attachments);
     copyAttachments.splice(index, 1);
 
     return copyAttachments;
