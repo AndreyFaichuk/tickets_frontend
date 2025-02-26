@@ -5,6 +5,7 @@ import { ADD_LOGGED_IN_ROUTES } from '../../../constants/routes';
 
 const pageMap: Record<string, string> = {
   Dashboard: ADD_LOGGED_IN_ROUTES.EDIT_TODO,
+  Workspaces: ADD_LOGGED_IN_ROUTES.TODOS,
 };
 
 export const useGetBackMatcher = () => {

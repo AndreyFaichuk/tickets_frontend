@@ -24,6 +24,12 @@ export default tseslint
         'react-refresh/only-export-components': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
+        'prettier/prettier': [
+          'error',
+          {
+            endOfLine: 'auto',
+          },
+        ],
       },
     },
   )

@@ -1,10 +1,10 @@
+import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
 import { Comment, RawComment } from './AddNewComment.types';
-import dayjs from 'dayjs';
 
 export const getNormalizeComments = (rawComments: RawComment[]): Comment[] => {
   return rawComments.map((rawComment) => {
-    const { avatarUrl, firstName, lastName } = rawComment.creator;
+    const { avatarUrl, firstName, lastName, _id } = rawComment.creator;
 
     return {
       comment: rawComment.comment,
@@ -13,7 +13,7 @@ export const getNormalizeComments = (rawComments: RawComment[]): Comment[] => {
       updatedAt: rawComment.updated_at,
       todoId: rawComment.todoId,
       user: {
-        userId: rawComment.creator._id,
+        userId: _id,
         avatarUrl: avatarUrl,
         firstName: firstName,
         lastName: lastName,

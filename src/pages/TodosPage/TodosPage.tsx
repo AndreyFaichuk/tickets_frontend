@@ -1,19 +1,31 @@
-import { BasePage } from '../../app/BasePage';
 import { PAGES_MAP } from '../../constants';
 
 import { DnDToDoProvider } from './components/DnDToDoProvider';
 import { DisplayWithLoader } from '../../components/shared/DisplayWithLoader';
 import { useColumnsFetch } from '../../hooks/columns/useColumnsFetch';
+import { useWorkspaceFetchById } from '../../hooks/workspaces/useWorkspaceFetchById';
+import { DefaultAppPage } from '../../app/DefaultAppPage';
+import { useCurrentWorkspaceSync } from '../WorkspacesPage/hooks/useCurrentWorkspaceSync';
 
 export const TodosPage = () => {
+  useCurrentWorkspaceSync();
+
+  const { currentWorkspace, isCurrentWorkspaceLoading } =
+    useWorkspaceFetchById();
+
   const { allColumns, areAllColumnsLoading } = useColumnsFetch();
 
+  const isLoading = isCurrentWorkspaceLoading || areAllColumnsLoading;
+
+  const pageTitle = isLoading
+    ? PAGES_MAP.dashboard
+    : `${PAGES_MAP.dashboard} for workspace ${currentWorkspace?.title || ''}`;
+
   return (
-    <BasePage.Root>
-      <BasePage.Title title={PAGES_MAP.dashboard} />
-      <DisplayWithLoader isloading={areAllColumnsLoading}>
+    <DefaultAppPage title={pageTitle}>
+      <DisplayWithLoader isloading={isLoading}>
         <DnDToDoProvider data={allColumns} />
       </DisplayWithLoader>
-    </BasePage.Root>
+    </DefaultAppPage>
   );
 };

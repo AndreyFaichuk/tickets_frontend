@@ -1,26 +1,27 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useColumnActions } from '../../../../../hooks/columns/useColumnsActions';
 import { TodoCardProps } from '../../TodoCard/TodoCard.types';
+
+export type RawColumnType = {
+  _id: string;
+  title: string;
+  creatorId: string;
+  cards: TodoCardProps[];
+};
 
 export type ColumnType = {
   id: string;
   title: string;
+  creatorId: string;
   cards: TodoCardProps[];
 };
 
 export const useColumnsManagement = (data: ColumnType[]) => {
-  const { handleCreateNewColumn } = useColumnActions();
-
   const [columns, setColumns] = useState<ColumnType[]>(data);
   const [activeCard, setActiveCard] = useState<TodoCardProps | null>(null);
 
   useEffect(() => {
     setColumns(data);
   }, [data]);
-
-  const handleAddNewColumnToList = (columnTitle: string) => {
-    handleCreateNewColumn(columnTitle);
-  };
 
   const columnMap = useMemo(() => {
     const map = new Map<string, ColumnType>();
@@ -40,9 +41,6 @@ export const useColumnsManagement = (data: ColumnType[]) => {
     columns: {
       currentColumns: columns,
       activeCard,
-    },
-    columnsHandlers: {
-      handleAddNewColumnToList,
     },
   };
 };

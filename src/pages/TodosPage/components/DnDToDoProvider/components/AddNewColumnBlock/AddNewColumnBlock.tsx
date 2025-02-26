@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 
@@ -6,61 +6,35 @@ import {
   StyledDnDToDoProviderButton,
   StyledDnDToDoProviderIconButton,
 } from './AddNewColumnBlock.styled';
-import { SwapComponents } from '../../../../../../components/shared/SwapComponents';
-import { Input } from '../../../../../../components/shared/Input';
+import { SwapButtonComponent } from '../../../../../../components/shared/SwapButtonComponent';
+import { useColumnActions } from '../../../../../../hooks/columns/useColumnsActions';
 
-type AddNewColumnBlock = {
-  onAddNewColumnToList: (columnTitle: string) => void;
+type AddNewColumnBlockProps = {
+  workspaceId: string;
 };
 
-export const AddNewColumnBlock: FC<AddNewColumnBlock> = ({
-  onAddNewColumnToList,
+export const AddNewColumnBlock: FC<AddNewColumnBlockProps> = ({
+  workspaceId,
 }) => {
-  const [newColumnTitle, setNewColumnTitle] = useState<string>('');
+  const { handleCreateNewColumn } = useColumnActions();
 
-  const handleChangeNewColumnName = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setNewColumnTitle(e.target.value);
-  };
-
-  const handleAddNewColumn = () => {
-    if (!newColumnTitle.trim()) {
-      handleCancelNewColumn();
-      return;
-    }
-
-    onAddNewColumnToList(newColumnTitle);
-    handleCancelNewColumn();
-  };
-
-  const handleCancelNewColumn = () => {
-    setNewColumnTitle('');
+  const handleAddNewColumn = (title: string) => {
+    handleCreateNewColumn({ title, workspaceId });
   };
 
   return (
-    <SwapComponents
-      shouldCallAfterClickOutside={handleCancelNewColumn}
-      shouldCallAfterApprove={handleAddNewColumn}
-      render={({ shouldSwap, handleSwap }) =>
-        shouldSwap ? (
-          <Input
-            autoFocusOnMount
-            value={newColumnTitle}
-            onChange={handleChangeNewColumnName}
-          />
-        ) : (
-          <StyledDnDToDoProviderButton>
-            <StyledDnDToDoProviderIconButton
-              onMouseDown={handleSwap}
-              type="button"
-              size="large"
-              color="secondary">
-              <AddIcon />
-            </StyledDnDToDoProviderIconButton>
-          </StyledDnDToDoProviderButton>
-        )
-      }
-    />
+    <SwapButtonComponent onApprove={handleAddNewColumn}>
+      {(handleSwap) => (
+        <StyledDnDToDoProviderButton>
+          <StyledDnDToDoProviderIconButton
+            onMouseDown={handleSwap}
+            type="button"
+            size="large"
+            color="secondary">
+            <AddIcon />
+          </StyledDnDToDoProviderIconButton>
+        </StyledDnDToDoProviderButton>
+      )}
+    </SwapButtonComponent>
   );
 };

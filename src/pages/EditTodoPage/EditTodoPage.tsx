@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Stack } from '@mui/material';
 
 import { PAGES_MAP } from '../../constants';
 import { ToDoForm } from '../../components/shared/ToDoForm/ToDoForm';
@@ -12,7 +13,6 @@ import { DisplayWithLoader } from '../../components/shared/DisplayWithLoader';
 import { StyledEditTodoPageRoot } from './EditTodoPage.styled';
 import { useCommentsFetch } from '../../hooks/comments/useCommentsFetch';
 import { AddNewComment } from '../../components/shared/CommentsBlock';
-import { Stack } from '@mui/material';
 import { useGetCurrentUser } from '../../hooks/user/useGetCurrentUser';
 
 export const EditTodoPage = () => {

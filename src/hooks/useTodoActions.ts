@@ -6,11 +6,16 @@ import { TodoApi } from '../api/todo.api';
 import { ADD_LOGGED_IN_ROUTES } from '../constants/routes';
 import { TodoValues } from '../components/shared/ToDoForm/ToDoForm.schema';
 import { columnsQueryKeys } from './columns/useColumnsFetch';
-import { todosQueryKeys } from './useTodoFetchById';
+import { useWorkspaceStore } from '../stores/workspaceStore';
+import { workspacesQueryKeys } from './workspaces/useWorkspacesFetch';
 
 export const useTodoActions = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+
+  const currentWorkspaceId = useWorkspaceStore(
+    (state) => state.currentWorkspaceId,
+  );
 
   const updateToDo = useMutation({
     mutationFn: async ({ id, todo }: { id: string; todo: TodoValues }) => {
@@ -35,7 +40,7 @@ export const useTodoActions = () => {
       toast('ToDo has been updated!');
 
       queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
+        queryKey: columnsQueryKeys.columns.all(currentWorkspaceId),
       });
 
       navigate(ADD_LOGGED_IN_ROUTES.TODOS);
@@ -54,7 +59,11 @@ export const useTodoActions = () => {
       toast('ToDo has been deleted!');
 
       queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
+        queryKey: columnsQueryKeys.columns.all(currentWorkspaceId),
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: workspacesQueryKeys.workspaces.all(),
       });
     },
   });
@@ -88,7 +97,11 @@ export const useTodoActions = () => {
       toast('ToDo has been created!');
 
       queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
+        queryKey: columnsQueryKeys.columns.all(currentWorkspaceId),
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: workspacesQueryKeys.workspaces.all(),
       });
     },
   });

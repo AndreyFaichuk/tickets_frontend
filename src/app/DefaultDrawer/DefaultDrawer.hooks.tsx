@@ -33,7 +33,7 @@ export const useDefaultDrawerOptions = ({
       {
         title: 'Dashboard',
         Icon: <DashboardIcon />,
-        onClick: () => navigate(ADD_LOGGED_IN_ROUTES.TODOS),
+        onClick: () => navigate(ADD_LOGGED_IN_ROUTES.WORKSPACES),
       },
       {
         title: 'Settings',

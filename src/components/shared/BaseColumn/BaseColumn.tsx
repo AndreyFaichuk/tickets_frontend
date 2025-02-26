@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress, Stack, Typography } from '@mui/material';
 import { useDroppable } from '@dnd-kit/core';
@@ -15,9 +15,8 @@ import { TodoCardProps } from '../../../pages/TodosPage/components/TodoCard/Todo
 
 import { BASE_COLUMN_MODAL_TYPES } from './BaseColumn.constants';
 import { useBaseColumnManagement } from './hooks/useBaseColumnManagement';
-import { SwapComponents } from '../SwapComponents/SwapComponents';
 import { useColumnActions } from '../../../hooks/columns/useColumnsActions';
-import { Input } from '../Input';
+import { SwapButtonComponent } from '../SwapButtonComponent';
 
 type BaseColumn = {
   initialTodos: TodoCardProps[];
@@ -39,8 +38,6 @@ export const BaseColumn: FC<BaseColumn> = ({
 
   const { setNodeRef } = useDroppable({ id: id });
 
-  const [columnTitle, setColumnTitle] = useState<string>(title);
-
   const {
     activeModals,
     modalsList,
@@ -51,43 +48,25 @@ export const BaseColumn: FC<BaseColumn> = ({
     columnId: id,
   });
 
-  const handleResetNewColumntitle = () => {
-    setColumnTitle(title);
-  };
-
-  const handleChangeNewColumnName = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    setColumnTitle(e.target.value);
-  };
-
-  const handleSubmitChangeColumnTitle = () => {
+  const handleSubmitChangeColumnTitle = (title: string) => {
     handleUpdateColumn({
-      columnForUpdate: { title: columnTitle },
+      columnForUpdate: { title },
       columnId: id,
     });
   };
 
   return (
     <Stack direction="column" gap={1} position="relative">
-      <SwapComponents
-        shouldCallAfterClickOutside={handleResetNewColumntitle}
-        shouldCallAfterApprove={handleSubmitChangeColumnTitle}
-        render={({ shouldSwap, handleSwap }) =>
-          shouldSwap ? (
-            <Input
-              autoFocusOnMount
-              value={columnTitle}
-              variant="standard"
-              onChange={handleChangeNewColumnName}
-            />
-          ) : (
-            <Typography onClick={handleSwap} variant="h6">
-              {title}
-            </Typography>
-          )
-        }
-      />
+      <SwapButtonComponent
+        initialValue={title}
+        onApprove={handleSubmitChangeColumnTitle}>
+        {(handleSwap) => (
+          <Typography onClick={handleSwap} variant="h6">
+            {title}
+          </Typography>
+        )}
+      </SwapButtonComponent>
+
       <StyledBaseColumnRoot elevation={5}>
         <SortableContext
           id={id}
