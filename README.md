@@ -37,7 +37,7 @@ This setup includes the following services:
 ## Flow (CI/CD)
 
 1. **CI Process**: Check PRs before merging into the **main** branch, including linting, and types checks.
-2. **CD Process**: Once the prepared PR is merged into the main branch, the CD process begins, deploying to the AWS VPS instance.
+2. **CD Process**: The CD process begins manually by new tag v\* to the AWS VPS instance.
 
 ## Docker Compose Configuration
 
