@@ -9,4 +9,6 @@ COPY . .
 
 EXPOSE 8080
 
+COPY .env.dev .env
+
 CMD ["npm", "run", "dev"]

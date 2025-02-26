@@ -42,7 +42,4 @@ export const COOKIE_NAMES = {
   sessionId: 'sessionId',
 } as const;
 
-export const BASE_URL =
-  import.meta.env.MODE === 'development'
-    ? 'http://localhost:3000'
-    : 'http://18.214.91.17:3000';
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
