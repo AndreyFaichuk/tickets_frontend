@@ -11,7 +11,7 @@ import {
 } from '@dnd-kit/core';
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
-import { useColumnsManagement } from './useColumnsManagement';
+import { ColumnType, useColumnsManagement } from './useColumnsManagement';
 import {
   CURRENT_DND_COLUMN_INITIAL_STATE,
   CurrentDnDColumnState,
@@ -19,16 +19,10 @@ import {
 } from '../DnDToDoProvider.constants';
 import { useColumnActions } from '../../../../../hooks/columns/useColumnsActions';
 
-export type ColumnType = {
-  id: string;
-  title: string;
-  cards: TodoCardProps[];
-};
-
 export const useDnDManagement = (data: ColumnType[]) => {
   const { handleMoveTodoColumns } = useColumnActions();
 
-  const { columnMap, setActiveCard, setColumns, columns, columnsHandlers } =
+  const { columnMap, setActiveCard, setColumns, columns } =
     useColumnsManagement(data);
 
   const [currentDnDColumnState, setCurrentDnDColumnState] =
@@ -181,6 +175,5 @@ export const useDnDManagement = (data: ColumnType[]) => {
       handleDragStart,
     },
     columns,
-    columnsHandlers,
   };
 };

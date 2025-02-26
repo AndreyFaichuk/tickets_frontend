@@ -1,0 +1,40 @@
+import { BASE_URL } from '../constants';
+import {
+  CreateWorkspaceValues,
+  UpdateWorkspaceValues,
+} from '../hooks/workspaces/useWorkspacesActions';
+
+import { RawWorkspace } from '../pages/WorkspacesPage/WorkspacesPage.types';
+import { PromiseAxiosResponse } from '../types';
+import { securityAxios } from './securityAxios';
+
+const WORKSPACE_URL = `${BASE_URL}/workspaces`;
+
+export class WorkspaceApi {
+  static getWorkspaces(): PromiseAxiosResponse<RawWorkspace[]> {
+    const response = securityAxios.get(`${WORKSPACE_URL}/all`);
+    return response;
+  }
+
+  static async createWorkspace(workspaceValues: CreateWorkspaceValues) {
+    const response = await securityAxios.post(
+      `${WORKSPACE_URL}/create`,
+      workspaceValues,
+    );
+
+    return response.data;
+  }
+
+  static async updateWorkspace(workspaceValues: UpdateWorkspaceValues) {
+    const response = await securityAxios.patch(`${WORKSPACE_URL}`, {
+      workspaceValues,
+    });
+
+    return response.data;
+  }
+
+  static getWorkspace(id: string): PromiseAxiosResponse<RawWorkspace> {
+    const response = securityAxios.get(`${WORKSPACE_URL}/${id}`);
+    return response;
+  }
+}

@@ -12,11 +12,15 @@ project/
 ```
 
 ## Scripts
+
 start-dev.sh
+
 ```
 docker-compose up -d --build tickets_frontend_dev tickets_backend_dev
 ```
+
 start-prod.sh
+
 ```
 docker-compose up -d --build tickets_frontend_prod tickets_backend_prod
 ```
@@ -35,11 +39,10 @@ This setup includes the following services:
 1. **CI Process**: Check PRs before merging into the **main** branch, including linting, and types checks.
 2. **CD Process**: Once the prepared PR is merged into the main branch, the CD process begins, deploying to the AWS VPS instance.
 
-
 ## Docker Compose Configuration
 
 ```yaml
-version: "3.8"
+version: '3.8'
 
 services:
   # Dev (Vite)
@@ -48,7 +51,7 @@ services:
       context: ./tickets_frontend
       dockerfile: Dockerfile.dev
     ports:
-      - "8080:8080"
+      - '8080:8080'
     volumes:
       - ./tickets_frontend:/app
       - /app/node_modules
@@ -62,7 +65,7 @@ services:
       context: ./tickets_frontend
       dockerfile: Dockerfile.prod
     ports:
-      - "8080:8080"
+      - '8080:8080'
     depends_on:
       - tickets_backend_prod
 
@@ -72,13 +75,12 @@ services:
       context: ./tickets_backend
       dockerfile: Dockerfile.dev
     ports:
-      - "3000:3000"
+      - '3000:3000'
     env_file:
       - ./tickets_backend/.env.dev
     volumes:
       - ./tickets_backend:/app
       - /app/node_modules
-    command: npm run start:dev
     depends_on:
       - mongo
 
@@ -88,20 +90,19 @@ services:
       context: ./tickets_backend
       dockerfile: Dockerfile.prod
     ports:
-      - "3000:3000"
+      - '3000:3000'
     env_file:
       - ./tickets_backend/.env.prod
 
   mongo:
     image: mongo
     ports:
-      - "28017:27017"
+      - '28017:27017'
     volumes:
       - mongo-data:/data/db
 
 volumes:
   mongo-data:
-
 ```
 
 ## Repositories

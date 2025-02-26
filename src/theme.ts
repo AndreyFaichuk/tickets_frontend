@@ -166,6 +166,36 @@ const baseTheme = createTheme({
         },
       },
     },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          backgroundColor: lighten('#acc2b2', 0.4),
+          '& .MuiTableRow-root': {
+            cursor: 'default',
+            '&:hover': {
+              backgroundColor: 'inherit',
+            },
+          },
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          cursor: 'pointer',
+          '&:hover': {
+            backgroundColor: '#f5f5f5',
+          },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          padding: '8px',
+        },
+      },
+    },
   },
 });
 

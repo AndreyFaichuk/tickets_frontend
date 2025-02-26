@@ -1,4 +1,4 @@
-import { User } from '../../../app/DefaultUserMenu/DefaultUserMenu.types';
+import { CreatorUser } from '../../../types';
 
 export type RawComment = {
   _id: string;
@@ -14,15 +14,11 @@ export type RawComment = {
   updated_at: string;
 };
 
-type CommentUser = Pick<User, 'avatarUrl' | 'firstName' | 'lastName'> & {
-  userId: string;
-};
-
 export type Comment = {
   comment: string;
   commentId: string;
   createdAt: string;
   updatedAt: string;
   todoId: string;
-  user: CommentUser;
+  user: CreatorUser;
 };

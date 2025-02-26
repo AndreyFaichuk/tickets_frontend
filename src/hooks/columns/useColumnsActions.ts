@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import { ColumnApi } from '../../api/column.api';
 import { columnsQueryKeys } from './useColumnsFetch';
 import { CurrentDnDColumnType } from '../../pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.constants';
+import { useWorkspaceStore } from '../../stores/workspaceStore';
+import { workspacesQueryKeys } from '../workspaces/useWorkspacesFetch';
 
 export type ColumnForUpdate = {
   title?: string;
@@ -14,12 +16,21 @@ export type ColumnForReplace = {
   toColumnId: string;
 };
 
+export type ColumnForCreate = {
+  title: string;
+  workspaceId: string;
+};
+
 export const useColumnActions = () => {
   const queryClient = useQueryClient();
 
+  const currentWorkspaceId = useWorkspaceStore(
+    (state) => state.currentWorkspaceId,
+  );
+
   const createNewColumn = useMutation({
-    mutationFn: async (columnName: string) => {
-      const response = await ColumnApi.addColumn(columnName);
+    mutationFn: async (columnForCreate: ColumnForCreate) => {
+      const response = await ColumnApi.addColumn(columnForCreate);
       return response.data;
     },
     onError: (error: Error) => {
@@ -28,7 +39,11 @@ export const useColumnActions = () => {
     onSuccess: () => {
       toast('New Column has been added!');
       queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
+        queryKey: columnsQueryKeys.columns.all(currentWorkspaceId),
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: workspacesQueryKeys.workspaces.all(),
       });
     },
   });
@@ -51,7 +66,7 @@ export const useColumnActions = () => {
       toast('Column has been updated!');
 
       queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
+        queryKey: columnsQueryKeys.columns.all(currentWorkspaceId),
       });
     },
   });
@@ -68,7 +83,11 @@ export const useColumnActions = () => {
       toast('Column has been deleted!');
 
       queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
+        queryKey: columnsQueryKeys.columns.all(currentWorkspaceId),
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: workspacesQueryKeys.workspaces.all(),
       });
     },
   });
@@ -84,7 +103,7 @@ export const useColumnActions = () => {
       toast('Todo has been moved!');
 
       queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
+        queryKey: columnsQueryKeys.columns.all(currentWorkspaceId),
       });
     },
   });
@@ -99,7 +118,7 @@ export const useColumnActions = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: columnsQueryKeys.columns.all(),
+        queryKey: columnsQueryKeys.columns.all(currentWorkspaceId),
       });
     },
   });

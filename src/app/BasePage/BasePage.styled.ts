@@ -4,7 +4,6 @@ export const StyledBasePageRoot = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(6),
-  width: '88vw',
 }));
 
 export const StyledBasePageTitle = styled(Typography)(({ theme }) => ({

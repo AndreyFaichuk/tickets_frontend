@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core';
 import { Stack } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
 import { TodoCard } from '../TodoCard';
 import { BaseColumn } from '../../../../components/shared/BaseColumn';
@@ -14,10 +15,11 @@ type DnDProviderProps = {
 };
 
 export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
+  const { workspaceId = '' } = useParams<{ workspaceId: string }>();
+
   const {
     dnd: { sensors, handleDragEnd, handleDragOver, handleDragStart },
     columns: { activeCard, currentColumns },
-    columnsHandlers: { handleAddNewColumnToList },
   } = useDnDManagement(data);
 
   const renderedColumns = useMemo(() => {
@@ -55,7 +57,7 @@ export const DnDToDoProvider: FC<DnDProviderProps> = ({ data }) => {
             minWidth: '100%',
           }}>
           {renderedColumns}
-          <AddNewColumnBlock onAddNewColumnToList={handleAddNewColumnToList} />
+          <AddNewColumnBlock workspaceId={workspaceId} />
         </Stack>
       </StyledDnDToDoProviderRoot>
       <DragOverlay

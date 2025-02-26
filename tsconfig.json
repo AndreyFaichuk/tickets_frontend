@@ -6,10 +6,6 @@
     "lib": ["es2015","es2017","es2019", "ES5", "ES6","es2020", "es2022", "dom"],
     "outDir": "dist",
     "rootDir": "src",
-    "baseUrl": ".",
-    "paths": {
-      "@app/*": ["./src/app/some-folder/*", "./dist/app/some-folder/*"]
-    },
     "strict": true,
     "noImplicitAny": true,
     "noEmit": true,

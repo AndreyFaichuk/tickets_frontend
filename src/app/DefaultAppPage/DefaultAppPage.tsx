@@ -1,11 +1,10 @@
 import { FC } from 'react';
 
-import { Pages } from '../../constants';
 import { BasePage } from '../BasePage';
 import { useGetBackMatcher } from './hooks/useGetBackMatcher';
 
 type DefaultAppPageProps = {
-  title: Pages;
+  title: string;
   children: React.ReactNode;
 };
 

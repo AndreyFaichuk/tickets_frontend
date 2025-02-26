@@ -33,6 +33,7 @@ export const PAGES_MAP = {
   settings: 'Settings',
   logout: 'Logout',
   editTodo: 'Edit Todo',
+  workspaces: 'Workspaces',
 } as const;
 
 export type Pages = ValuesToType<typeof PAGES_MAP>;

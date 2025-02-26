@@ -26,7 +26,7 @@ export const useAuthUser = () => {
         queryKey: usersQueryKeys.user.current(),
       });
       toast.success('You successfully logged in!');
-      navigation(ADD_LOGGED_IN_ROUTES.TODOS);
+      navigation(ADD_LOGGED_IN_ROUTES.WORKSPACES);
     },
   });
 
@@ -43,7 +43,7 @@ export const useAuthUser = () => {
         queryKey: usersQueryKeys.user.current(),
       });
       toast.success('You successfully logged in!');
-      navigation(ADD_LOGGED_IN_ROUTES.TODOS);
+      navigation(ADD_LOGGED_IN_ROUTES.WORKSPACES);
     },
   });
 
