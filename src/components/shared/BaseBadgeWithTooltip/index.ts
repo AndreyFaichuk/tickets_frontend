@@ -1,0 +1,1 @@
+export { BaseBadgeWithTooltip } from './BaseBadgeWithTooltip';

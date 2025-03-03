@@ -1,4 +1,4 @@
-import { BASE_URL } from '../constants';
+import { BASE_BACKEND_URL } from '../constants';
 import {
   RegisteredFormValues,
   RegisterNewUserValues,
@@ -6,7 +6,7 @@ import {
 import { LoginFormValues } from '../pages/LoginPage/components/LoginForm/LoginForm.shema';
 import { securityAxios } from './securityAxios';
 
-const AUTH_URL = `${BASE_URL}/auth`;
+const AUTH_URL = `${BASE_BACKEND_URL}/auth`;
 
 export class AuthApi {
   static async registerUser(

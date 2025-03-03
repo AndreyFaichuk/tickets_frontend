@@ -9,9 +9,7 @@ import { useWorkspaceStore } from '../../stores/workspaceStore';
 export const useWorkspaceFetchById = () => {
   const navigate = useNavigate();
 
-  const currentWorkspaceId = useWorkspaceStore(
-    (state) => state.currentWorkspaceId,
-  );
+  const currentWorkspaceId = useWorkspaceStore.currentWorkspaceId();
 
   const { data: currentWorkspace, isLoading: isCurrentWorkspaceLoading } =
     useQuery({

@@ -1,4 +1,4 @@
-import { BASE_URL } from '../constants';
+import { BASE_BACKEND_URL } from '../constants';
 import {
   CreateWorkspaceValues,
   UpdateWorkspaceValues,
@@ -8,7 +8,7 @@ import { RawWorkspace } from '../pages/WorkspacesPage/WorkspacesPage.types';
 import { PromiseAxiosResponse } from '../types';
 import { securityAxios } from './securityAxios';
 
-const WORKSPACE_URL = `${BASE_URL}/workspaces`;
+const WORKSPACE_URL = `${BASE_BACKEND_URL}/workspaces`;
 
 export class WorkspaceApi {
   static getWorkspaces(): PromiseAxiosResponse<RawWorkspace[]> {

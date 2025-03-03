@@ -1,8 +1,9 @@
 import { TodoCardActionBlockProps } from './TodoCardActionBlock.types';
-import { IconButton, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined';
+import { StyledTodoCardActionBlockIcon } from './TodoCardActionBlock.styled';
 
 export const TodoCardActionBlock = ({
   actions,
@@ -20,15 +21,15 @@ export const TodoCardActionBlock = ({
   };
 
   return (
-    <Stack direction="row" justifyContent="flex-end">
+    <Stack direction="row" justifyContent="space-between">
       <Stack direction="row">
-        <IconButton onClick={handleEdit}>
+        <StyledTodoCardActionBlockIcon onClick={handleEdit}>
           <ModeOutlinedIcon />
-        </IconButton>
+        </StyledTodoCardActionBlockIcon>
       </Stack>
-      <IconButton color="warning" onClick={handleDelete}>
+      <StyledTodoCardActionBlockIcon color="warning" onClick={handleDelete}>
         <DeleteIcon />
-      </IconButton>
+      </StyledTodoCardActionBlockIcon>
     </Stack>
   );
 };

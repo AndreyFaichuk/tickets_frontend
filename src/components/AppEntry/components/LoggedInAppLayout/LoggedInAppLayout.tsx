@@ -10,11 +10,11 @@ export const LoggedInAppLayout = () => {
   return (
     <DefaultAppLayout>
       <Routes>
+        <Route path={ADD_LOGGED_IN_ROUTES.WORKSPACES}>
+          <Route index element={<WorkspacesPage />} />
+          <Route path="invite" element={<WorkspacesPage />} />
+        </Route>
         <Route path={ADD_LOGGED_IN_ROUTES.TODOS} element={<TodosPage />} />
-        <Route
-          path={ADD_LOGGED_IN_ROUTES.WORKSPACES}
-          element={<WorkspacesPage />}
-        />
         <Route
           path={ADD_LOGGED_IN_ROUTES.EDIT_TODO}
           element={<EditTodoPage />}

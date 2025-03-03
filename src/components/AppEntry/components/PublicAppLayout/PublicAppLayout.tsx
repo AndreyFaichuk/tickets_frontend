@@ -1,11 +1,24 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import { ADD_PUBLIC_ROUTES } from '../../../../constants/routes';
 import { AuthPage } from '../../../../pages/AuthPage';
 import { LoginPage } from '../../../../pages/LoginPage';
 import { DefaultPublicAppLayout } from '../../../../app/DefaultPublicAppLayout';
+import { useWorkspaceStore } from '../../../../stores/workspaceStore';
 
 export const PublicAppLayout = () => {
+  const location = useLocation();
+
+  const urlParams = new URLSearchParams(location.search);
+  const token = urlParams.get('token');
+
+  const setWorkspaceInviteTokenAfterLogIn =
+    useWorkspaceStore.setWorkspaceInviteTokenAfterLogIn();
+
+  if (token) {
+    setWorkspaceInviteTokenAfterLogIn(token);
+  }
+
   return (
     <DefaultPublicAppLayout>
       <Routes>

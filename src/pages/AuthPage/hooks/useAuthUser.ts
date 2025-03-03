@@ -8,10 +8,23 @@ import { AxiosErrorResponse } from '../../../types';
 import { ADD_LOGGED_IN_ROUTES } from '../../../constants/routes';
 import { LoginFormValues } from '../../LoginPage/components/LoginForm/LoginForm.shema';
 import { usersQueryKeys } from '../../../hooks/user/useGetCurrentUser';
+import { workspacesQueryKeys } from '../../../hooks/workspaces/useWorkspacesFetch';
 
 export const useAuthUser = () => {
   const navigation = useNavigate();
   const queryClient = useQueryClient();
+
+  const successHandler = () => {
+    queryClient.invalidateQueries({
+      queryKey: usersQueryKeys.user.current(),
+    });
+    queryClient.invalidateQueries({
+      queryKey: workspacesQueryKeys.workspaces.all(),
+    });
+
+    toast.success('You successfully logged in!');
+    navigation(ADD_LOGGED_IN_ROUTES.WORKSPACES);
+  };
 
   const createUser = useMutation({
     mutationFn: async (newUser: RegisterNewUserValues) => {
@@ -22,11 +35,7 @@ export const useAuthUser = () => {
       toast.error(error.response?.data.message);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: usersQueryKeys.user.current(),
-      });
-      toast.success('You successfully logged in!');
-      navigation(ADD_LOGGED_IN_ROUTES.WORKSPACES);
+      successHandler();
     },
   });
 
@@ -39,11 +48,7 @@ export const useAuthUser = () => {
       toast.error(error.response?.data.message);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: usersQueryKeys.user.current(),
-      });
-      toast.success('You successfully logged in!');
-      navigation(ADD_LOGGED_IN_ROUTES.WORKSPACES);
+      successHandler();
     },
   });
 

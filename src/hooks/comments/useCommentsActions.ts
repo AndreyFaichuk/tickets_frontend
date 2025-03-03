@@ -49,7 +49,7 @@ export const useCommentsActions = (todoId: string) => {
 
   const deleteComment = useMutation({
     mutationFn: async (commentId: string) => {
-      const response = await CommentsApi.deleteComment(commentId);
+      const response = await CommentsApi.deleteComment(todoId, commentId);
       return response.data;
     },
     onError: (error: Error) => {

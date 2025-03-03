@@ -42,4 +42,5 @@ export const COOKIE_NAMES = {
   sessionId: 'sessionId',
 } as const;
 
-export const BASE_URL = import.meta.env.VITE_BASE_URL;
+export const BASE_BACKEND_URL: string = import.meta.env.VITE_BASE_BACKEND_URL;
+export const BASE_FRONTEND_URL: string = import.meta.env.VITE_BASE_FRONTEND_URL;

@@ -6,10 +6,10 @@ import {
   ColumnForUpdate,
 } from '../hooks/columns/useColumnsActions';
 import { CurrentDnDColumnType } from '../pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.constants';
-import { BASE_URL } from '../constants';
+import { BASE_BACKEND_URL } from '../constants';
 import { RawColumnType } from '../pages/TodosPage/components/DnDToDoProvider/hooks/useColumnsManagement';
 
-const COLUMN_URL = `${BASE_URL}/columns`;
+const COLUMN_URL = `${BASE_BACKEND_URL}/columns`;
 
 export class ColumnApi {
   static addColumn(

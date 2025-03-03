@@ -13,6 +13,8 @@ export const useCopyToClipboard = (): [
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 1500);
     } catch (err) {
+      console.log(err, 'err');
+
       toast.error('Something went wrong!');
     }
   };

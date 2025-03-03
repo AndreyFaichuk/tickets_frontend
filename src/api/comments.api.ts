@@ -1,10 +1,10 @@
 import { RawComment } from '../components/shared/CommentsBlock/AddNewComment.types';
-import { BASE_URL } from '../constants';
+import { BASE_BACKEND_URL } from '../constants';
 import { CreateCommentValues } from '../hooks/comments/useCommentsActions';
 import { PromiseAxiosResponse } from '../types';
 import { securityAxios } from './securityAxios';
 
-const COMMENT_URL = `${BASE_URL}/comments`;
+const COMMENT_URL = `${BASE_BACKEND_URL}/comments`;
 
 export class CommentsApi {
   static async createComment(commentValues: CreateCommentValues) {
@@ -29,8 +29,13 @@ export class CommentsApi {
     return response;
   }
 
-  static deleteComment(commentId: string): PromiseAxiosResponse<RawComment> {
-    const response = securityAxios.delete(`${COMMENT_URL}/${commentId}`);
+  static deleteComment(
+    todoId: string,
+    commentId: string,
+  ): PromiseAxiosResponse<RawComment> {
+    const response = securityAxios.delete(
+      `${COMMENT_URL}/${todoId}/${commentId}`,
+    );
     return response;
   }
 }

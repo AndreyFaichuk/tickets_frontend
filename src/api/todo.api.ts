@@ -1,9 +1,9 @@
 import { TodoCardProps } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
 import { securityAxios } from './securityAxios';
 import { PromiseAxiosResponse } from '../types';
-import { BASE_URL } from '../constants';
+import { BASE_BACKEND_URL } from '../constants';
 
-const TODO_URL = `${BASE_URL}/todos`;
+const TODO_URL = `${BASE_BACKEND_URL}/todos`;
 
 export class TodoApi {
   static updateTodo(
