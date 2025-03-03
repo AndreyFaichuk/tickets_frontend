@@ -24,9 +24,7 @@ export type ColumnForCreate = {
 export const useColumnActions = () => {
   const queryClient = useQueryClient();
 
-  const currentWorkspaceId = useWorkspaceStore(
-    (state) => state.currentWorkspaceId,
-  );
+  const currentWorkspaceId = useWorkspaceStore.currentWorkspaceId();
 
   const createNewColumn = useMutation({
     mutationFn: async (columnForCreate: ColumnForCreate) => {

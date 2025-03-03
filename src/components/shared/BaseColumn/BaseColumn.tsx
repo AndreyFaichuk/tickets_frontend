@@ -79,6 +79,7 @@ export const BaseColumn: FC<BaseColumn> = ({
             alignItems="center">
             {initialTodos.map((card) => (
               <TodoCard
+                totalComments={card.totalComments}
                 attachmentsUrls={card.attachmentsUrls}
                 priority={card.priority}
                 created_at={card.created_at}

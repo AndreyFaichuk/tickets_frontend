@@ -6,6 +6,7 @@ import { Badge, Stack, Tooltip } from '@mui/material';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 
 import {
+  TodoCardActionIconWrapper,
   TodoCardContentWrapper,
   TodoCardIconWrapper,
   TodoCardRoot,
@@ -15,6 +16,8 @@ import { TodoCardPropsWithActions } from './TodoCard.types';
 import { CircularProgressWithLabel } from '../CircularProgressWithLabel';
 import { TodoCardActionBlock } from '../TodoCardActionBlock';
 import { PRIORITY_ICON_MAP } from '../../../../components/shared/ToDoForm/ToDoForm.constants';
+import { BaseBadgeWithTooltip } from '../../../../components/shared/BaseBadgeWithTooltip';
+import { DEFAULT_BADGE_VARIANTS } from '../../../../components/shared/BaseBadgeWithTooltip/BaseBadgeWithTooltip.constants';
 
 interface TodoCardProps extends TodoCardPropsWithActions {
   isDragging?: boolean;
@@ -30,6 +33,7 @@ export const TodoCard: FC<TodoCardProps> = ({
   created_at,
   priority,
   attachmentsUrls,
+  totalComments,
   isDragging = false,
   isActiveCard = false,
 }) => {
@@ -74,21 +78,26 @@ export const TodoCard: FC<TodoCardProps> = ({
           </TodoCardIconWrapper>
         </Tooltip>
         <CircularProgressWithLabel progress={progress} />
-        <Stack flexDirection="column" alignItems="flex-end">
+        <TodoCardActionIconWrapper flexDirection="column" gap={1}>
           <TodoCardActionBlock actions={actions} currentId={_id} />
           <Stack direction="row" gap={3} alignItems="flex-end">
             {attachmentsCount > 0 && (
-              <Tooltip title="attachments" placement="top">
-                <Badge color="info" badgeContent={attachmentsCount}>
-                  <AttachFileIcon />
-                </Badge>
-              </Tooltip>
+              <BaseBadgeWithTooltip
+                badgeVariant={DEFAULT_BADGE_VARIANTS.attachments}
+                count={attachmentsCount}
+              />
             )}
-            <TodoCardTypography variant="body2">
-              {formattedDate}
-            </TodoCardTypography>
+            {totalComments > 0 && (
+              <BaseBadgeWithTooltip
+                badgeVariant={DEFAULT_BADGE_VARIANTS.comments}
+                count={totalComments}
+              />
+            )}
           </Stack>
-        </Stack>
+          <TodoCardTypography variant="body2">
+            {formattedDate}
+          </TodoCardTypography>
+        </TodoCardActionIconWrapper>
       </Stack>
     </TodoCardRoot>
   );

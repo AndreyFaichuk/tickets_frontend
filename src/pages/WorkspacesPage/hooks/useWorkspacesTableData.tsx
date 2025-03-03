@@ -13,7 +13,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Workspace } from '../WorkspacesPage.types';
 import { useCurrentWorkspaceSync } from './useCurrentWorkspaceSync';
 import { useCopyToClipboard } from '../../../hooks/useCopyToClipboard ';
-import { BASE_URL } from '../../../constants';
+import { BASE_FRONTEND_URL } from '../../../constants';
 
 export const useWorkspacesTableData = (): ColumnDef<Workspace>[] => {
   const navigate = useNavigate();
@@ -27,7 +27,9 @@ export const useWorkspacesTableData = (): ColumnDef<Workspace>[] => {
   };
 
   const handleCopySharingLink = (inviteToken: string) => {
-    copyToClipboard(`${BASE_URL}/invite?token=${inviteToken}`);
+    copyToClipboard(
+      `${BASE_FRONTEND_URL}/app/workspaces/invite?token=${inviteToken}`,
+    );
   };
 
   return [
@@ -77,17 +79,19 @@ export const useWorkspacesTableData = (): ColumnDef<Workspace>[] => {
           return <Typography variant="h6">No members yet</Typography>;
 
         return (
-          <AvatarGroup
-            total={members.length}
-            sx={{ justifyContent: 'flex-end' }}>
-            {members.map((member) => (
-              <Tooltip
-                key={member.userId}
-                title={`${member.firstName} ${member.lastName}`}>
-                <Avatar src={member.avatarUrl} alt={member.firstName} />
-              </Tooltip>
-            ))}
-          </AvatarGroup>
+          <Stack direction="row" justifyContent="center">
+            <AvatarGroup
+              total={members.length}
+              sx={{ justifyContent: 'flex-end' }}>
+              {members.map((member) => (
+                <Tooltip
+                  key={member.userId}
+                  title={`${member.firstName} ${member.lastName}`}>
+                  <Avatar src={member.avatarUrl} alt={member.firstName} />
+                </Tooltip>
+              ))}
+            </AvatarGroup>
+          </Stack>
         );
       },
     },

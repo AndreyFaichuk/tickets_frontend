@@ -12,8 +12,11 @@ import { Workspace } from './WorkspacesPage.types';
 import { DefaultAppPage } from '../../app/DefaultAppPage';
 import { useWorkspacesActions } from '../../hooks/workspaces/useWorkspacesActions';
 import { SwapButtonComponent } from '../../components/shared/SwapButtonComponent';
+import { useInviteNewMemberToWorkspace } from '../../hooks/invite/useInviteNewMemberToWorkspace';
 
 export const WorkspacesPage: FC = () => {
+  useInviteNewMemberToWorkspace();
+
   const { allWorkspaces, allWorkspacesLoading } = useWorkspacesFetch();
   const { createWorkspace } = useWorkspacesActions();
 

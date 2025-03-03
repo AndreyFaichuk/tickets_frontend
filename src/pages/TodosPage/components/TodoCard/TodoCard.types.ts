@@ -10,6 +10,7 @@ export type TodoCardProps = {
   priority: PriorityType;
   attachmentsUrls: string[];
   columnId: string;
+  totalComments: number;
 };
 
 export type TodoCardForCreate = Omit<TodoCardProps, '_id' | 'created_at'>;

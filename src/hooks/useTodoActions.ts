@@ -13,9 +13,7 @@ export const useTodoActions = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const currentWorkspaceId = useWorkspaceStore(
-    (state) => state.currentWorkspaceId,
-  );
+  const currentWorkspaceId = useWorkspaceStore.currentWorkspaceId();
 
   const updateToDo = useMutation({
     mutationFn: async ({ id, todo }: { id: string; todo: TodoValues }) => {

@@ -6,12 +6,17 @@ import {
   ADD_PUBLIC_ROUTES,
 } from '../../../constants/routes';
 import { COOKIE_NAMES } from '../../../constants';
+import { useWorkspaceStore } from '../../../stores/workspaceStore';
+import { useCurrentWorkspaceSync } from '../../../pages/WorkspacesPage/hooks/useCurrentWorkspaceSync';
 
 const PUBLIC_ROUTES = Object.keys(ADD_PUBLIC_ROUTES);
 
 export const useAuth = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { handleRemoveWorkspaceIdFromLocalStorage } = useCurrentWorkspaceSync();
+
+  const clearWorkspaceState = useWorkspaceStore.clearWorkspaceState();
 
   const [cookies, _, removeCookie] = useCookies([COOKIE_NAMES.sessionId]);
 
@@ -24,6 +29,8 @@ export const useAuth = () => {
   }, [isAuthenticated, location.pathname, navigate]);
 
   const handleLogout = useCallback(() => {
+    clearWorkspaceState();
+    handleRemoveWorkspaceIdFromLocalStorage();
     removeCookie(COOKIE_NAMES.sessionId, { path: '/' });
     navigate(ADD_PUBLIC_ROUTES.LOGIN, { replace: true });
   }, [navigate, removeCookie]);

@@ -14,9 +14,7 @@ export const columnsQueryKeys = {
 };
 
 export const useColumnsFetch = () => {
-  const currentWorkspaceId = useWorkspaceStore(
-    (state) => state.currentWorkspaceId,
-  );
+  const currentWorkspaceId = useWorkspaceStore.currentWorkspaceId();
 
   const { data: allColumns, isLoading } = useQuery({
     queryKey: columnsQueryKeys.columns.all(currentWorkspaceId),
@@ -25,9 +23,7 @@ export const useColumnsFetch = () => {
       const normalizedColumns = getNormalizeColumns(response.data);
       return normalizedColumns;
     },
-    staleTime: 1000 * 60,
-    retry: false,
-    enabled: Boolean(currentWorkspaceId),
+    enabled: !!currentWorkspaceId,
   });
 
   const columnsOptions: SelectOptions = useMemo(
