@@ -26,7 +26,7 @@ export const useDefaultDrawerOptions = ({
   isOpen,
 }: useDefaultDrawerOptionsProps) => {
   const navigate = useNavigate();
-  const { handleLogout } = useAuth();
+  const { handleUserLogout } = useAuth();
 
   const DRAWER_OPTIONS: Array<DrawerOption> = useMemo(() => {
     return [
@@ -44,10 +44,10 @@ export const useDefaultDrawerOptions = ({
       {
         title: 'Logout',
         Icon: <LogoutIcon />,
-        onClick: () => handleLogout(),
+        onClick: () => handleUserLogout(),
       },
     ];
-  }, [handleLogout, navigate]);
+  }, [handleUserLogout, navigate]);
 
   const renderDrawerListItem = () => (
     <>

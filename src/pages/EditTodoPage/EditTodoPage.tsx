@@ -14,10 +14,11 @@ import { StyledEditTodoPageRoot } from './EditTodoPage.styled';
 import { useCommentsFetch } from '../../hooks/comments/useCommentsFetch';
 import { AddNewComment } from '../../components/shared/CommentsBlock';
 import { useGetCurrentUser } from '../../hooks/user/useGetCurrentUser';
+import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
 
 export const EditTodoPage = () => {
   const { id = '' } = useParams<{ id: string }>();
-
+  useAuthUserCheck();
   const { currentUser, isCurrentUserLoading } = useGetCurrentUser();
 
   const { handleUpdateToDo, isUpdatingToDo } = useTodoActions();

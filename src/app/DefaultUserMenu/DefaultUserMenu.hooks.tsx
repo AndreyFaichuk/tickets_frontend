@@ -4,12 +4,12 @@ import { UserMenuOption } from './DefaultUserMenu.types';
 import { StyledDefaultMenuItem } from './DefaultUserMenu.styled';
 
 export const useDefaultUserMenuOptions = () => {
-  const { handleLogout } = useAuth();
+  const { handleUserLogout } = useAuth();
 
   const USER_MENU_OPTIONS: Array<UserMenuOption> = [
     {
       title: 'Logout',
-      onClick: () => handleLogout(),
+      onClick: () => handleUserLogout(),
     },
   ];
 

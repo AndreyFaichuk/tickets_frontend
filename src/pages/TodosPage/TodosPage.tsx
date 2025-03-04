@@ -6,9 +6,11 @@ import { useColumnsFetch } from '../../hooks/columns/useColumnsFetch';
 import { useWorkspaceFetchById } from '../../hooks/workspaces/useWorkspaceFetchById';
 import { DefaultAppPage } from '../../app/DefaultAppPage';
 import { useCurrentWorkspaceSync } from '../WorkspacesPage/hooks/useCurrentWorkspaceSync';
+import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
 
 export const TodosPage = () => {
   useCurrentWorkspaceSync();
+  useAuthUserCheck();
 
   const { currentWorkspace, isCurrentWorkspaceLoading } =
     useWorkspaceFetchById();

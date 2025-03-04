@@ -16,7 +16,7 @@ export const usersQueryKeys = {
 };
 
 export const useGetCurrentUser = () => {
-  const { handleLogout } = useAuth();
+  const { handleUserLogout } = useAuth();
 
   const {
     data: currentUser,
@@ -35,9 +35,9 @@ export const useGetCurrentUser = () => {
   useEffect(() => {
     if (failureReason && failureReason.response) {
       toast.error(failureReason.response.data.message);
-      handleLogout();
+      handleUserLogout();
     }
-  }, [failureReason, handleLogout]);
+  }, [failureReason, handleUserLogout]);
 
   return {
     currentUser: currentUser ?? ({} as User),
