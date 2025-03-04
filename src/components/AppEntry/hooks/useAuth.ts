@@ -1,13 +1,13 @@
 import { useEffect, useCallback } from 'react';
-import { useCookies } from 'react-cookie';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
   ADD_LOGGED_IN_ROUTES,
   ADD_PUBLIC_ROUTES,
 } from '../../../constants/routes';
-import { COOKIE_NAMES } from '../../../constants';
 import { useWorkspaceStore } from '../../../stores/workspaceStore';
 import { useCurrentWorkspaceSync } from '../../../pages/WorkspacesPage/hooks/useCurrentWorkspaceSync';
+import { useAuthUserCheck } from '../../../pages/AuthPage/hooks/useAuthUserCheck';
+import { useAuthUser } from '../../../pages/AuthPage/hooks/useAuthUser';
 
 const PUBLIC_ROUTES = Object.keys(ADD_PUBLIC_ROUTES);
 
@@ -18,22 +18,20 @@ export const useAuth = () => {
 
   const clearWorkspaceState = useWorkspaceStore.clearWorkspaceState();
 
-  const [cookies, _, removeCookie] = useCookies([COOKIE_NAMES.sessionId]);
-
-  const isAuthenticated = Boolean(cookies[COOKIE_NAMES.sessionId]);
+  const { isAuthenticated } = useAuthUserCheck();
+  const { handleLogout } = useAuthUser();
 
   useEffect(() => {
     if (isAuthenticated && PUBLIC_ROUTES.includes(location.pathname)) {
-      navigate(ADD_LOGGED_IN_ROUTES.TODOS, { replace: true });
+      navigate(ADD_LOGGED_IN_ROUTES.WORKSPACES, { replace: true });
     }
   }, [isAuthenticated, location.pathname, navigate]);
 
-  const handleLogout = useCallback(() => {
+  const handleUserLogout = useCallback(() => {
     clearWorkspaceState();
     handleRemoveWorkspaceIdFromLocalStorage();
-    removeCookie(COOKIE_NAMES.sessionId, { path: '/' });
-    navigate(ADD_PUBLIC_ROUTES.LOGIN, { replace: true });
-  }, [navigate, removeCookie]);
+    handleLogout();
+  }, []);
 
-  return { isAuthenticated, handleLogout };
+  return { isAuthenticated, handleUserLogout };
 };
