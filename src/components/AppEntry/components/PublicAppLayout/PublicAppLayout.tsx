@@ -1,12 +1,12 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import { ADD_PUBLIC_ROUTES } from '../../../../constants/routes';
-import { AuthPage } from '../../../../pages/AuthPage';
-import { LoginPage } from '../../../../pages/LoginPage';
 import { DefaultPublicAppLayout } from '../../../../app/DefaultPublicAppLayout';
-import { useWorkspaceStore } from '../../../../stores/workspaceStore';
+import { useWorkspaceStore } from '../../../../stores/workspacesStore';
+import LoginPage from '../../../../pages/LoginPage/LoginPage';
+import AuthPage from '../../../../pages/AuthPage/AuthPage';
 
-export const PublicAppLayout = () => {
+export default function PublicAppLayout() {
   const location = useLocation();
 
   const urlParams = new URLSearchParams(location.search);
@@ -31,4 +31,4 @@ export const PublicAppLayout = () => {
       </Routes>
     </DefaultPublicAppLayout>
   );
-};
+}

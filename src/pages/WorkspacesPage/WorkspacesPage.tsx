@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Button, Stack } from '@mui/material';
 import { StyledWorkspacesPageRoot } from './WorkspacesPage.styled';
 import { DisplayWithLoader } from '../../components/shared/DisplayWithLoader';
@@ -14,13 +13,25 @@ import { useWorkspacesActions } from '../../hooks/workspaces/useWorkspacesAction
 import { SwapButtonComponent } from '../../components/shared/SwapButtonComponent';
 import { useInviteNewMemberToWorkspace } from '../../hooks/invite/useInviteNewMemberToWorkspace';
 import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
+import { useWorkspaceStore } from '../../stores/workspacesStore';
+import { PaginatorWithPerPage } from './components/PaginatorWithPerPage';
+import { InputDebouncedValue } from '../../components/shared/InputDebouncedValue';
 
-export const WorkspacesPage: FC = () => {
+export default function WorkspacesPage() {
   useInviteNewMemberToWorkspace();
   useAuthUserCheck();
 
   const { allWorkspaces, allWorkspacesLoading } = useWorkspacesFetch();
+
+  const currentPerPage = useWorkspaceStore.currentPerPage();
+  const setCurrentPage = useWorkspaceStore.setCurrentPage();
+  const setCurrentPerPage = useWorkspaceStore.setCurrentPerPage();
+  const setSearch = useWorkspaceStore.setSearch();
+  const search = useWorkspaceStore.search();
+
   const { createWorkspace } = useWorkspacesActions();
+
+  const { workspaces, pagination } = allWorkspaces;
 
   const handleSubmitCreateWorkspace = (title: string) => {
     createWorkspace({
@@ -30,22 +41,43 @@ export const WorkspacesPage: FC = () => {
 
   const columns = useWorkspacesTableData();
 
+  const handlePaginatorChange = (
+    _: React.ChangeEvent<unknown>,
+    page: number,
+  ) => {
+    setCurrentPage(page.toString());
+  };
+
   const getContent = () => {
-    if (!allWorkspaces.length)
+    if (!workspaces.length)
       return (
         <EmptyWorkspaceBlock onCreateWorkspace={handleSubmitCreateWorkspace} />
       );
 
     return (
       <Stack gap={2} alignItems="flex-start">
-        <SwapButtonComponent onApprove={handleSubmitCreateWorkspace}>
-          {(handleSwap) => (
-            <Button variant="contained" color="success" onClick={handleSwap}>
-              New workspace
-            </Button>
-          )}
-        </SwapButtonComponent>
-        <BaseTable<Workspace> columns={columns} data={allWorkspaces} />
+        <Stack direction="row" gap={2} alignItems="center">
+          <SwapButtonComponent onApprove={handleSubmitCreateWorkspace}>
+            {(handleSwap) => (
+              <Button variant="contained" color="success" onClick={handleSwap}>
+                New workspace
+              </Button>
+            )}
+          </SwapButtonComponent>
+          <InputDebouncedValue
+            value={search}
+            setSearch={setSearch}
+            label="Search by title"
+          />
+        </Stack>
+        <BaseTable<Workspace> columns={columns} data={workspaces} />
+        <PaginatorWithPerPage
+          currentPage={pagination.currentPage}
+          currentPerPage={currentPerPage}
+          onPaginatorChange={handlePaginatorChange}
+          setCurrentPerPage={setCurrentPerPage}
+          totalPages={pagination.totalPages}
+        />
       </Stack>
     );
   };
@@ -59,4 +91,4 @@ export const WorkspacesPage: FC = () => {
       </DisplayWithLoader>
     </DefaultAppPage>
   );
-};
+}

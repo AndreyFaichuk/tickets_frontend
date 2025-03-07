@@ -6,9 +6,16 @@ import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { theme } from '../../theme';
-import { LoggedInAppLayout } from './components/LoggedInAppLayout';
-import { PublicAppLayout } from './components/PublicAppLayout';
 import { useAuth } from './hooks/useAuth';
+import { lazy, Suspense } from 'react';
+import { DefaultCircularLoader } from '../shared/DefaultCircularLoader/DefaultCircularLoader';
+
+const LazyLoggedInAppLayout = lazy(
+  () => import('./components/LoggedInAppLayout/LoggedInAppLayout'),
+);
+const LazyPublicAppLayout = lazy(
+  () => import('./components/PublicAppLayout/PublicAppLayout'),
+);
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
@@ -17,7 +24,7 @@ const queryClient = new QueryClient({
 const App = () => {
   const { isAuthenticated } = useAuth();
 
-  return isAuthenticated ? <LoggedInAppLayout /> : <PublicAppLayout />;
+  return isAuthenticated ? <LazyLoggedInAppLayout /> : <LazyPublicAppLayout />;
 };
 
 export const AppProvider = () => {
@@ -26,7 +33,9 @@ export const AppProvider = () => {
       <ThemeProvider theme={theme}>
         <Router>
           <CssBaseline />
-          <App />
+          <Suspense fallback={<DefaultCircularLoader />}>
+            <App />
+          </Suspense>
         </Router>
         <ToastContainer />
       </ThemeProvider>

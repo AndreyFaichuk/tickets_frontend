@@ -8,7 +8,7 @@ import { DefaultAppPage } from '../../app/DefaultAppPage';
 import { useCurrentWorkspaceSync } from '../WorkspacesPage/hooks/useCurrentWorkspaceSync';
 import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
 
-export const TodosPage = () => {
+export default function TodosPage() {
   useCurrentWorkspaceSync();
   useAuthUserCheck();
 
@@ -30,4 +30,4 @@ export const TodosPage = () => {
       </DisplayWithLoader>
     </DefaultAppPage>
   );
-};
+}

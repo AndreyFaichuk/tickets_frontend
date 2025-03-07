@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 
-type InputProps = TextFieldProps & {
+export type InputProps = TextFieldProps & {
   autoFocusOnMount?: boolean;
 };
 
 export const Input: React.FC<InputProps> = ({
-  autoFocusOnMount,
+  autoFocusOnMount = false,
   variant = 'standard',
   ...props
 }) => {
