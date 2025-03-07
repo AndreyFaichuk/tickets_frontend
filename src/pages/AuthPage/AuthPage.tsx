@@ -4,7 +4,7 @@ import { useAuthUser } from './hooks/useAuthUser';
 import { DefaultAuthLayout } from '../../app/DefaultAuthLayout';
 import { AUTH, AUTH_CONTENT } from '../../constants';
 
-export const AuthPage = () => {
+export default function AuthPage() {
   const { handleRegisterUser } = useAuthUser();
 
   const handleSubmit = (values: RegisteredFormValues) => {
@@ -20,4 +20,4 @@ export const AuthPage = () => {
       <RegistrationForm onSubmit={handleSubmit} />
     </DefaultAuthLayout>
   );
-};
+}

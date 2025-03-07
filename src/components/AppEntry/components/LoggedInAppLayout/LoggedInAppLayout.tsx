@@ -2,11 +2,11 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { DefaultAppLayout } from '../../../../app/DefaultAppLayout';
 import { ADD_LOGGED_IN_ROUTES } from '../../../../constants/routes';
-import { TodosPage } from '../../../../pages/TodosPage';
-import { EditTodoPage } from '../../../../pages/EditTodoPage';
-import { WorkspacesPage } from '../../../../pages/WorkspacesPage';
+import WorkspacesPage from '../../../../pages/WorkspacesPage/WorkspacesPage';
+import TodosPage from '../../../../pages/TodosPage/TodosPage';
+import EditTodoPage from '../../../../pages/EditTodoPage/EditTodoPage';
 
-export const LoggedInAppLayout = () => {
+export default function LoggedInAppLayout() {
   return (
     <DefaultAppLayout>
       <Routes>
@@ -26,4 +26,4 @@ export const LoggedInAppLayout = () => {
       </Routes>
     </DefaultAppLayout>
   );
-};
+}

@@ -7,14 +7,6 @@ export type ApiResponse<T> = Promise<T>;
 
 export type PromiseAxiosResponse<T> = Promise<AxiosResponse<T>>;
 
-export type PaginatedData<T> = {
-  data: T[];
-  currentPage: number;
-  perPage: number;
-  totalCount: number;
-  totalPages: number;
-};
-
 export type CreatorUser = Pick<User, 'avatarUrl' | 'firstName' | 'lastName'> & {
   userId: string;
 };
@@ -34,4 +26,13 @@ export type AuthType = 'registration' | 'login';
 export type AuthContent = {
   title: string;
   subtitle: React.ReactNode;
+};
+
+export type PaginatedData<T> = {
+  content: T;
+  pagination: {
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+  };
 };

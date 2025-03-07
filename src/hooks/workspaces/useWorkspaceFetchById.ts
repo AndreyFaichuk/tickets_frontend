@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { workspacesQueryKeys } from './useWorkspacesFetch';
 import { WorkspaceApi } from '../../api/workspace.api';
 import { ADD_LOGGED_IN_ROUTES } from '../../constants/routes';
-import { useWorkspaceStore } from '../../stores/workspaceStore';
+import { useWorkspaceStore } from '../../stores/workspacesStore';
 
 export const useWorkspaceFetchById = () => {
   const navigate = useNavigate();

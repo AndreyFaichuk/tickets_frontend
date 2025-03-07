@@ -16,7 +16,7 @@ import { AddNewComment } from '../../components/shared/CommentsBlock';
 import { useGetCurrentUser } from '../../hooks/user/useGetCurrentUser';
 import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
 
-export const EditTodoPage = () => {
+export default function EditTodoPage() {
   const { id = '' } = useParams<{ id: string }>();
   useAuthUserCheck();
   const { currentUser, isCurrentUserLoading } = useGetCurrentUser();
@@ -98,4 +98,4 @@ export const EditTodoPage = () => {
       </DisplayWithLoader>
     </DefaultAppPage>
   );
-};
+}

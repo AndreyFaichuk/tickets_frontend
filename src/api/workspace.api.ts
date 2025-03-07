@@ -5,15 +5,40 @@ import {
 } from '../hooks/workspaces/useWorkspacesActions';
 
 import { RawWorkspace } from '../pages/WorkspacesPage/WorkspacesPage.types';
-import { PromiseAxiosResponse } from '../types';
+import { PerPage } from '../stores/workspacesStore/constants';
+import { PaginatedData, PromiseAxiosResponse } from '../types';
 import { securityAxios } from './securityAxios';
 
 const WORKSPACE_URL = `${BASE_BACKEND_URL}/workspaces`;
 
+type GetWorkspacesVariables = {
+  currentPage: string;
+  currentPerPage: PerPage;
+  search: string;
+};
+
 export class WorkspaceApi {
-  static getWorkspaces(): PromiseAxiosResponse<RawWorkspace[]> {
-    const response = securityAxios.get(`${WORKSPACE_URL}/all`);
-    return response;
+  static async getWorkspaces({
+    currentPage,
+    currentPerPage,
+    search,
+  }: GetWorkspacesVariables): Promise<PaginatedData<RawWorkspace[]>> {
+    const url = new URL(`${WORKSPACE_URL}/all`);
+
+    if (currentPage) {
+      url.searchParams.append('page', currentPage.toString());
+    }
+
+    if (currentPerPage) {
+      url.searchParams.append('limit', currentPerPage.toString());
+    }
+
+    if (search) {
+      url.searchParams.append('search', search);
+    }
+
+    const response = await securityAxios.get(url.toString());
+    return response.data;
   }
 
   static async createWorkspace(workspaceValues: CreateWorkspaceValues) {

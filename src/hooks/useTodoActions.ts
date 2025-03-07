@@ -6,8 +6,8 @@ import { TodoApi } from '../api/todo.api';
 import { ADD_LOGGED_IN_ROUTES } from '../constants/routes';
 import { TodoValues } from '../components/shared/ToDoForm/ToDoForm.schema';
 import { columnsQueryKeys } from './columns/useColumnsFetch';
-import { useWorkspaceStore } from '../stores/workspaceStore';
 import { workspacesQueryKeys } from './workspaces/useWorkspacesFetch';
+import { useWorkspaceStore } from '../stores/workspacesStore';
 
 export const useTodoActions = () => {
   const queryClient = useQueryClient();

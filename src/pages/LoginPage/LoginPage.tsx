@@ -4,7 +4,7 @@ import { useAuthUser } from '../AuthPage/hooks/useAuthUser';
 import { LoginForm } from './components/LoginForm';
 import { LoginFormValues } from './components/LoginForm/LoginForm.shema';
 
-export const LoginPage = () => {
+export default function LoginPage() {
   const { handleLoginUser } = useAuthUser();
 
   const handleSubmit = (values: LoginFormValues) => {
@@ -18,4 +18,4 @@ export const LoginPage = () => {
       <LoginForm onSubmit={handleSubmit} />
     </DefaultAuthLayout>
   );
-};
+}
