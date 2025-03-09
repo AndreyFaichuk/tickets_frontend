@@ -4,6 +4,8 @@ import { WorkspaceApi } from '../../api/workspace.api';
 import { getNormalizeWorkspaces } from '../../pages/WorkspacesPage/WorkspacesPage.utils';
 import { useWorkspaceStore } from '../../stores/workspacesStore';
 import { PerPage } from '../../stores/workspacesStore/constants';
+import { PaginatedData } from '../../types';
+import { Workspace } from '../../pages/WorkspacesPage/WorkspacesPage.types';
 
 const WORKSPACES_KEY = 'workspaces' as const;
 const ALL_KEY = 'all' as const;
@@ -28,13 +30,9 @@ export const useWorkspacesFetch = () => {
   const currentPerPage = useWorkspaceStore.currentPerPage();
   const search = useWorkspaceStore.search();
 
-  const {
-    data: allWorkspaces = {
-      workspaces: [],
-      pagination: { totalItems: 0, totalPages: 0, currentPage: 1 },
-    },
-    isLoading,
-  } = useQuery({
+  const { data: allWorkspaces, isLoading } = useQuery<
+    PaginatedData<Workspace[]>
+  >({
     queryKey: workspacesQueryKeys.workspaces.page(
       currentPage,
       currentPerPage,
@@ -48,7 +46,7 @@ export const useWorkspacesFetch = () => {
       });
 
       return {
-        workspaces: getNormalizeWorkspaces(response.content),
+        content: getNormalizeWorkspaces(response.content),
         pagination: response.pagination,
       };
     },

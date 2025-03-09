@@ -31,5 +31,6 @@ export const workspacePaginationSlice: StateCreator<PaginationSlice> = (
   setCurrentPerPage: (currentPerPage: PerPage) =>
     set(() => ({ currentPerPage, currentPage: DEFAULT_CURRENT_PAGE })),
 
-  setSearch: (search: string) => set(() => ({ search })),
+  setSearch: (search: string) =>
+    set(() => ({ search, currentPage: DEFAULT_CURRENT_PAGE })),
 });
