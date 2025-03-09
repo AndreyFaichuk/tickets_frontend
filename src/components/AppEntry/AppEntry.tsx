@@ -22,7 +22,11 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return <DefaultCircularLoader />;
+  }
 
   return isAuthenticated ? <LazyLoggedInAppLayout /> : <LazyPublicAppLayout />;
 };

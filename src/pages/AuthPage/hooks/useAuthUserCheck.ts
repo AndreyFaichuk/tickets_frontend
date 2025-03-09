@@ -14,7 +14,7 @@ export const authQueryKeys = {
 export const useAuthUserCheck = () => {
   const navigate = useNavigate();
 
-  const { data: isAuthenticated } = useQuery({
+  const { data: isAuthenticated, isLoading } = useQuery({
     queryKey: authQueryKeys.auth,
     queryFn: async () => {
       try {
@@ -28,5 +28,5 @@ export const useAuthUserCheck = () => {
     retry: false,
   });
 
-  return { isAuthenticated };
+  return { isAuthenticated, isLoading };
 };
