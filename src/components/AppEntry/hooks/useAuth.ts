@@ -18,7 +18,7 @@ export const useAuth = () => {
 
   const clearWorkspaceState = useWorkspaceStore.clearWorkspaceState();
 
-  const { isAuthenticated } = useAuthUserCheck();
+  const { isAuthenticated, isLoading } = useAuthUserCheck();
   const { handleLogout } = useAuthUser();
 
   useEffect(() => {
@@ -33,5 +33,5 @@ export const useAuth = () => {
     handleLogout();
   }, []);
 
-  return { isAuthenticated, handleUserLogout };
+  return { isAuthenticated, handleUserLogout, isLoading };
 };
