@@ -1,4 +1,4 @@
-import { Button, Stack } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import { StyledWorkspacesPageRoot } from './WorkspacesPage.styled';
 import { DisplayWithLoader } from '../../components/shared/DisplayWithLoader';
 import { PAGES_MAP } from '../../constants';
@@ -16,6 +16,7 @@ import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
 import { useWorkspaceStore } from '../../stores/workspacesStore';
 import { PaginatorWithPerPage } from './components/PaginatorWithPerPage';
 import { InputDebouncedValue } from '../../components/shared/InputDebouncedValue';
+import { WorkspaceFilterBar } from './components/WorkspaceFilterBar/WorkspaceFilterBar';
 
 export default function WorkspacesPage() {
   useInviteNewMemberToWorkspace();
@@ -23,15 +24,7 @@ export default function WorkspacesPage() {
 
   const { allWorkspaces, allWorkspacesLoading } = useWorkspacesFetch();
 
-  const currentPerPage = useWorkspaceStore.currentPerPage();
-  const setCurrentPage = useWorkspaceStore.setCurrentPage();
-  const setCurrentPerPage = useWorkspaceStore.setCurrentPerPage();
-  const setSearch = useWorkspaceStore.setSearch();
-  const search = useWorkspaceStore.search();
-
   const { createWorkspace } = useWorkspacesActions();
-
-  const { workspaces, pagination } = allWorkspaces;
 
   const handleSubmitCreateWorkspace = (title: string) => {
     createWorkspace({
@@ -41,54 +34,45 @@ export default function WorkspacesPage() {
 
   const columns = useWorkspacesTableData();
 
-  const handlePaginatorChange = (
-    _: React.ChangeEvent<unknown>,
-    page: number,
-  ) => {
-    setCurrentPage(page.toString());
-  };
+  const isLoading =
+    allWorkspacesLoading ||
+    !allWorkspaces?.content ||
+    !allWorkspaces?.pagination;
+
+  const emptyWorkspaces =
+    !allWorkspaces?.pagination.totalItems &&
+    !allWorkspaces?.pagination.totalPages;
 
   const getContent = () => {
-    if (!workspaces.length)
+    if (!isLoading && emptyWorkspaces) {
+      return <Typography variant="h5">There are no workspaces</Typography>;
+    }
+
+    if (!isLoading && !allWorkspaces?.content.length) {
       return (
         <EmptyWorkspaceBlock onCreateWorkspace={handleSubmitCreateWorkspace} />
       );
+    }
 
     return (
-      <Stack gap={2} alignItems="flex-start">
-        <Stack direction="row" gap={2} alignItems="center">
-          <SwapButtonComponent onApprove={handleSubmitCreateWorkspace}>
-            {(handleSwap) => (
-              <Button variant="contained" color="success" onClick={handleSwap}>
-                New workspace
-              </Button>
-            )}
-          </SwapButtonComponent>
-          <InputDebouncedValue
-            value={search}
-            setSearch={setSearch}
-            label="Search by title"
-          />
-        </Stack>
-        <BaseTable<Workspace> columns={columns} data={workspaces} />
-        <PaginatorWithPerPage
-          currentPage={pagination.currentPage}
-          currentPerPage={currentPerPage}
-          onPaginatorChange={handlePaginatorChange}
-          setCurrentPerPage={setCurrentPerPage}
-          totalPages={pagination.totalPages}
-        />
-      </Stack>
+      <BaseTable<Workspace>
+        columns={columns}
+        data={allWorkspaces?.content ?? []}
+      />
     );
   };
 
   return (
     <DefaultAppPage title={PAGES_MAP.workspaces}>
-      <DisplayWithLoader isloading={allWorkspacesLoading}>
-        <StyledWorkspacesPageRoot alignItems="center">
-          {getContent()}
-        </StyledWorkspacesPageRoot>
-      </DisplayWithLoader>
+      <WorkspaceFilterBar shouldHidePaginator={emptyWorkspaces}>
+        <DisplayWithLoader isloading={isLoading}>
+          <StyledWorkspacesPageRoot alignItems="center">
+            <Stack gap={2} alignItems="flex-start">
+              {getContent()}
+            </Stack>
+          </StyledWorkspacesPageRoot>
+        </DisplayWithLoader>
+      </WorkspaceFilterBar>
     </DefaultAppPage>
   );
 }
