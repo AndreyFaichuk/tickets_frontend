@@ -23,6 +23,7 @@ export const FormInput = ({
             {label}
           </Typography>
           <TextField
+            id={`form-input_${name}`}
             {...rest}
             {...field}
             variant="outlined"

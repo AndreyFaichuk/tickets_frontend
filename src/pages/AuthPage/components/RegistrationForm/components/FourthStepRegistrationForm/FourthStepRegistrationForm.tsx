@@ -14,28 +14,26 @@ export const FourthStepRegistrationForm: FC = () => {
   const isLessThanMobile = useBreakpoint('down', 'mobile');
 
   return (
-    <>
-      <FourthStepRegistrationFormRoot>
-        <Stack spacing={2}>
-          <FormDatePicker label="Date of Birth" name="dateOfBirth" />
-          <FormCheckBox label="Remember Me?" name="isRememberMe" />
-        </Stack>
+    <FourthStepRegistrationFormRoot id="registration-form-fourth-step_root">
+      <Stack spacing={2}>
+        <FormDatePicker label="Date of Birth" name="dateOfBirth" />
+        <FormCheckBox label="Remember Me?" name="isRememberMe" />
+      </Stack>
 
-        <FourthStepRegistrationFormInputsWrapper>
-          <FormInput
-            name="password"
-            label="Password"
-            type="password"
-            fullWidth={isLessThanMobile ? true : false}
-          />
-          <FormInput
-            name="repeatPassword"
-            label="Repeat Password"
-            type="password"
-            fullWidth={isLessThanMobile ? true : false}
-          />
-        </FourthStepRegistrationFormInputsWrapper>
-      </FourthStepRegistrationFormRoot>
-    </>
+      <FourthStepRegistrationFormInputsWrapper>
+        <FormInput
+          name="password"
+          label="Password"
+          type="password"
+          fullWidth={isLessThanMobile ? true : false}
+        />
+        <FormInput
+          name="repeatPassword"
+          label="Repeat Password"
+          type="password"
+          fullWidth={isLessThanMobile ? true : false}
+        />
+      </FourthStepRegistrationFormInputsWrapper>
+    </FourthStepRegistrationFormRoot>
   );
 };
