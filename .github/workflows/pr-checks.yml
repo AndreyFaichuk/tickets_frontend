@@ -28,3 +28,6 @@ jobs:
 
       - name: TypeScript
         run: npm run type:check
+
+      - name: Vitest test
+        run: npm run test

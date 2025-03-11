@@ -36,8 +36,10 @@ const BaseAuthLayoutTitle: React.FC<StyledBaseAuthLayoutTitleProps> = ({
 }) => {
   return (
     <StyledBaseAuthTitleWrapper direction="column" gap={1} alignItems="center">
-      <StyledBaseAuthTitle variant="h4">{title}</StyledBaseAuthTitle>
-      <StyledBaseAuthSubTitle variant="body1">
+      <StyledBaseAuthTitle id="base-auth-layout_title" variant="h4">
+        {title}
+      </StyledBaseAuthTitle>
+      <StyledBaseAuthSubTitle variant="body1" id="base-auth-layout_subtitle">
         {subTitle}
       </StyledBaseAuthSubTitle>
     </StyledBaseAuthTitleWrapper>

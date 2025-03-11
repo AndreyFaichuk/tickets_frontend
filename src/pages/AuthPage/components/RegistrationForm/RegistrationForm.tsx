@@ -39,7 +39,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
 
   return (
     <FormProvider {...methods}>
-      <StyledRegisteredFormRoot onSubmit={submit}>
+      <StyledRegisteredFormRoot onSubmit={submit} id="registration-form">
         <AminationWrapper key={currentStep}>
           {steps[currentStep].render}
         </AminationWrapper>
@@ -51,6 +51,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
             </Button>
           )}
           <Button
+            id="form-next_button"
             key={isLastStep ? 'finish' : 'next'}
             type={isLastStep ? 'submit' : 'button'}
             fullWidth

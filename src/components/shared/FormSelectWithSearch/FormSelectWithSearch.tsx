@@ -45,6 +45,7 @@ export const FormSelectWithSearch = ({
               {label}
             </Typography>
             <Autocomplete
+              id={`form-select-with-search_${name}`}
               {...rest}
               value={options.find((option) => option.value === value) || null}
               onChange={(_, newValue) => {
