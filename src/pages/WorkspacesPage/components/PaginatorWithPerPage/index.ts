@@ -1,1 +1,0 @@
-export { PaginatorWithPerPage } from './PaginatorWithPerPage';

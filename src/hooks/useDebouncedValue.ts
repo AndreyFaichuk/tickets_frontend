@@ -16,6 +16,10 @@ export const useDebouncedValue = ({
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
+    setCurrentValue(defaultValue);
+  }, [defaultValue]);
+
+  useEffect(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }

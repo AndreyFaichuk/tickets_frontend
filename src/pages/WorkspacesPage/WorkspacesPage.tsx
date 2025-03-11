@@ -10,13 +10,10 @@ import { useWorkspacesTableData } from './hooks/useWorkspacesTableData';
 import { Workspace } from './WorkspacesPage.types';
 import { DefaultAppPage } from '../../app/DefaultAppPage';
 import { useWorkspacesActions } from '../../hooks/workspaces/useWorkspacesActions';
-import { SwapButtonComponent } from '../../components/shared/SwapButtonComponent';
 import { useInviteNewMemberToWorkspace } from '../../hooks/invite/useInviteNewMemberToWorkspace';
 import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
-import { useWorkspaceStore } from '../../stores/workspacesStore';
-import { PaginatorWithPerPage } from './components/PaginatorWithPerPage';
-import { InputDebouncedValue } from '../../components/shared/InputDebouncedValue';
 import { WorkspaceFilterBar } from './components/WorkspaceFilterBar/WorkspaceFilterBar';
+import { SwapButtonComponent } from '../../components/shared/SwapButtonComponent';
 
 export default function WorkspacesPage() {
   useInviteNewMemberToWorkspace();
@@ -64,7 +61,17 @@ export default function WorkspacesPage() {
 
   return (
     <DefaultAppPage title={PAGES_MAP.workspaces}>
-      <WorkspaceFilterBar shouldHidePaginator={emptyWorkspaces}>
+      <Stack gap={1}>
+        <Stack direction="row" alignItems="center">
+          <SwapButtonComponent onApprove={handleSubmitCreateWorkspace}>
+            {(handleSwap) => (
+              <Button variant="contained" color="success" onClick={handleSwap}>
+                New workspace
+              </Button>
+            )}
+          </SwapButtonComponent>
+        </Stack>
+        <WorkspaceFilterBar />
         <DisplayWithLoader isloading={isLoading}>
           <StyledWorkspacesPageRoot alignItems="center">
             <Stack gap={2} alignItems="flex-start">
@@ -72,7 +79,7 @@ export default function WorkspacesPage() {
             </Stack>
           </StyledWorkspacesPageRoot>
         </DisplayWithLoader>
-      </WorkspaceFilterBar>
+      </Stack>
     </DefaultAppPage>
   );
 }
