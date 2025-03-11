@@ -3,6 +3,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import {
   Avatar,
   AvatarGroup,
+  Box,
   IconButton,
   Stack,
   Tooltip,
@@ -10,13 +11,20 @@ import {
 } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { Workspace } from '../WorkspacesPage.types';
 import { useCurrentWorkspaceSync } from './useCurrentWorkspaceSync';
 import { useCopyToClipboard } from '../../../hooks/useCopyToClipboard ';
 import { BASE_FRONTEND_URL } from '../../../constants';
+import { getFormattedDate } from '../../../components/shared/CommentsBlock/AddNewComment.utils';
+import { useWorkspaceStore } from '../../../stores/workspacesStore';
+import { DEFAULT_SORT_OPTION } from '../../../stores/workspacesStore/constants';
 
 export const useWorkspacesTableData = (): ColumnDef<Workspace>[] => {
   const navigate = useNavigate();
+  const sort = useWorkspaceStore.sort();
+  const setSort = useWorkspaceStore.setSort();
 
   const { handleSetWorkspaceIdToLocalStorage } = useCurrentWorkspaceSync();
   const [isCopied, copyToClipboard] = useCopyToClipboard();
@@ -30,6 +38,15 @@ export const useWorkspacesTableData = (): ColumnDef<Workspace>[] => {
     copyToClipboard(
       `${BASE_FRONTEND_URL}/app/workspaces/invite?token=${inviteToken}`,
     );
+  };
+
+  const handleSort = () => {
+    if (sort === DEFAULT_SORT_OPTION.asc) {
+      setSort(DEFAULT_SORT_OPTION.desc);
+      return;
+    }
+
+    setSort(DEFAULT_SORT_OPTION.asc);
   };
 
   return [
@@ -93,6 +110,32 @@ export const useWorkspacesTableData = (): ColumnDef<Workspace>[] => {
             </AvatarGroup>
           </Stack>
         );
+      },
+    },
+    {
+      accessorKey: 'createdAt',
+      header: () => {
+        return (
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            gap={1}>
+            Created at
+            <IconButton onClick={handleSort} size="small">
+              {sort === DEFAULT_SORT_OPTION.asc ? (
+                <ArrowDownwardIcon fontSize="inherit" />
+              ) : (
+                <ArrowUpwardIcon fontSize="inherit" />
+              )}
+            </IconButton>
+          </Stack>
+        );
+      },
+      cell: ({ getValue }) => {
+        const formattedDate = getFormattedDate(getValue<string>());
+
+        return <Typography variant="h6">{formattedDate}</Typography>;
       },
     },
     {

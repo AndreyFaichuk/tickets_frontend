@@ -8,4 +8,10 @@ export const DEFAULT_PER_PAGE = {
   thirty: '30',
 } as const;
 
+export const DEFAULT_SORT_OPTION = {
+  asc: 'asc',
+  desc: 'desc',
+} as const;
+
 export type PerPage = ValuesToType<typeof DEFAULT_PER_PAGE>;
+export type SortOption = ValuesToType<typeof DEFAULT_SORT_OPTION>;

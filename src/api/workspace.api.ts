@@ -5,7 +5,7 @@ import {
 } from '../hooks/workspaces/useWorkspacesActions';
 
 import { RawWorkspace } from '../pages/WorkspacesPage/WorkspacesPage.types';
-import { PerPage } from '../stores/workspacesStore/constants';
+import { PerPage, SortOption } from '../stores/workspacesStore/constants';
 import { PaginatedData, PromiseAxiosResponse } from '../types';
 import { securityAxios } from './securityAxios';
 
@@ -15,6 +15,8 @@ type GetWorkspacesVariables = {
   currentPage: string;
   currentPerPage: PerPage;
   search: string;
+  sort: SortOption;
+  amICreator: boolean;
 };
 
 export class WorkspaceApi {
@@ -22,6 +24,8 @@ export class WorkspaceApi {
     currentPage,
     currentPerPage,
     search,
+    sort,
+    amICreator,
   }: GetWorkspacesVariables): Promise<PaginatedData<RawWorkspace[]>> {
     const url = new URL(`${WORKSPACE_URL}/all`);
 
@@ -35,6 +39,14 @@ export class WorkspaceApi {
 
     if (search) {
       url.searchParams.append('search', search);
+    }
+
+    if (sort) {
+      url.searchParams.append('sort', sort.toString());
+    }
+
+    if (amICreator) {
+      url.searchParams.append('isCreator', amICreator.toString());
     }
 
     const response = await securityAxios.get(url.toString());
