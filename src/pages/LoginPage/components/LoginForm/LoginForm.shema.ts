@@ -1,16 +1,17 @@
 import { z } from 'zod';
+import { LOGIN_FORM_NAMES } from './constants';
 
 export const loginSchema = z.object({
-  email: z
+  [LOGIN_FORM_NAMES.email]: z
     .string()
     .email({ message: 'Enter a valid email.' })
     .min(1, 'This field is required.'),
-  password: z
+  [LOGIN_FORM_NAMES.password]: z
     .string()
     .trim()
     .min(8, 'Password must be at least 8 characters')
     .trim(),
-  isRememberMe: z.boolean().default(false),
+  [LOGIN_FORM_NAMES.isRememberMe]: z.boolean().default(false),
 });
 
 export type LoginFormValues = z.infer<typeof loginSchema>;

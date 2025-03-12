@@ -1,12 +1,13 @@
 import { screen } from '@testing-library/react';
 import { expect, test, describe } from 'vitest';
-import AuthPage from '../AuthPage';
 import { renderWithProviders } from '../../../tests-utils';
+import LoginPage from '../LoginPage';
 import { BASE_AUTH_LAYOUT_ID } from '../../../app/BaseAuthLayout/constants';
+import { LOGIN_FORM } from '../components/LoginForm/constants';
 
-describe('src/pages/AuthPage/AuthPage.tsx', () => {
+describe('src/pages/LoginPage/LoginPage.tsx', () => {
   test('it renders', () => {
-    renderWithProviders(<AuthPage />);
+    renderWithProviders(<LoginPage />);
 
     const rootElement = screen.getByTestId(BASE_AUTH_LAYOUT_ID.root);
 
@@ -14,7 +15,7 @@ describe('src/pages/AuthPage/AuthPage.tsx', () => {
   });
 
   test('it has title and subtitle', () => {
-    renderWithProviders(<AuthPage />);
+    renderWithProviders(<LoginPage />);
 
     const titleElement = screen.getByTestId(BASE_AUTH_LAYOUT_ID.title);
     const subTitleElement = screen.getByTestId(BASE_AUTH_LAYOUT_ID.subtitle);
@@ -23,13 +24,11 @@ describe('src/pages/AuthPage/AuthPage.tsx', () => {
     expect(subTitleElement).toBeInTheDocument();
   });
 
-  test('it has first step of RegistrationForm by default', () => {
-    renderWithProviders(<AuthPage />);
+  test('it has LoginForm by default', () => {
+    renderWithProviders(<LoginPage />);
 
-    const firstStepRegistrationFormlElement = screen.getByTestId(
-      'registration-form-first-step_root',
-    );
+    const loginFormlElement = screen.getByTestId(LOGIN_FORM.root);
 
-    expect(firstStepRegistrationFormlElement).toBeInTheDocument();
+    expect(loginFormlElement).toBeInTheDocument();
   });
 });

@@ -30,6 +30,7 @@ export const FormCheckBox = ({
         <FormControlLabel
           control={
             <Checkbox
+              id={`form-checkbox_${name}`}
               {...field}
               checked={field.value || false}
               onChange={(e) => field.onChange(e.target.checked)}

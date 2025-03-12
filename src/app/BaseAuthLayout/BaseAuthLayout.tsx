@@ -5,6 +5,7 @@ import {
   StyledBaseAuthTitle,
   StyledBaseAuthTitleWrapper,
 } from './BaseAuthLayout.styled';
+import { BASE_AUTH_LAYOUT_ID } from './constants';
 
 type StyledBaseAuthLayoutRootProps = {
   children?: React.ReactNode;
@@ -24,7 +25,7 @@ const BaseAuthLayoutRoot: React.FC<StyledBaseAuthLayoutRootProps> = ({
   ...rest
 }) => {
   return (
-    <StyledBaseAuthLayoutRoot id="app-auth" {...rest}>
+    <StyledBaseAuthLayoutRoot id={BASE_AUTH_LAYOUT_ID.root} {...rest}>
       {children}
     </StyledBaseAuthLayoutRoot>
   );
@@ -36,10 +37,10 @@ const BaseAuthLayoutTitle: React.FC<StyledBaseAuthLayoutTitleProps> = ({
 }) => {
   return (
     <StyledBaseAuthTitleWrapper direction="column" gap={1} alignItems="center">
-      <StyledBaseAuthTitle id="base-auth-layout_title" variant="h4">
+      <StyledBaseAuthTitle id={BASE_AUTH_LAYOUT_ID.title} variant="h4">
         {title}
       </StyledBaseAuthTitle>
-      <StyledBaseAuthSubTitle variant="body1" id="base-auth-layout_subtitle">
+      <StyledBaseAuthSubTitle variant="body1" id={BASE_AUTH_LAYOUT_ID.subtitle}>
         {subTitle}
       </StyledBaseAuthSubTitle>
     </StyledBaseAuthTitleWrapper>
