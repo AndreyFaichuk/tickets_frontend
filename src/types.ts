@@ -1,5 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { User } from './app/DefaultUserMenu/DefaultUserMenu.types';
+import { DEFAULT_FORM_ELEMENTS } from './constants';
 
 export type ValuesToType<T> = T[keyof T];
 
@@ -36,3 +37,14 @@ export type PaginatedData<T> = {
     currentPage: number;
   };
 };
+
+type FormElements = ValuesToType<typeof DEFAULT_FORM_ELEMENTS>;
+
+export type FormCompositeNames<T extends string> = {
+  [key in T]: CompositeName<key, FormElements>;
+};
+
+export type CompositeName<
+  U extends string,
+  K extends FormElements,
+> = `form-${K}_${U}`;

@@ -11,6 +11,7 @@ import { LoginFormValues, loginSchema } from './LoginForm.shema';
 import { FormInput } from '../../../../components/shared/FormInput';
 import { AminationWrapper } from '../../../../components/shared/AminationWrapper';
 import { FormCheckBox } from '../../../../components/shared/FormCheckBox';
+import { LOGIN_FORM, LOGIN_FORM_NAMES } from './constants';
 
 type LoginFormProps = {
   onSubmit: (values: LoginFormValues) => void;
@@ -26,21 +27,25 @@ export const LoginForm: FC<LoginFormProps> = ({ onSubmit }) => {
 
   return (
     <FormProvider {...methods}>
-      <StyledLoginFormRoot onSubmit={submit}>
+      <StyledLoginFormRoot onSubmit={submit} id={LOGIN_FORM.root}>
         <AminationWrapper>
           <StyledLoginFormInputsWrapper>
-            <FormInput name="email" label="Email" fullWidth />
+            <FormInput name={LOGIN_FORM_NAMES.email} label="Email" fullWidth />
             <FormInput
-              name="password"
+              name={LOGIN_FORM_NAMES.password}
               label="Password"
               type="password"
               fullWidth
             />
           </StyledLoginFormInputsWrapper>
-          <FormCheckBox label="Remember Me?" name="isRememberMe" />
+          <FormCheckBox
+            label="Remember Me?"
+            name={LOGIN_FORM_NAMES.isRememberMe}
+          />
         </AminationWrapper>
 
         <Button
+          id={LOGIN_FORM.submitButton}
           type="submit"
           fullWidth
           endIcon={<SendIcon />}

@@ -30,7 +30,7 @@ export const FormDatePicker = ({ name, label, ...rest }: DatePickerProps) => {
         const value = field.value ? dayjs(field.value) : null;
 
         return (
-          <Box display="flex" flexDirection="column" gap={1}>
+          <Box display="flex" flexDirection="column" gap={1} id="asd">
             <Typography variant="subtitle2">{label}</Typography>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateCalendar

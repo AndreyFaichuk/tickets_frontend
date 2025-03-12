@@ -44,3 +44,10 @@ export const COOKIE_NAMES = {
 
 export const BASE_BACKEND_URL: string = import.meta.env.VITE_BASE_BACKEND_URL;
 export const BASE_FRONTEND_URL: string = import.meta.env.VITE_BASE_FRONTEND_URL;
+
+export const DEFAULT_FORM_ELEMENTS = {
+  checkbox: 'checkbox',
+  input: 'input',
+  selectWithSearch: 'select-with-search',
+  dateCalendar: 'dateCalendar',
+} as const;

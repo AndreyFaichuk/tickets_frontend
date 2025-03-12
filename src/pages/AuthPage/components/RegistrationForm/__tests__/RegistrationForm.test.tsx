@@ -1,4 +1,4 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { expect, test, describe, vi, beforeEach } from 'vitest';
 
 import { renderWithProviders } from '../../../../../tests-utils';
@@ -9,6 +9,7 @@ import { FIELDS, REGISTRATIONS_STEPS } from '../RegistrationForm.constants';
 import { FirstStepRegistrationForm } from '../components/FirstStepRegistrationForm';
 import { ThirdStepRegistrationForm } from '../components/ThirdStepRegistrationForm';
 import { FourthStepRegistrationForm } from '../components/FourthStepRegistrationForm';
+import { REGISTRATION_FORM } from '../constants';
 
 describe('src/pages/AuthPage/components/RegistrationForm/RegistrationForm.tsx', () => {
   const handleSubmit = vi.fn();
@@ -17,10 +18,14 @@ describe('src/pages/AuthPage/components/RegistrationForm/RegistrationForm.tsx', 
     vi.restoreAllMocks();
   });
 
+  const emailErrorText = 'Enter a valid email.';
+  const firstNameErrorText = 'First name must consist of at least 1 character';
+  const lastNameErrorText = 'Last name must consist of at least 1 character';
+
   test('it renders', () => {
     renderWithProviders(<RegistrationForm onSubmit={handleSubmit} />);
 
-    const rootElement = screen.getByTestId('registration-form');
+    const rootElement = screen.getByTestId(REGISTRATION_FORM.root);
 
     expect(rootElement).toBeInTheDocument();
   });
@@ -28,28 +33,23 @@ describe('src/pages/AuthPage/components/RegistrationForm/RegistrationForm.tsx', 
   test('it should throw errors if click next button with empty fields on the first step', async () => {
     renderWithProviders(<RegistrationForm onSubmit={handleSubmit} />);
 
-    const nextButton = screen.getByTestId('form-next_button');
+    const nextButton = screen.getByTestId(REGISTRATION_FORM.submitButton);
 
-    fireEvent.click(nextButton);
+    await act(async () => {
+      fireEvent.click(nextButton);
+    });
 
-    await waitFor(() =>
-      screen.getByText('First name must consist of at least 1 character'),
-    );
+    await waitFor(() => {
+      screen.getByText(firstNameErrorText);
+      screen.getByText(lastNameErrorText);
+    });
 
-    await waitFor(() =>
-      screen.getByText('Last name must consist of at least 1 character'),
-    );
+    const firstNameErrorMessages = screen.getByText(firstNameErrorText);
 
-    const firstNameErrorMessages = screen.getAllByText(
-      'First name must consist of at least 1 character',
-    );
+    const lastNameErrorMessages = screen.getByText(lastNameErrorText);
 
-    const lastNameErrorMessages = screen.getAllByText(
-      'Last name must consist of at least 1 character',
-    );
-
-    expect(firstNameErrorMessages.length).toBeGreaterThan(0);
-    expect(lastNameErrorMessages.length).toBeGreaterThan(0);
+    expect(firstNameErrorMessages).toBeInTheDocument();
+    expect(lastNameErrorMessages).toBeInTheDocument();
   });
 
   test('it should proceed to the second step if first name and second name fields are filled correctly', async () => {
@@ -58,12 +58,14 @@ describe('src/pages/AuthPage/components/RegistrationForm/RegistrationForm.tsx', 
     const firstNameElement = screen.getByTestId('form-input_firstName');
     const lastNameElement = screen.getByTestId('form-input_lastName');
 
-    const nextButton = screen.getByTestId('form-next_button');
+    const nextButton = screen.getByTestId(REGISTRATION_FORM.submitButton);
 
     fireEvent.input(firstNameElement, { target: { value: 'John' } });
     fireEvent.input(lastNameElement, { target: { value: 'Smith' } });
 
-    fireEvent.click(nextButton);
+    await act(async () => {
+      fireEvent.click(nextButton);
+    });
 
     await waitFor(() => {
       expect(screen.getByTestId('form-input_email')).toBeInTheDocument();
@@ -113,19 +115,21 @@ describe('src/pages/AuthPage/components/RegistrationForm/RegistrationForm.tsx', 
 
     renderWithProviders(<RegistrationForm onSubmit={handleSubmit} />);
 
-    const nextButton = screen.getByTestId('form-next_button');
+    const nextButton = screen.getByTestId(REGISTRATION_FORM.submitButton);
 
     const emeilInputElement = screen.getByTestId('form-input_email');
 
     fireEvent.input(emeilInputElement, { target: { value: 'invalid_email' } });
 
-    fireEvent.click(nextButton);
+    await act(async () => {
+      fireEvent.click(nextButton);
+    });
 
-    await waitFor(() => screen.getByText('Enter a valid email.'));
+    await waitFor(() => screen.getByText(emailErrorText));
 
-    const emailErrorMessage = screen.getAllByText('Enter a valid email.');
+    const emailErrorMessage = screen.getByText(emailErrorText);
 
-    expect(emailErrorMessage.length).toBeGreaterThan(0);
+    expect(emailErrorMessage).toBeInTheDocument();
   });
 
   test('it should render the third step directly', async () => {

@@ -1,33 +1,39 @@
 import { z } from 'zod';
+import { REGISTRATION_FORM_NAMES } from './constants';
 
 export const registeredSchema = z
   .object({
-    firstName: z
+    [REGISTRATION_FORM_NAMES.firstName]: z
       .string()
       .min(1, 'First name must consist of at least 1 character')
       .trim(),
-    lastName: z
+    [REGISTRATION_FORM_NAMES.lastName]: z
       .string()
       .min(1, 'Last name must consist of at least 1 character')
       .trim(),
-    email: z
+    [REGISTRATION_FORM_NAMES.email]: z
       .string()
       .email({ message: 'Enter a valid email.' })
       .min(1, 'This field is required.')
       .trim(),
-    password: z
+    [REGISTRATION_FORM_NAMES.password]: z
       .string()
       .trim()
       .min(8, 'Password must be at least 8 characters')
       .trim(),
-    repeatPassword: z
+    [REGISTRATION_FORM_NAMES.repeatPassword]: z
       .string()
       .trim()
       .min(8, 'Password must be at least 8 characters')
       .trim(),
-    isRememberMe: z.boolean().default(false),
-    country: z.string().min(1, 'Country is required!'),
-    dateOfBirth: z.string().min(1, 'Date of birth is required!').date(),
+    [REGISTRATION_FORM_NAMES.isRememberMe]: z.boolean().default(false),
+    [REGISTRATION_FORM_NAMES.country]: z
+      .string()
+      .min(1, 'Country is required!'),
+    [REGISTRATION_FORM_NAMES.dateOfBirth]: z
+      .string()
+      .min(1, 'Date of birth is required!')
+      .date(),
   })
   .refine((data) => data.password === data.repeatPassword, {
     message: 'Passwords do not match',

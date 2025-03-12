@@ -17,6 +17,7 @@ import { AminationWrapper } from '../../../../components/shared/AminationWrapper
 
 import { useRegistrationFormManagement } from './RegistrationForm.hooks';
 import { REGISTRATIONS_STEPS } from './RegistrationForm.constants';
+import { REGISTRATION_FORM } from './constants';
 
 type RegistrationFormProps = {
   onSubmit: (values: RegisteredFormValues) => void;
@@ -39,19 +40,23 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({ onSubmit }) => {
 
   return (
     <FormProvider {...methods}>
-      <StyledRegisteredFormRoot onSubmit={submit} id="registration-form">
+      <StyledRegisteredFormRoot onSubmit={submit} id={REGISTRATION_FORM.root}>
         <AminationWrapper key={currentStep}>
           {steps[currentStep].render}
         </AminationWrapper>
 
         <StyledRegisteredFormButtonsWrapper>
           {currentStepOptions.backStep && (
-            <Button type="button" variant="outlined" onClick={onBack}>
+            <Button
+              type="button"
+              variant="outlined"
+              onClick={onBack}
+              id={REGISTRATION_FORM.backButton}>
               Back
             </Button>
           )}
           <Button
-            id="form-next_button"
+            id={REGISTRATION_FORM.submitButton}
             key={isLastStep ? 'finish' : 'next'}
             type={isLastStep ? 'submit' : 'button'}
             fullWidth
