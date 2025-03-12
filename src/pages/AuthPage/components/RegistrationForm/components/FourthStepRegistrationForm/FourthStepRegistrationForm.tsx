@@ -15,13 +15,16 @@ export const FourthStepRegistrationForm: FC = () => {
   const isLessThanMobile = useBreakpoint('down', 'mobile');
 
   return (
-    <FourthStepRegistrationFormRoot id="registration-form-fourth-step_root">
+    <FourthStepRegistrationFormRoot>
       <Stack spacing={2}>
         <FormDatePicker
           label="Date of Birth"
           name={REGISTRATION_FORM_NAMES.dateOfBirth}
         />
-        <FormCheckBox label="Remember Me?" name="isRememberMe" />
+        <FormCheckBox
+          label="Remember Me?"
+          name={REGISTRATION_FORM_NAMES.isRememberMe}
+        />
       </Stack>
 
       <FourthStepRegistrationFormInputsWrapper>
