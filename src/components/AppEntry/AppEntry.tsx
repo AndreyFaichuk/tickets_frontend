@@ -13,6 +13,7 @@ import { DefaultCircularLoader } from '../shared/DefaultCircularLoader/DefaultCi
 const LazyLoggedInAppLayout = lazy(
   () => import('./components/LoggedInAppLayout/LoggedInAppLayout'),
 );
+
 const LazyPublicAppLayout = lazy(
   () => import('./components/PublicAppLayout/PublicAppLayout'),
 );
