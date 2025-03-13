@@ -24,11 +24,11 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-      - name: Run TypeScript type check
+      - name: Run TypeScript types check
         run: npm run type:check
 
       - name: Run Vitest tests
-        run: npm run test --coverage
+        run: npm run test
 
       - name: Setup SSH key for VPS
         run: |
