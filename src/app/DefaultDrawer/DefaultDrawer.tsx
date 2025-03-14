@@ -23,21 +23,24 @@ export const DefaultDrawer: FC = () => {
   const actionButton = () => {
     if (isOpen) {
       return (
-        <IconButton onClick={handleDrawerClose}>
+        <IconButton onClick={handleDrawerClose} id="close-drawer-button">
           <ChevronLeftIcon />
         </IconButton>
       );
     }
 
     return (
-      <IconButton sx={{ margin: '-6px' }} onClick={handleDrawerOpen}>
+      <IconButton
+        sx={{ margin: '-6px' }}
+        onClick={handleDrawerOpen}
+        id="open-drawer-button">
         <ChevronRightIcon />
       </IconButton>
     );
   };
 
   return (
-    <Drawer variant="permanent" open={isOpen}>
+    <Drawer variant="permanent" open={isOpen} id="default-drawer">
       <DrawerHeader>{actionButton()}</DrawerHeader>
       <Divider />
       <List>{renderDrawerListItem()}</List>
