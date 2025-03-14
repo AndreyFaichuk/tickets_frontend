@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { BaseAuthLayout } from '../BaseAuthLayout';
 
 type DefaultAuthLayout = {

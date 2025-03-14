@@ -1,8 +1,10 @@
 import { screen } from '@testing-library/react';
 import { expect, test, describe } from 'vitest';
-import AuthPage from '../AuthPage';
+
+import { BASE_AUTH_LAYOUT_ID } from '@app/BaseAuthLayout/constants';
+
 import { renderWithProviders } from '../../../tests-utils';
-import { BASE_AUTH_LAYOUT_ID } from '../../../app/BaseAuthLayout/constants';
+import AuthPage from '../AuthPage';
 
 describe('src/pages/AuthPage/AuthPage.tsx', () => {
   test('it renders', () => {

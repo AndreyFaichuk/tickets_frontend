@@ -1,10 +1,12 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
+import AuthPage from '@pages/AuthPage/AuthPage';
+import LoginPage from '@pages/LoginPage/LoginPage';
+import { useWorkspaceStore } from '@stores/workspacesStore';
+
+import { DefaultPublicAppLayout } from '@app/DefaultPublicAppLayout';
+
 import { ADD_PUBLIC_ROUTES } from '../../../../constants/routes';
-import { DefaultPublicAppLayout } from '../../../../app/DefaultPublicAppLayout';
-import { useWorkspaceStore } from '../../../../stores/workspacesStore';
-import LoginPage from '../../../../pages/LoginPage/LoginPage';
-import AuthPage from '../../../../pages/AuthPage/AuthPage';
 
 export default function PublicAppLayout() {
   const location = useLocation();

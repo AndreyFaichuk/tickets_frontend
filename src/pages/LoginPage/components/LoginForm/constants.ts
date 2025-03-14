@@ -1,5 +1,5 @@
-import { DEFAULT_FORM_ELEMENTS } from '../../../../constants';
-import { FormCompositeNames, ValuesToType } from '../../../../types';
+import { DEFAULT_FORM_ELEMENTS } from '@constants';
+import { FormCompositeNames, ValuesToType } from '@types';
 
 export const LOGIN_FORM = {
   root: 'login-form',

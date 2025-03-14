@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { workspacesQueryKeys } from './useWorkspacesFetch';
-import { WorkspaceApi } from '../../api/workspace.api';
+import { WorkspaceApi } from '@api/workspace.api';
 import { ADD_LOGGED_IN_ROUTES } from '../../constants/routes';
-import { useWorkspaceStore } from '../../stores/workspacesStore';
+import { useWorkspaceStore } from '@stores/workspacesStore';
 
 export const useWorkspaceFetchById = () => {
   const navigate = useNavigate();

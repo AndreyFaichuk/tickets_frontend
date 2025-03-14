@@ -1,6 +1,7 @@
 import { ChangeEvent, FC } from 'react';
-import { Input, InputProps } from '../Input/Input';
+
 import { useDebouncedValue } from '../../../hooks/useDebouncedValue';
+import { Input, InputProps } from '../Input/Input';
 
 type InputDebouncedValueProps = InputProps & {
   setSearch: (search: string) => void;

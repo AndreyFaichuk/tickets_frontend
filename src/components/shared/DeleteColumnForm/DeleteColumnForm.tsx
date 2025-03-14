@@ -1,16 +1,20 @@
 import { FC } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-import { StyledDeleteColumnFormRoot } from './DeleteColumnForm.styled';
+import { FormProvider, useForm } from 'react-hook-form';
+
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Button, Stack, Typography } from '@mui/material';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { FormSelect } from '../FormSelect';
+import { SelectOptions } from '../FormSelect/FormSelect';
+
 import {
   deleteColumnSchema,
   DeleteColumnValues,
 } from './DeleteColumnForm.schema';
-import { Button, Stack, Typography } from '@mui/material';
-import { FormSelect } from '../FormSelect';
-import { SelectOptions } from '../FormSelect/FormSelect';
+import { StyledDeleteColumnFormRoot } from './DeleteColumnForm.styled';
 
 type DeleteColumnFormProps = {
   onSubmit: (values: DeleteColumnValues) => void;

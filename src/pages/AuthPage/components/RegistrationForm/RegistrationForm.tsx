@@ -1,23 +1,24 @@
 import { FC } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
 
-import {
-  StyledRegisteredFormButtonsWrapper,
-  StyledRegisteredFormRoot,
-} from './RegistrationForm.styled';
+import { FormProvider, useForm } from 'react-hook-form';
+
+import SendIcon from '@mui/icons-material/Send';
+import { Button } from '@mui/material';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AminationWrapper } from '@shared/AminationWrapper';
+
+import { REGISTRATION_FORM } from './constants';
+import { REGISTRATIONS_STEPS } from './RegistrationForm.constants';
+import { useRegistrationFormManagement } from './RegistrationForm.hooks';
 import {
   RegisteredFormValues,
   registeredSchema,
 } from './RegistrationForm.schema';
-
-import { AminationWrapper } from '../../../../components/shared/AminationWrapper';
-
-import { useRegistrationFormManagement } from './RegistrationForm.hooks';
-import { REGISTRATIONS_STEPS } from './RegistrationForm.constants';
-import { REGISTRATION_FORM } from './constants';
+import {
+  StyledRegisteredFormButtonsWrapper,
+  StyledRegisteredFormRoot,
+} from './RegistrationForm.styled';
 
 type RegistrationFormProps = {
   onSubmit: (values: RegisteredFormValues) => void;

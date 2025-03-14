@@ -5,6 +5,7 @@ import {
   MenuItem,
   Select,
 } from '@mui/material';
+
 import { Editor } from '@tiptap/react';
 
 import { useTextEditorMenu } from '../../hooks/useTextEditorMenu';

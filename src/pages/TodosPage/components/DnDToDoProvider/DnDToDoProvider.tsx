@@ -1,14 +1,19 @@
 import { FC, useMemo } from 'react';
-import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core';
-import { Stack } from '@mui/material';
+
 import { useParams } from 'react-router-dom';
 
+import { closestCorners, DndContext, DragOverlay } from '@dnd-kit/core';
+
+import { Stack } from '@mui/material';
+
+import { BaseColumn } from '@shared/BaseColumn';
+
 import { TodoCard } from '../TodoCard';
-import { BaseColumn } from '../../../../components/shared/BaseColumn';
-import { useDnDManagement } from './hooks/useDnDManagement';
+
 import { AddNewColumnBlock } from './components/AddNewColumnBlock';
 import { StyledDnDToDoProviderRoot } from './DnDToDoProvider.styled';
 import { ColumnType } from './hooks/useColumnsManagement';
+import { useDnDManagement } from './hooks/useDnDManagement';
 
 type DnDProviderProps = {
   data: ColumnType[];

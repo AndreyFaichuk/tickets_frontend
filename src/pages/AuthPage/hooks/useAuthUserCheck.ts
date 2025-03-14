@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AuthApi } from '../../../api/auth.api';
+import { AuthApi } from '@api/auth.api';
 import { useNavigate } from 'react-router-dom';
 import { ADD_PUBLIC_ROUTES } from '../../../constants/routes';
 

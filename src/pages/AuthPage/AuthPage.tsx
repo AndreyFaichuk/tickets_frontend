@@ -1,8 +1,10 @@
+import { AUTH, AUTH_CONTENT } from '@constants';
+
+import { DefaultAuthLayout } from '@app/DefaultAuthLayout';
+
 import { RegistrationForm } from './components/RegistrationForm';
 import { RegisteredFormValues } from './components/RegistrationForm/RegistrationForm.schema';
 import { useAuthUser } from './hooks/useAuthUser';
-import { DefaultAuthLayout } from '../../app/DefaultAuthLayout';
-import { AUTH, AUTH_CONTENT } from '../../constants';
 
 export default function AuthPage() {
   const { handleRegisterUser } = useAuthUser();

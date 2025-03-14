@@ -1,5 +1,5 @@
 import { green, red, blue, purple } from '@mui/material/colors';
-import { ValuesToType } from '../../../types';
+import { ValuesToType } from '@types';
 import { hexToRgb } from '@mui/material';
 
 export const DEFAULT_POSITION_VALUES_MAP = {

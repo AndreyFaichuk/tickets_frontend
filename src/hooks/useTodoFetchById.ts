@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { TodoApi } from '../api/todo.api';
+import { TodoApi } from '@api/todo.api';
 
 export const todosQueryKeys = {
   todos: {

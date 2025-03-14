@@ -1,5 +1,6 @@
-import { Skeleton } from '@mui/material';
 import { FC } from 'react';
+
+import { Skeleton } from '@mui/material';
 
 type SkeletonsProps = {
   numbers: number;

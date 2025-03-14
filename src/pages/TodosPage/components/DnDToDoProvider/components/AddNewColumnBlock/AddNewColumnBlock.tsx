@@ -2,12 +2,13 @@ import { FC } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 
+import { useColumnActions } from '@hooks/columns/useColumnsActions';
+import { SwapButtonComponent } from '@shared/SwapButtonComponent';
+
 import {
   StyledDnDToDoProviderButton,
   StyledDnDToDoProviderIconButton,
 } from './AddNewColumnBlock.styled';
-import { SwapButtonComponent } from '../../../../../../components/shared/SwapButtonComponent';
-import { useColumnActions } from '../../../../../../hooks/columns/useColumnsActions';
 
 type AddNewColumnBlockProps = {
   workspaceId: string;

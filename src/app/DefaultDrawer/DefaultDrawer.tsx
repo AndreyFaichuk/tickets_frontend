@@ -4,8 +4,8 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Divider, IconButton, List } from '@mui/material';
 
-import { Drawer, DrawerHeader } from './DefaultDrawer.styled';
 import { useDefaultDrawerOptions } from './DefaultDrawer.hooks';
+import { Drawer, DrawerHeader } from './DefaultDrawer.styled';
 
 export const DefaultDrawer: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

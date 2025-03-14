@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import { AnimatePresence, HTMLMotionProps, motion } from 'motion/react';
 
 type AminationWrapperProps = HTMLMotionProps<'div'> & {

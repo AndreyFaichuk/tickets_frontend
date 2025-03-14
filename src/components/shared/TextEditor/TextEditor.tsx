@@ -1,10 +1,11 @@
 import { FC } from 'react';
+
 import { Divider } from '@mui/material';
 
 import { Editor, EditorContent } from '@tiptap/react';
 
-import { StyledTextEditorRoot } from './TextEditor.styled';
 import { MenuBar } from './components/MenuBar';
+import { StyledTextEditorRoot } from './TextEditor.styled';
 
 type TextEditorProps = {
   editor: Editor;

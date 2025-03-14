@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import {
   Avatar,
   Divider,
@@ -9,9 +10,10 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useDefaultUserMenuOptions } from './DefaultUserMenu.hooks';
-import { useGetCurrentUser } from '../../hooks/user/useGetCurrentUser';
+import { useGetCurrentUser } from '@hooks/user/useGetCurrentUser';
+
 import { MenuList } from './components/MenuList';
+import { useDefaultUserMenuOptions } from './DefaultUserMenu.hooks';
 
 export const DefaultUserMenu = () => {
   const { currentUser, isCurrentUserLoading } = useGetCurrentUser();

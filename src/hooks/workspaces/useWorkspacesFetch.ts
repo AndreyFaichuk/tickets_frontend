@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { WorkspaceApi } from '../../api/workspace.api';
-import { getNormalizeWorkspaces } from '../../pages/WorkspacesPage/WorkspacesPage.utils';
-import { useWorkspaceStore } from '../../stores/workspacesStore';
-import { PerPage, SortOption } from '../../stores/workspacesStore/constants';
-import { PaginatedData } from '../../types';
-import { Workspace } from '../../pages/WorkspacesPage/WorkspacesPage.types';
+import { WorkspaceApi } from '@api/workspace.api';
+import { getNormalizeWorkspaces } from '@pages/WorkspacesPage/WorkspacesPage.utils';
+import { useWorkspaceStore } from '@stores/workspacesStore';
+import { PerPage, SortOption } from '@stores/workspacesStore/constants';
+import { PaginatedData } from '@types';
+import { Workspace } from '@pages/WorkspacesPage/WorkspacesPage.types';
 
 const WORKSPACES_KEY = 'workspaces' as const;
 const ALL_KEY = 'all' as const;

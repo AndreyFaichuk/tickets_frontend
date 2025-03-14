@@ -1,9 +1,18 @@
 import { FC } from 'react';
-import dayjs from 'dayjs';
+
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Badge, Stack, Tooltip } from '@mui/material';
-import AttachFileIcon from '@mui/icons-material/AttachFile';
+
+import dayjs from 'dayjs';
+
+import { Stack, Tooltip } from '@mui/material';
+
+import { BaseBadgeWithTooltip } from '@shared/BaseBadgeWithTooltip';
+import { DEFAULT_BADGE_VARIANTS } from '@shared/BaseBadgeWithTooltip/BaseBadgeWithTooltip.constants';
+import { PRIORITY_ICON_MAP } from '@shared/ToDoForm/ToDoForm.constants';
+
+import { CircularProgressWithLabel } from '../CircularProgressWithLabel';
+import { TodoCardActionBlock } from '../TodoCardActionBlock';
 
 import {
   TodoCardActionIconWrapper,
@@ -13,11 +22,6 @@ import {
   TodoCardTypography,
 } from './TodoCard.styled';
 import { TodoCardPropsWithActions } from './TodoCard.types';
-import { CircularProgressWithLabel } from '../CircularProgressWithLabel';
-import { TodoCardActionBlock } from '../TodoCardActionBlock';
-import { PRIORITY_ICON_MAP } from '../../../../components/shared/ToDoForm/ToDoForm.constants';
-import { BaseBadgeWithTooltip } from '../../../../components/shared/BaseBadgeWithTooltip';
-import { DEFAULT_BADGE_VARIANTS } from '../../../../components/shared/BaseBadgeWithTooltip/BaseBadgeWithTooltip.constants';
 
 interface TodoCardProps extends TodoCardPropsWithActions {
   isDragging?: boolean;

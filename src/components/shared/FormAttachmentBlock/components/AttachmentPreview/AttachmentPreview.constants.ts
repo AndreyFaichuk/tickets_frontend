@@ -1,8 +1,8 @@
-import { ValuesToType } from '../../../../../types';
+import { ValuesToType } from '@types';
 
-import DocxIcon from '../../../../../assests/icon/docxFormat.svg';
-import DocIcon from '../../../../../assests/icon/docFormat.svg';
-import PdfIcon from '../../../../../assests/icon/pdfFormat.svg';
+import DocxIcon from '@assests/icon/docxFormat.svg';
+import DocIcon from '@assests/icon/docFormat.svg';
+import PdfIcon from '@assests/icon/pdfFormat.svg';
 
 export const ATTACHMENT_FORMAT_ICON = {
   PDF: 'application/pdf',

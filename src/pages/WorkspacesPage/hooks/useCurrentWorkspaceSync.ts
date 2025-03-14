@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useWorkspaceStore } from '../../../stores/workspacesStore';
+import { useWorkspaceStore } from '@stores/workspacesStore';
 
 export const useCurrentWorkspaceSync = () => {
   const setCurrentWorkspaceId = useWorkspaceStore.setCurrentWorkspaceId();

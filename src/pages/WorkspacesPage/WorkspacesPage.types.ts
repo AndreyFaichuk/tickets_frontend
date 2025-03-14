@@ -1,4 +1,4 @@
-import { CreatorUser } from '../../types';
+import { CreatorUser } from '@types';
 
 export type RawWorkspace = {
   _id: string;

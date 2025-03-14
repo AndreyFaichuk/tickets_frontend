@@ -1,10 +1,13 @@
 import { FC } from 'react';
+
 import { Button } from '@mui/material';
+
+import { SwapButtonComponent } from '@shared/SwapButtonComponent';
+
 import {
   StyledEmptyWorkspaceBlockRoot,
   StyledEmptyWorkspaceBlockTitle,
 } from './EmptyWorkspaceBlock.styled';
-import { SwapButtonComponent } from '../../../../components/shared/SwapButtonComponent';
 
 type EmptyWorkspaceBlockProps = {
   onCreateWorkspace: (title: string) => void;

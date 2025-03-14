@@ -1,4 +1,4 @@
-import { ValuesToType } from '../../../types';
+import { ValuesToType } from '@types';
 
 export const BASE_COLUMN_MODAL_TYPES = {
   createTodo: 'createTodo',

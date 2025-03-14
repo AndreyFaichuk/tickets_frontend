@@ -1,5 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { ColumnDef } from '@tanstack/react-table';
+
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import {
   Avatar,
   AvatarGroup,
@@ -9,17 +13,17 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+
+import { BASE_FRONTEND_URL } from '@constants';
+import { useCopyToClipboard } from '@hooks/useCopyToClipboard ';
+import { getFormattedDate } from '@shared/CommentsBlock/AddNewComment.utils';
+import { useWorkspaceStore } from '@stores/workspacesStore';
+import { DEFAULT_SORT_OPTION } from '@stores/workspacesStore/constants';
+import { ColumnDef } from '@tanstack/react-table';
+
 import { Workspace } from '../WorkspacesPage.types';
+
 import { useCurrentWorkspaceSync } from './useCurrentWorkspaceSync';
-import { useCopyToClipboard } from '../../../hooks/useCopyToClipboard ';
-import { BASE_FRONTEND_URL } from '../../../constants';
-import { getFormattedDate } from '../../../components/shared/CommentsBlock/AddNewComment.utils';
-import { useWorkspaceStore } from '../../../stores/workspacesStore';
-import { DEFAULT_SORT_OPTION } from '../../../stores/workspacesStore/constants';
 
 export const useWorkspacesTableData = (): ColumnDef<Workspace>[] => {
   const navigate = useNavigate();

@@ -1,12 +1,13 @@
-import { BASE_BACKEND_URL } from '../constants';
+import { BASE_BACKEND_URL } from '@constants';
+import { RawWorkspace } from '@pages/WorkspacesPage/WorkspacesPage.types';
+import { PerPage, SortOption } from '@stores/workspacesStore/constants';
+import { PaginatedData, PromiseAxiosResponse } from '@types';
+
 import {
   CreateWorkspaceValues,
   UpdateWorkspaceValues,
 } from '../hooks/workspaces/useWorkspacesActions';
 
-import { RawWorkspace } from '../pages/WorkspacesPage/WorkspacesPage.types';
-import { PerPage, SortOption } from '../stores/workspacesStore/constants';
-import { PaginatedData, PromiseAxiosResponse } from '../types';
 import { securityAxios } from './securityAxios';
 
 const WORKSPACE_URL = `${BASE_BACKEND_URL}/workspaces`;

@@ -1,13 +1,14 @@
 import React from 'react';
 
-import {
-  StyledDefaultAppLayoutContent,
-  StyledDefaultAppLayoutPageContent,
-} from './DefaultAppLayout.styled';
 import { Box } from '@mui/material';
 
 import { DefaultAppHeader } from '../DefaultAppHeader';
 import { DefaultDrawer } from '../DefaultDrawer';
+
+import {
+  StyledDefaultAppLayoutContent,
+  StyledDefaultAppLayoutPageContent,
+} from './DefaultAppLayout.styled';
 
 export interface DefaultAppLayoutProps {
   children: React.ReactNode;

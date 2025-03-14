@@ -1,4 +1,5 @@
-import { PriorityType } from '../../../../components/shared/ToDoForm/ToDoForm.constants';
+import { PriorityType } from '@shared/ToDoForm/ToDoForm.constants';
+
 import { TodoCardActionBlockProps } from '../TodoCardActionBlock/TodoCardActionBlock.types';
 
 export type TodoCardProps = {

@@ -1,7 +1,8 @@
 import { FC, useState, ReactNode } from 'react';
-import { ClickAwayListener, IconButton } from '@mui/material';
+
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
+import { ClickAwayListener, IconButton } from '@mui/material';
 
 import {
   StyledSwapComponentsActions,

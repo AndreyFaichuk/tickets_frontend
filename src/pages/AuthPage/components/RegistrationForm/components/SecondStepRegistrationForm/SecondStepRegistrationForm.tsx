@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
-import { FormInput } from '../../../../../../components/shared/FormInput';
+import { FormInput } from '@shared/FormInput';
+
 import { REGISTRATION_FORM_NAMES } from '../../constants';
 
 export const SecondStepRegistrationForm: FC = () => {

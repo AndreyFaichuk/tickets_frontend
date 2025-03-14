@@ -1,10 +1,11 @@
-import { BASE_BACKEND_URL } from '../constants';
+import { BASE_BACKEND_URL } from '@constants';
 import {
   RegisteredFormValues,
   RegisterNewUserValues,
-} from '../pages/AuthPage/components/RegistrationForm/RegistrationForm.schema';
-import { AuthUserCheckResponse } from '../pages/AuthPage/hooks/useAuthUserCheck';
-import { LoginFormValues } from '../pages/LoginPage/components/LoginForm/LoginForm.shema';
+} from '@pages/AuthPage/components/RegistrationForm/RegistrationForm.schema';
+import { AuthUserCheckResponse } from '@pages/AuthPage/hooks/useAuthUserCheck';
+import { LoginFormValues } from '@pages/LoginPage/components/LoginForm/LoginForm.shema';
+
 import { securityAxios } from './securityAxios';
 
 const AUTH_URL = `${BASE_BACKEND_URL}/auth`;

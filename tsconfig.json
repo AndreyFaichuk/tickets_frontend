@@ -14,6 +14,19 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "types": ["@testing-library/jest-dom"],
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": ["./src/components/shared/*"],
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@app/*": ["./src/app/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@api/*": ["./src/api/*"],
+      "@assests/*": ["./src/assests/*"],
+      "@constants": ["./src/constants.tsx"],
+      "@types": ["./src/types.ts"],
+    }
   },
   "include": [
     "src/**/*"

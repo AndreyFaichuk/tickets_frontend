@@ -1,8 +1,9 @@
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { expect, test, describe, vi, beforeEach } from 'vitest';
+
 import { renderWithProviders } from '../../../../../tests-utils';
-import { LoginForm } from '../LoginForm';
 import { LOGIN_FORM, LOGIN_FORM_COMPOSITE_NAMES } from '../constants';
+import { LoginForm } from '../LoginForm';
 
 describe('src/pages/LoginPage/components/LoginForm/LoginForm.tsx', () => {
   const handleSubmit = vi.fn();

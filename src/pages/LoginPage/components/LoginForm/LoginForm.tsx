@@ -1,17 +1,21 @@
 import { FC } from 'react';
+
 import { FormProvider, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@mui/material';
+
 import SendIcon from '@mui/icons-material/Send';
+import { Button } from '@mui/material';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AminationWrapper } from '@shared/AminationWrapper';
+import { FormCheckBox } from '@shared/FormCheckBox';
+import { FormInput } from '@shared/FormInput';
+
+import { LOGIN_FORM, LOGIN_FORM_NAMES } from './constants';
+import { LoginFormValues, loginSchema } from './LoginForm.shema';
 import {
   StyledLoginFormInputsWrapper,
   StyledLoginFormRoot,
 } from './LoginForm.styled';
-import { LoginFormValues, loginSchema } from './LoginForm.shema';
-import { FormInput } from '../../../../components/shared/FormInput';
-import { AminationWrapper } from '../../../../components/shared/AminationWrapper';
-import { FormCheckBox } from '../../../../components/shared/FormCheckBox';
-import { LOGIN_FORM, LOGIN_FORM_NAMES } from './constants';
 
 type LoginFormProps = {
   onSubmit: (values: LoginFormValues) => void;

@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { User } from './app/DefaultUserMenu/DefaultUserMenu.types';
+import { User } from '@app/DefaultUserMenu/DefaultUserMenu.types';
 import { DEFAULT_FORM_ELEMENTS } from './constants';
 
 export type ValuesToType<T> = T[keyof T];

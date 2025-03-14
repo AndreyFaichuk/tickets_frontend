@@ -1,5 +1,7 @@
 import { FC } from 'react';
+
 import { Badge, Tooltip, TooltipProps, BadgeProps } from '@mui/material';
+
 import {
   BADGE_ICON_MAPPER,
   BadgeVariants,
