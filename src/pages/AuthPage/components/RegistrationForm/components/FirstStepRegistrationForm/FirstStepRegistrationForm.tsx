@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
-import { FormInput } from '../../../../../../components/shared/FormInput';
-import { StyledRegisteredFormInputsWrapper } from '../../RegistrationForm.styled';
+import { FormInput } from '@shared/FormInput';
+
 import { REGISTRATION_FORM_NAMES } from '../../constants';
+import { StyledRegisteredFormInputsWrapper } from '../../RegistrationForm.styled';
 
 export const FirstStepRegistrationForm: FC = () => {
   return (

@@ -2,14 +2,14 @@ import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { expect, test, describe, vi, beforeEach } from 'vitest';
 
 import { renderWithProviders } from '../../../../../tests-utils';
-import { RegistrationForm } from '../RegistrationForm';
-import * as registrationHooks from '../RegistrationForm.hooks';
-import { SecondStepRegistrationForm } from '../components/SecondStepRegistrationForm';
-import { FIELDS, REGISTRATIONS_STEPS } from '../RegistrationForm.constants';
 import { FirstStepRegistrationForm } from '../components/FirstStepRegistrationForm';
-import { ThirdStepRegistrationForm } from '../components/ThirdStepRegistrationForm';
 import { FourthStepRegistrationForm } from '../components/FourthStepRegistrationForm';
+import { SecondStepRegistrationForm } from '../components/SecondStepRegistrationForm';
+import { ThirdStepRegistrationForm } from '../components/ThirdStepRegistrationForm';
 import { LOGIN_FORM_COMPOSITE_NAMES, REGISTRATION_FORM } from '../constants';
+import { RegistrationForm } from '../RegistrationForm';
+import { FIELDS, REGISTRATIONS_STEPS } from '../RegistrationForm.constants';
+import * as registrationHooks from '../RegistrationForm.hooks';
 
 describe('src/pages/AuthPage/components/RegistrationForm/RegistrationForm.tsx', () => {
   const handleSubmit = vi.fn();

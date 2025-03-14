@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { REGISTRATION_FORM_NAMES } from './constants';
 
 export const registeredSchema = z

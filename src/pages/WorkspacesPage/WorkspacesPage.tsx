@@ -1,19 +1,22 @@
 import { Button, Stack, Typography } from '@mui/material';
-import { StyledWorkspacesPageRoot } from './WorkspacesPage.styled';
-import { DisplayWithLoader } from '../../components/shared/DisplayWithLoader';
-import { PAGES_MAP } from '../../constants';
-import { BaseTable } from '../../components/shared/BaseTable';
 
-import { useWorkspacesFetch } from '../../hooks/workspaces/useWorkspacesFetch';
-import { EmptyWorkspaceBlock } from './components/EmptyWorkspaceBlock';
-import { useWorkspacesTableData } from './hooks/useWorkspacesTableData';
-import { Workspace } from './WorkspacesPage.types';
-import { DefaultAppPage } from '../../app/DefaultAppPage';
-import { useWorkspacesActions } from '../../hooks/workspaces/useWorkspacesActions';
+import { PAGES_MAP } from '@constants';
+
+import { DefaultAppPage } from '@app/DefaultAppPage';
+import { BaseTable } from '@shared/BaseTable';
+import { DisplayWithLoader } from '@shared/DisplayWithLoader';
+import { SwapButtonComponent } from '@shared/SwapButtonComponent';
+
 import { useInviteNewMemberToWorkspace } from '../../hooks/invite/useInviteNewMemberToWorkspace';
+import { useWorkspacesActions } from '../../hooks/workspaces/useWorkspacesActions';
+import { useWorkspacesFetch } from '../../hooks/workspaces/useWorkspacesFetch';
 import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
+
+import { EmptyWorkspaceBlock } from './components/EmptyWorkspaceBlock';
 import { WorkspaceFilterBar } from './components/WorkspaceFilterBar/WorkspaceFilterBar';
-import { SwapButtonComponent } from '../../components/shared/SwapButtonComponent';
+import { useWorkspacesTableData } from './hooks/useWorkspacesTableData';
+import { StyledWorkspacesPageRoot } from './WorkspacesPage.styled';
+import { Workspace } from './WorkspacesPage.types';
 
 export default function WorkspacesPage() {
   useInviteNewMemberToWorkspace();

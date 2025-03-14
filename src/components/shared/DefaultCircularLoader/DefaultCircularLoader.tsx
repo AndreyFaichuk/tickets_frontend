@@ -1,5 +1,7 @@
 import { FC } from 'react';
+
 import { CircularProgress, CircularProgressProps } from '@mui/material';
+
 import { StyledDefaultCircularLoaderRoot } from './DefaultCircularLoader.styled';
 
 type DefaultCircularLoaderProps = CircularProgressProps;

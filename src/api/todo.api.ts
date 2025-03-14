@@ -1,7 +1,9 @@
-import { TodoCardProps } from '../pages/TodosPage/components/TodoCard/TodoCard.types';
+import { BASE_BACKEND_URL } from '@constants';
+import { PromiseAxiosResponse } from '@types';
+
+import { TodoCardProps } from '@pages/TodosPage/components/TodoCard/TodoCard.types';
+
 import { securityAxios } from './securityAxios';
-import { PromiseAxiosResponse } from '../types';
-import { BASE_BACKEND_URL } from '../constants';
 
 const TODO_URL = `${BASE_BACKEND_URL}/todos`;
 

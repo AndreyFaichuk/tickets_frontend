@@ -1,7 +1,8 @@
-import LowPriorityIcon from '../../../assests/icon/lowPriority.svg';
-import HighPriorityIcon from '../../../assests/icon/highPriority.svg';
-import MiddlePriorityIcon from '../../../assests/icon/middlePriority.svg';
-import { ValuesToType } from '../../../types';
+import { ValuesToType } from '@types';
+
+import HighPriorityIcon from '@assests/icon/highPriority.svg';
+import LowPriorityIcon from '@assests/icon/lowPriority.svg';
+import MiddlePriorityIcon from '@assests/icon/middlePriority.svg';
 
 export const PRIORITY_VARIANT = {
   low: 'low',

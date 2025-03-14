@@ -1,6 +1,9 @@
-import { DefaultAuthLayout } from '../../app/DefaultAuthLayout';
-import { AUTH, AUTH_CONTENT } from '../../constants';
+import { AUTH, AUTH_CONTENT } from '@constants';
+
+import { DefaultAuthLayout } from '@app/DefaultAuthLayout';
+
 import { useAuthUser } from '../AuthPage/hooks/useAuthUser';
+
 import { LoginForm } from './components/LoginForm';
 import { LoginFormValues } from './components/LoginForm/LoginForm.shema';
 

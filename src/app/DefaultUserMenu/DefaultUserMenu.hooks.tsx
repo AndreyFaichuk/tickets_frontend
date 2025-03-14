@@ -1,7 +1,9 @@
 import { Typography } from '@mui/material';
-import { useAuth } from '../../components/AppEntry/hooks/useAuth';
-import { UserMenuOption } from './DefaultUserMenu.types';
+
+import { useAuth } from '@components/AppEntry/hooks/useAuth';
+
 import { StyledDefaultMenuItem } from './DefaultUserMenu.styled';
+import { UserMenuOption } from './DefaultUserMenu.types';
 
 export const useDefaultUserMenuOptions = () => {
   const { handleUserLogout } = useAuth();

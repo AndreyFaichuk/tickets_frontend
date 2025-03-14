@@ -1,4 +1,4 @@
-import { ValuesToType } from '../../../../types';
+import { ValuesToType } from '@types';
 
 export const CURRENT_DND_COLUMN_INITIAL_STATE = {
   fromColumnId: 'fromColumnId',

@@ -1,16 +1,19 @@
 import { FC } from 'react';
-import DOMPurify from 'dompurify';
 
 import { Avatar, Box, Button, Stack, Tooltip, Typography } from '@mui/material';
-import { TextEditor } from '../TextEditor';
-import { useTextEditorConfig } from './hooks/useTextEditorConfig';
+
+import DOMPurify from 'dompurify';
+
 import { useCommentsActions } from '../../../hooks/comments/useCommentsActions';
 import { Comment as CommentType } from '../CommentsBlock/AddNewComment.types';
+import { TextEditor } from '../TextEditor';
+
 import {
   StyledAddNewCommentSection,
   StyledAddNewCommentRoot,
 } from './AddNewComment.styled';
 import { getFormattedDate, getIsSameDate } from './AddNewComment.utils';
+import { useTextEditorConfig } from './hooks/useTextEditorConfig';
 
 type CommentsBlockProps = {
   currentUserId: string;

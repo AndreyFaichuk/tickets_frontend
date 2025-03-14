@@ -1,10 +1,11 @@
 import { FC } from 'react';
 
-import { BaseHeader } from '../BaseHeader';
-import { StyledDefaultAppHeaderUserMenu } from './DefaultAppHeader.styled';
-import trelloIcon from '../../assests/icon/todoList.svg';
+import trelloIcon from '@assests/icon/todoList.svg';
 
+import { BaseHeader } from '../BaseHeader';
 import { DefaultUserMenu } from '../DefaultUserMenu';
+
+import { StyledDefaultAppHeaderUserMenu } from './DefaultAppHeader.styled';
 
 export const DefaultAppHeader: FC = () => {
   return (

@@ -1,16 +1,20 @@
 import { FC } from 'react';
+
 import { FormProvider, useForm } from 'react-hook-form';
+
+import { Button, Stack } from '@mui/material';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { StyledToDoFormRoot, StyledToDoFormSection } from './ToDoForm.styled';
-import { FormInput } from '../FormInput';
-import { Button, Stack } from '@mui/material';
-import { FormTextArea } from '../FormTextArea';
-import { FormProgressSlider } from '../FormProgressSlider';
-import { todoSchema, TodoValues } from './ToDoForm.schema';
-import { FormSelect } from '../FormSelect';
-import { PRIORITY_OPTIONS } from './ToDoForm.constants';
 import { FormAttachmentBlock } from '../FormAttachmentBlock';
+import { FormInput } from '../FormInput';
+import { FormProgressSlider } from '../FormProgressSlider';
+import { FormSelect } from '../FormSelect';
+import { FormTextArea } from '../FormTextArea';
+
+import { PRIORITY_OPTIONS } from './ToDoForm.constants';
+import { todoSchema, TodoValues } from './ToDoForm.schema';
+import { StyledToDoFormRoot, StyledToDoFormSection } from './ToDoForm.styled';
 
 type ToDoFormProps = {
   onSubmit: (values: TodoValues) => void;

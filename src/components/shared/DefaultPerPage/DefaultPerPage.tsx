@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import {
   FormControl,
   InputLabel,
@@ -7,10 +8,8 @@ import {
   SelectChangeEvent,
   SelectProps,
 } from '@mui/material';
-import {
-  DEFAULT_PER_PAGE,
-  PerPage,
-} from '../../../stores/workspacesStore/constants';
+
+import { DEFAULT_PER_PAGE, PerPage } from '@stores/workspacesStore/constants';
 
 type DefaultPerPageProps = SelectProps & {
   currentPerPage: PerPage;

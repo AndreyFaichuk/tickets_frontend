@@ -1,15 +1,18 @@
 import { FC } from 'react';
+
 import { Stack } from '@mui/material';
 
-import { FormCheckBox } from '../../../../../../components/shared/FormCheckBox';
-import { FormDatePicker } from '../../../../../../components/shared/FormDatePicker';
-import { FormInput } from '../../../../../../components/shared/FormInput';
+import { FormCheckBox } from '@shared/FormCheckBox';
+import { FormDatePicker } from '@shared/FormDatePicker';
+import { FormInput } from '@shared/FormInput';
+
+import { useBreakpoint } from '../../../../../../hooks/useBreakpoint';
+import { REGISTRATION_FORM_NAMES } from '../../constants';
+
 import {
   FourthStepRegistrationFormInputsWrapper,
   FourthStepRegistrationFormRoot,
 } from './FourthStepRegistrationForm.styled';
-import { useBreakpoint } from '../../../../../../hooks/useBreakpoint';
-import { REGISTRATION_FORM_NAMES } from '../../constants';
 
 export const FourthStepRegistrationForm: FC = () => {
   const isLessThanMobile = useBreakpoint('down', 'mobile');

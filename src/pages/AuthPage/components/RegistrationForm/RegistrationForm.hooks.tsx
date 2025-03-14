@@ -1,14 +1,16 @@
 import { useState } from 'react';
+
 import { UseFormTrigger } from 'react-hook-form';
+
+import { FirstStepRegistrationForm } from './components/FirstStepRegistrationForm';
+import { FourthStepRegistrationForm } from './components/FourthStepRegistrationForm';
+import { SecondStepRegistrationForm } from './components/SecondStepRegistrationForm';
+import { ThirdStepRegistrationForm } from './components/ThirdStepRegistrationForm';
 import {
   FIELDS,
   FieldsToRegistration,
   REGISTRATIONS_STEPS,
 } from './RegistrationForm.constants';
-import { FirstStepRegistrationForm } from './components/FirstStepRegistrationForm';
-import { SecondStepRegistrationForm } from './components/SecondStepRegistrationForm';
-import { ThirdStepRegistrationForm } from './components/ThirdStepRegistrationForm';
-import { FourthStepRegistrationForm } from './components/FourthStepRegistrationForm';
 import { RegisteredFormValues } from './RegistrationForm.schema';
 
 type useRegistrationFormManagementProps = {

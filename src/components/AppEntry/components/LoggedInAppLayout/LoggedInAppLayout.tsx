@@ -1,20 +1,19 @@
 import { lazy, Suspense } from 'react';
+
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { DefaultAppLayout } from '../../../../app/DefaultAppLayout';
+import { DefaultAppLayout } from '@app/DefaultAppLayout';
+import { DefaultCircularLoader } from '@shared/DefaultCircularLoader/DefaultCircularLoader';
+
 import { ADD_LOGGED_IN_ROUTES } from '../../../../constants/routes';
-import { DefaultCircularLoader } from '../../../shared/DefaultCircularLoader/DefaultCircularLoader';
 
 const LazyWorkspacesPage = lazy(
-  () => import('../../../../pages/WorkspacesPage/WorkspacesPage'),
-);
-const LazyTodosPage = lazy(
-  () => import('../../../../pages/TodosPage/TodosPage'),
+  () => import('@pages/WorkspacesPage/WorkspacesPage'),
 );
 
-const LazyEditTodoPage = lazy(
-  () => import('../../../../pages/EditTodoPage/EditTodoPage'),
-);
+const LazyTodosPage = lazy(() => import('@pages/TodosPage/TodosPage'));
+
+const LazyEditTodoPage = lazy(() => import('@pages/EditTodoPage/EditTodoPage'));
 
 export default function LoggedInAppLayout() {
   return (

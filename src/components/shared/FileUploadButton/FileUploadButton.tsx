@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { Button, ButtonProps, styled } from '@mui/material';
+
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import { Button, ButtonProps, styled } from '@mui/material';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',

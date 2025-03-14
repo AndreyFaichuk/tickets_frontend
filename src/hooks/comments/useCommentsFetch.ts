@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { CommentsApi } from '../../api/comments.api';
+import { CommentsApi } from '@api/comments.api';
 import {
   getDefaultComment,
   getNormalizeComments,
-} from '../../components/shared/CommentsBlock/AddNewComment.utils';
+} from '@shared/CommentsBlock/AddNewComment.utils';
+
 import { useGetCurrentUser } from '../user/useGetCurrentUser';
 
 export const commentsQueryKeys = {

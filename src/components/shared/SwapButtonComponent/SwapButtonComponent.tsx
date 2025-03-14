@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
-import { SwapComponents } from '../SwapComponents';
+
 import { Input } from '../Input';
+import { SwapComponents } from '../SwapComponents';
 
 type SwapButtonComponentProps = {
   onApprove: (text: string) => void;

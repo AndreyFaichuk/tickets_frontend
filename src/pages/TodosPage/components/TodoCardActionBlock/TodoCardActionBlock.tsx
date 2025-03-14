@@ -1,9 +1,9 @@
-import { TodoCardActionBlockProps } from './TodoCardActionBlock.types';
-import { Stack } from '@mui/material';
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeOutlinedIcon from '@mui/icons-material/ModeOutlined';
+import { Stack } from '@mui/material';
+
 import { StyledTodoCardActionBlockIcon } from './TodoCardActionBlock.styled';
+import { TodoCardActionBlockProps } from './TodoCardActionBlock.types';
 
 export const TodoCardActionBlock = ({
   actions,

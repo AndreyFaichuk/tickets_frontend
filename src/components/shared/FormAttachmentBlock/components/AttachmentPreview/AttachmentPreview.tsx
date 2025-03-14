@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { Tooltip } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 
+import CloseIcon from '@mui/icons-material/Close';
+import { Tooltip } from '@mui/material';
+
+import {
+  ATTACHMENT_ICON_MAP,
+  ATTACHMENTS_TYPE_MAP,
+  AttachmentType,
+} from './AttachmentPreview.constants';
 import {
   StyledFormAttachmentButton,
   StyledFormAttachmentImage,
@@ -10,11 +16,6 @@ import {
   StyledFormAttachmentTypeLabel,
   StyledFormAttachmentTypeWrapper,
 } from './AttachmentPreview.styled';
-import {
-  ATTACHMENT_ICON_MAP,
-  ATTACHMENTS_TYPE_MAP,
-  AttachmentType,
-} from './AttachmentPreview.constants';
 
 interface DocumentPreviewProps {
   file: File;

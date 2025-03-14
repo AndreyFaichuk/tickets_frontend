@@ -1,13 +1,16 @@
-import { securityAxios } from './securityAxios';
-import { PromiseAxiosResponse } from '../types';
+import { BASE_BACKEND_URL } from '@constants';
+import { PromiseAxiosResponse } from '@types';
+
+import { CurrentDnDColumnType } from '@pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.constants';
+import { RawColumnType } from '@pages/TodosPage/components/DnDToDoProvider/hooks/useColumnsManagement';
+
 import {
   ColumnForCreate,
   ColumnForReplace,
   ColumnForUpdate,
 } from '../hooks/columns/useColumnsActions';
-import { CurrentDnDColumnType } from '../pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.constants';
-import { BASE_BACKEND_URL } from '../constants';
-import { RawColumnType } from '../pages/TodosPage/components/DnDToDoProvider/hooks/useColumnsManagement';
+
+import { securityAxios } from './securityAxios';
 
 const COLUMN_URL = `${BASE_BACKEND_URL}/columns`;
 

@@ -1,4 +1,4 @@
-import { ValuesToType } from '../../types';
+import { ValuesToType } from '@types';
 
 export const DEFAULT_CURRENT_PAGE = '1' as const;
 

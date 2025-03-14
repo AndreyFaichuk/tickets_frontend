@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { StyledMenuListRoot } from './MenuList.styled';
 
 type MenuListProps = {

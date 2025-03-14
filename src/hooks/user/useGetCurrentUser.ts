@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-import { UserApi } from '../../api/user.api';
-import { AxiosErrorResponse } from '../../types';
-import { useAuth } from '../../components/AppEntry/hooks/useAuth';
-import { User } from '../../app/DefaultUserMenu/DefaultUserMenu.types';
+import { useQuery, UseQueryResult } from '@tanstack/react-query';
+import { AxiosErrorResponse } from '@types';
+import { toast } from 'react-toastify';
+
+import { UserApi } from '@api/user.api';
+import { User } from '@app/DefaultUserMenu/DefaultUserMenu.types';
+import { useAuth } from '@components/AppEntry/hooks/useAuth';
 
 export const usersQueryKeys = {
   user: {

@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { CommentsApi } from '../../api/comments.api';
+
+import { CommentsApi } from '@api/comments.api';
+
 import { commentsQueryKeys } from './useCommentsFetch';
 
 export type CreateCommentValues = {

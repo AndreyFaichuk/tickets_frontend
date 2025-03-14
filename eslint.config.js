@@ -4,6 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended';
+import importPlugin from 'eslint-plugin-import';
 
 export default tseslint
   .config(
@@ -18,6 +19,7 @@ export default tseslint
       plugins: {
         'react-hooks': reactHooks,
         'react-refresh': reactRefresh,
+        import: importPlugin,
       },
       rules: {
         ...reactHooks.configs.recommended.rules,
@@ -28,6 +30,65 @@ export default tseslint
           'error',
           {
             endOfLine: 'auto',
+          },
+        ],
+        'import/order': [
+          'error',
+          {
+            groups: [
+              'builtin',
+              'external',
+              'internal',
+              'parent',
+              'sibling',
+              'index',
+              'object',
+              'type',
+            ],
+            'newlines-between': 'always',
+            alphabetize: {
+              order: 'asc',
+              caseInsensitive: true,
+            },
+            pathGroups: [
+              {
+                pattern: 'react',
+                group: 'external',
+                position: 'before',
+              },
+              {
+                pattern: 'react-router-dom',
+                group: 'external',
+                position: 'before',
+              },
+              {
+                pattern: '@dnd-kit/**',
+                group: 'external',
+                position: 'before',
+              },
+              {
+                pattern: 'dayjs',
+                group: 'external',
+                position: 'before',
+              },
+              {
+                pattern: 'react-hook-form',
+                group: 'external',
+                position: 'before',
+              },
+              {
+                pattern: '@mui/**',
+                group: 'external',
+                position: 'before',
+              },
+              {
+                pattern:
+                  '@{components,shared,hooks,stores,app,pages,api,assests,constants,types}/**',
+                group: 'internal',
+                position: 'after',
+              },
+            ],
+            pathGroupsExcludedImportTypes: ['builtin'],
           },
         ],
       },

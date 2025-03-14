@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { BasePage } from '../BasePage';
+
 import { useGetBackMatcher } from './hooks/useGetBackMatcher';
 
 type DefaultAppPageProps = {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TodoCardProps } from '../../TodoCard/TodoCard.types';
+
 import {
   DragEndEvent,
   DragOverEvent,
@@ -11,13 +11,15 @@ import {
 } from '@dnd-kit/core';
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
-import { ColumnType, useColumnsManagement } from './useColumnsManagement';
+import { useColumnActions } from '../../../../../hooks/columns/useColumnsActions';
+import { TodoCardProps } from '../../TodoCard/TodoCard.types';
 import {
   CURRENT_DND_COLUMN_INITIAL_STATE,
   CurrentDnDColumnState,
   CurrentDnDColumnType,
 } from '../DnDToDoProvider.constants';
-import { useColumnActions } from '../../../../../hooks/columns/useColumnsActions';
+
+import { ColumnType, useColumnsManagement } from './useColumnsManagement';
 
 export const useDnDManagement = (data: ColumnType[]) => {
   const { handleMoveTodoColumns } = useColumnActions();

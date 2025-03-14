@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosErrorResponse } from '@types';
 import { toast } from 'react-toastify';
 
-import { RegisterNewUserValues } from '../components/RegistrationForm/RegistrationForm.schema';
-import { AuthApi } from '../../../api/auth.api';
-import { AxiosErrorResponse } from '../../../types';
-import {
-  ADD_LOGGED_IN_ROUTES,
-  ADD_PUBLIC_ROUTES,
-} from '../../../constants/routes';
-import { LoginFormValues } from '../../LoginPage/components/LoginForm/LoginForm.shema';
+import { AuthApi } from '@api/auth.api';
+import { workspacesQueryKeys } from '@hooks/workspaces/useWorkspacesFetch';
+
+import { ADD_LOGGED_IN_ROUTES } from '../../../constants/routes';
 import { usersQueryKeys } from '../../../hooks/user/useGetCurrentUser';
-import { workspacesQueryKeys } from '../../../hooks/workspaces/useWorkspacesFetch';
+import { LoginFormValues } from '../../LoginPage/components/LoginForm/LoginForm.shema';
+import { RegisterNewUserValues } from '../components/RegistrationForm/RegistrationForm.schema';
+
 import { authQueryKeys } from './useAuthUserCheck';
 
 export const useAuthUser = () => {

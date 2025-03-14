@@ -1,7 +1,8 @@
+import { Controller, useFormContext } from 'react-hook-form';
+
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
-import { Controller, useFormContext } from 'react-hook-form';
 
 const MAX = 100;
 const MIN = 0;

@@ -1,7 +1,9 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { PaginationSlice, workspacePaginationSlice } from './paginationSlice';
+
 import { createSelectors } from '../storeSelectors';
+
+import { PaginationSlice, workspacePaginationSlice } from './paginationSlice';
 import { WorkspaceSlice, workspaceSlice } from './workspacesSlice';
 
 type WorkspaceStore = PaginationSlice & WorkspaceSlice;

@@ -1,12 +1,15 @@
 import { ChangeEvent, FC } from 'react';
-import { Button, Checkbox, Divider, FormControlLabel } from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
-import { InputDebouncedValue } from '../../../../components/shared/InputDebouncedValue';
-import { useWorkspaceStore } from '../../../../stores/workspacesStore';
-import { useWorkspacesFetch } from '../../../../hooks/workspaces/useWorkspacesFetch';
+import { Button, Checkbox, Divider, FormControlLabel } from '@mui/material';
+
+import { useWorkspacesFetch } from '@hooks/workspaces/useWorkspacesFetch';
+import { DefaultPerPage } from '@shared/DefaultPerPage';
+import { InputDebouncedValue } from '@shared/InputDebouncedValue';
+import { Paginator } from '@shared/Paginator';
+import { useWorkspaceStore } from '@stores/workspacesStore';
+
 import { StyledWorkspaceFilterBarRoot } from './WorkspaceFilterBar.styled';
-import { DefaultPerPage } from '../../../../components/shared/DefaultPerPage';
-import { Paginator } from '../../../../components/shared/Paginator';
 
 export const WorkspaceFilterBar: FC = () => {
   const { allWorkspaces } = useWorkspacesFetch();

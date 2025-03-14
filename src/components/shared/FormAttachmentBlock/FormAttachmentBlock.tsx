@@ -1,6 +1,12 @@
 import { FC } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+
 import { Controller } from 'react-hook-form';
+
+import { Box, Stack, Typography } from '@mui/material';
+
+import { FileUploadButton } from '../FileUploadButton';
+
+import { AttachmentPreview } from './components/AttachmentPreview';
 import {
   StyledFormAttachmentButtonWrapper,
   StyledFormAttachmentPlaceholderWrapper,
@@ -10,8 +16,6 @@ import {
   convertFilesToFileList,
   mergeFiles,
 } from './FormAttachmentBlock.utils';
-import { FileUploadButton } from '../FileUploadButton';
-import { AttachmentPreview } from './components/AttachmentPreview';
 import { useAttachmentBlock } from './hooks/useAttachmentBlock';
 
 type FormAttachmentBlockProps = {

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { LOGIN_FORM_NAMES } from './constants';
 
 export const loginSchema = z.object({

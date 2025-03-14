@@ -1,7 +1,9 @@
-import { RawComment } from '../components/shared/CommentsBlock/AddNewComment.types';
-import { BASE_BACKEND_URL } from '../constants';
-import { CreateCommentValues } from '../hooks/comments/useCommentsActions';
-import { PromiseAxiosResponse } from '../types';
+import { BASE_BACKEND_URL } from '@constants';
+import { PromiseAxiosResponse } from '@types';
+
+import { CreateCommentValues } from '@hooks/comments/useCommentsActions';
+import { RawComment } from '@shared/CommentsBlock/AddNewComment.types';
+
 import { securityAxios } from './securityAxios';
 
 const COMMENT_URL = `${BASE_BACKEND_URL}/comments`;

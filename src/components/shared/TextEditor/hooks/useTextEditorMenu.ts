@@ -1,4 +1,7 @@
+import { SelectChangeEvent } from '@mui/material';
+
 import { Editor } from '@tiptap/react';
+
 import {
   Color,
   DEFAULT_COLOR_VALUES_MAP,
@@ -11,7 +14,6 @@ import {
   TextEditorHeading,
   TextEditorPosition,
 } from '../TextEditor.constants';
-import { SelectChangeEvent } from '@mui/material';
 import { getDefaultEditorOptions, MenuBar } from '../TextEditor.utils';
 
 export type TextEditorStyles =

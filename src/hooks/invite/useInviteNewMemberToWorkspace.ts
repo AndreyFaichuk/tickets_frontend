@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
+
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AxiosError } from 'axios';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { InviteApi } from '../../api/invite.api';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
+
+import { InviteApi } from '@api/invite.api';
+import { useWorkspaceStore } from '@stores/workspacesStore';
+
 import { ADD_LOGGED_IN_ROUTES } from '../../constants/routes';
 import { workspacesQueryKeys } from '../workspaces/useWorkspacesFetch';
-import { useWorkspaceStore } from '../../stores/workspacesStore';
 
 const TOAST_STYLES = {
   width: '600px',

@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import SettingsIcon from '@mui/icons-material/Settings';
 import {
   Divider,
   ListItem,
@@ -14,9 +14,11 @@ import {
   Tooltip,
 } from '@mui/material';
 
-import { DrawerOption } from './DefaultDrawer.types';
+import { useAuth } from '@components/AppEntry/hooks/useAuth';
+
 import { ADD_LOGGED_IN_ROUTES } from '../../constants/routes';
-import { useAuth } from '../../components/AppEntry/hooks/useAuth';
+
+import { DrawerOption } from './DefaultDrawer.types';
 
 type useDefaultDrawerOptionsProps = {
   isOpen: boolean;

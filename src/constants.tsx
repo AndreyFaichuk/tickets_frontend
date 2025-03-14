@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import { AuthContent, AuthType, ValuesToType } from './types';
+
+import { AuthContent, AuthType, ValuesToType } from '@types';
+
 import { ADD_PUBLIC_ROUTES } from './constants/routes';
 
 export const AUTH_CONTENT: Record<AuthType, AuthContent> = {

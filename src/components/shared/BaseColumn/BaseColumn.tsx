@@ -1,22 +1,26 @@
 import { FC } from 'react';
+
 import { useNavigate } from 'react-router-dom';
-import { CircularProgress, Stack, Typography } from '@mui/material';
+
 import { useDroppable } from '@dnd-kit/core';
 import { rectSortingStrategy, SortableContext } from '@dnd-kit/sortable';
-import CloseIcon from '@mui/icons-material/Close';
 
+import CloseIcon from '@mui/icons-material/Close';
+import { CircularProgress, Stack, Typography } from '@mui/material';
+
+import { TodoCard } from '@pages/TodosPage/components/TodoCard';
+import { TodoCardProps } from '@pages/TodosPage/components/TodoCard/TodoCard.types';
+
+import { useColumnActions } from '../../../hooks/columns/useColumnsActions';
+import { SwapButtonComponent } from '../SwapButtonComponent';
+
+import { BASE_COLUMN_MODAL_TYPES } from './BaseColumn.constants';
 import {
   StyledBaseColumnAddToDoButton,
   StyledBaseColumnRoot,
   StyledCloseIconButton,
 } from './BaseColumn.styled';
-import { TodoCard } from '../../../pages/TodosPage/components/TodoCard';
-import { TodoCardProps } from '../../../pages/TodosPage/components/TodoCard/TodoCard.types';
-
-import { BASE_COLUMN_MODAL_TYPES } from './BaseColumn.constants';
 import { useBaseColumnManagement } from './hooks/useBaseColumnManagement';
-import { useColumnActions } from '../../../hooks/columns/useColumnsActions';
-import { SwapButtonComponent } from '../SwapButtonComponent';
 
 type BaseColumn = {
   initialTodos: TodoCardProps[];

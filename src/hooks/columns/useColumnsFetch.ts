@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
 
-import { ColumnApi } from '../../api/column.api';
-import { SelectOptions } from '../../components/shared/FormSelect/FormSelect';
-import { getNormalizeColumns } from '../../pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.utils';
-import { useWorkspaceStore } from '../../stores/workspacesStore';
+import { ColumnApi } from '@api/column.api';
+import { getNormalizeColumns } from '@pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.utils';
+import { SelectOptions } from '@shared/FormSelect/FormSelect';
+import { useWorkspaceStore } from '@stores/workspacesStore';
 
 export const columnsQueryKeys = {
   columns: {

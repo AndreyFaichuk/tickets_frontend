@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
+
 import { v4 as uuidv4 } from 'uuid';
+
 import { Comment, RawComment } from './AddNewComment.types';
 
 export const getNormalizeComments = (rawComments: RawComment[]): Comment[] => {

@@ -1,11 +1,12 @@
 import { FC } from 'react';
+
 import { Typography } from '@mui/material';
 
-import { CircularProgressWithLabelProps } from './CircularProgressWithLabel.types';
 import {
   CircularProgressWithLabelContent,
   CustomCircularProgress,
 } from './CircularProgressWithLabel.styled';
+import { CircularProgressWithLabelProps } from './CircularProgressWithLabel.types';
 
 const CircularWithValueLabel: FC<CircularProgressWithLabelProps> = (
   props: CircularProgressWithLabelProps,
