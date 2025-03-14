@@ -31,11 +31,11 @@ export const DefaultUserMenu = () => {
   };
 
   if (isCurrentUserLoading) {
-    return <Skeleton variant="circular" width={40} height={40} />;
+    return <Skeleton variant="circular" width={40} height={40} id="skeleton" />;
   }
 
   return (
-    <Stack direction="row" gap={1} alignItems="center">
+    <Stack direction="row" gap={1} alignItems="center" id="default-user-menu">
       <Typography variant="h6">
         {`${currentUser.firstName}  ${currentUser.lastName}`}
       </Typography>
