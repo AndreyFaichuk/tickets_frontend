@@ -1,10 +1,9 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
+import { DefaultPublicAppLayout } from '@app/DefaultPublicAppLayout';
 import AuthPage from '@pages/AuthPage/AuthPage';
 import LoginPage from '@pages/LoginPage/LoginPage';
 import { useWorkspaceStore } from '@stores/workspacesStore';
-
-import { DefaultPublicAppLayout } from '@app/DefaultPublicAppLayout';
 
 import { ADD_PUBLIC_ROUTES } from '../../../../constants/routes';
 

@@ -1,7 +1,8 @@
 import { BASE_BACKEND_URL } from '@constants';
+import { PromiseAxiosResponse } from '@types';
+
 import { CurrentDnDColumnType } from '@pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.constants';
 import { RawColumnType } from '@pages/TodosPage/components/DnDToDoProvider/hooks/useColumnsManagement';
-import { PromiseAxiosResponse } from '@types';
 
 import {
   ColumnForCreate,

@@ -1,4 +1,5 @@
 import { BASE_BACKEND_URL } from '@constants';
+
 import {
   RegisteredFormValues,
   RegisterNewUserValues,

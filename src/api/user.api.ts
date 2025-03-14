@@ -1,4 +1,5 @@
 import { BASE_BACKEND_URL } from '@constants';
+
 import { RegisteredFormValues } from '@pages/AuthPage/components/RegistrationForm/RegistrationForm.schema';
 
 import { securityAxios } from './securityAxios';

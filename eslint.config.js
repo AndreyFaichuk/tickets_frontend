@@ -82,7 +82,8 @@ export default tseslint
                 position: 'before',
               },
               {
-                pattern: '@{api,app,components,types}/**',
+                pattern:
+                  '@{components,shared,hooks,stores,app,pages,api,assests,constants,types}/**',
                 group: 'internal',
                 position: 'after',
               },

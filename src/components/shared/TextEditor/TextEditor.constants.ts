@@ -1,6 +1,7 @@
-import { green, red, blue, purple } from '@mui/material/colors';
-import { ValuesToType } from '@types';
 import { hexToRgb } from '@mui/material';
+import { green, red, blue, purple } from '@mui/material/colors';
+
+import { ValuesToType } from '@types';
 
 export const DEFAULT_POSITION_VALUES_MAP = {
   Left: 'left',

@@ -2,10 +2,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 
 import { ColumnApi } from '@api/column.api';
-import { columnsQueryKeys } from './useColumnsFetch';
 import { CurrentDnDColumnType } from '@pages/TodosPage/components/DnDToDoProvider/DnDToDoProvider.constants';
-import { workspacesQueryKeys } from '../workspaces/useWorkspacesFetch';
 import { useWorkspaceStore } from '@stores/workspacesStore';
+
+import { workspacesQueryKeys } from '../workspaces/useWorkspacesFetch';
+
+import { columnsQueryKeys } from './useColumnsFetch';
 
 export type ColumnForUpdate = {
   title?: string;

@@ -5,6 +5,7 @@ import {
   getDefaultComment,
   getNormalizeComments,
 } from '@shared/CommentsBlock/AddNewComment.utils';
+
 import { useGetCurrentUser } from '../user/useGetCurrentUser';
 
 export const commentsQueryKeys = {

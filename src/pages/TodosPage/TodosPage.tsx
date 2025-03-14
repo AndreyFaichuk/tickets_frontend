@@ -1,9 +1,9 @@
 import { PAGES_MAP } from '@constants';
+
+import { DefaultAppPage } from '@app/DefaultAppPage';
 import { useColumnsFetch } from '@hooks/columns/useColumnsFetch';
 import { useWorkspaceFetchById } from '@hooks/workspaces/useWorkspaceFetchById';
 import { DisplayWithLoader } from '@shared/DisplayWithLoader';
-
-import { DefaultAppPage } from '@app/DefaultAppPage';
 
 import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
 import { useCurrentWorkspaceSync } from '../WorkspacesPage/hooks/useCurrentWorkspaceSync';

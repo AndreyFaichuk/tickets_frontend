@@ -1,4 +1,5 @@
 import { StateCreator } from 'zustand';
+
 import {
   DEFAULT_CURRENT_PAGE,
   DEFAULT_PER_PAGE,

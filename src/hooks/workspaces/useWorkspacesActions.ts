@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { workspacesQueryKeys } from './useWorkspacesFetch';
+
 import { WorkspaceApi } from '@api/workspace.api';
+
+import { workspacesQueryKeys } from './useWorkspacesFetch';
 
 export type CreateWorkspaceValues = {
   title: string;

@@ -1,5 +1,7 @@
 import { styled, Box, CircularProgress } from '@mui/material';
+
 import { theme } from '../../../../theme';
+
 import { getProgressColor } from './CircularProgressWithLabel.utils';
 
 export const CircularProgressWithLabelContent = styled(Box)(() => ({

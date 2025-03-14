@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { Stack } from '@mui/material';
 
 import { PAGES_MAP } from '@constants';
+
+import { DefaultAppPage } from '@app/DefaultAppPage';
 import { useCommentsFetch } from '@hooks/comments/useCommentsFetch';
 import { useGetCurrentUser } from '@hooks/user/useGetCurrentUser';
 import { useTodoActions } from '@hooks/useTodoActions';
@@ -13,8 +15,6 @@ import { AddNewComment } from '@shared/CommentsBlock';
 import { DisplayWithLoader } from '@shared/DisplayWithLoader';
 import { ToDoForm } from '@shared/ToDoForm/ToDoForm';
 import { TodoValues } from '@shared/ToDoForm/ToDoForm.schema';
-
-import { DefaultAppPage } from '@app/DefaultAppPage';
 
 import { useAuthUserCheck } from '../AuthPage/hooks/useAuthUserCheck';
 

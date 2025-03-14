@@ -1,13 +1,16 @@
 import { useEffect, useCallback } from 'react';
+
 import { useNavigate, useLocation } from 'react-router-dom';
+
+import { useAuthUser } from '@pages/AuthPage/hooks/useAuthUser';
+import { useAuthUserCheck } from '@pages/AuthPage/hooks/useAuthUserCheck';
+import { useCurrentWorkspaceSync } from '@pages/WorkspacesPage/hooks/useCurrentWorkspaceSync';
+import { useWorkspaceStore } from '@stores/workspacesStore';
+
 import {
   ADD_LOGGED_IN_ROUTES,
   ADD_PUBLIC_ROUTES,
 } from '../../../constants/routes';
-import { useCurrentWorkspaceSync } from '@pages/WorkspacesPage/hooks/useCurrentWorkspaceSync';
-import { useAuthUserCheck } from '@pages/AuthPage/hooks/useAuthUserCheck';
-import { useAuthUser } from '@pages/AuthPage/hooks/useAuthUser';
-import { useWorkspaceStore } from '@stores/workspacesStore';
 
 const PUBLIC_ROUTES = Object.keys(ADD_PUBLIC_ROUTES);
 

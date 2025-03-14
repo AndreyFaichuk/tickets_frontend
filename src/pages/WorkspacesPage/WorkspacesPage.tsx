@@ -1,11 +1,11 @@
 import { Button, Stack, Typography } from '@mui/material';
 
 import { PAGES_MAP } from '@constants';
+
+import { DefaultAppPage } from '@app/DefaultAppPage';
 import { BaseTable } from '@shared/BaseTable';
 import { DisplayWithLoader } from '@shared/DisplayWithLoader';
 import { SwapButtonComponent } from '@shared/SwapButtonComponent';
-
-import { DefaultAppPage } from '@app/DefaultAppPage';
 
 import { useInviteNewMemberToWorkspace } from '../../hooks/invite/useInviteNewMemberToWorkspace';
 import { useWorkspacesActions } from '../../hooks/workspaces/useWorkspacesActions';

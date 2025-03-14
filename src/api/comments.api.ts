@@ -1,7 +1,8 @@
 import { BASE_BACKEND_URL } from '@constants';
+import { PromiseAxiosResponse } from '@types';
+
 import { CreateCommentValues } from '@hooks/comments/useCommentsActions';
 import { RawComment } from '@shared/CommentsBlock/AddNewComment.types';
-import { PromiseAxiosResponse } from '@types';
 
 import { securityAxios } from './securityAxios';
 

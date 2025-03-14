@@ -1,7 +1,8 @@
 import { BASE_BACKEND_URL } from '@constants';
+import { PaginatedData, PromiseAxiosResponse } from '@types';
+
 import { RawWorkspace } from '@pages/WorkspacesPage/WorkspacesPage.types';
 import { PerPage, SortOption } from '@stores/workspacesStore/constants';
-import { PaginatedData, PromiseAxiosResponse } from '@types';
 
 import {
   CreateWorkspaceValues,

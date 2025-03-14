@@ -15,11 +15,12 @@ import {
 } from '@mui/material';
 
 import { BASE_FRONTEND_URL } from '@constants';
+import { ColumnDef } from '@tanstack/react-table';
+
 import { useCopyToClipboard } from '@hooks/useCopyToClipboard ';
 import { getFormattedDate } from '@shared/CommentsBlock/AddNewComment.utils';
 import { useWorkspaceStore } from '@stores/workspacesStore';
 import { DEFAULT_SORT_OPTION } from '@stores/workspacesStore/constants';
-import { ColumnDef } from '@tanstack/react-table';
 
 import { Workspace } from '../WorkspacesPage.types';
 

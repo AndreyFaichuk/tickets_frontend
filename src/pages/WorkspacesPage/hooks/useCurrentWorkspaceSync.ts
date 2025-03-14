@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { useWorkspaceStore } from '@stores/workspacesStore';
 
 export const useCurrentWorkspaceSync = () => {
