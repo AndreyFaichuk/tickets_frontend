@@ -22,7 +22,7 @@ type ToDoFormProps = {
   defaultValues?: TodoValues;
 };
 
-export const ToDoForm: FC<ToDoFormProps> = ({
+const ToDoForm: FC<ToDoFormProps> = ({
   onSubmit,
   defaultValues,
   isLoading = false,
@@ -76,3 +76,5 @@ export const ToDoForm: FC<ToDoFormProps> = ({
     </FormProvider>
   );
 };
+
+export default ToDoForm;

@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { Box, Button } from '@mui/material';
 
+import ToDoForm from '@shared/ToDoForm/ToDoForm';
+
 import { useColumnActions } from '../../../../hooks/columns/useColumnsActions';
 import { useColumnsFetch } from '../../../../hooks/columns/useColumnsFetch';
 import { useTodoActions } from '../../../../hooks/useTodoActions';
@@ -9,7 +11,6 @@ import { BaseModal } from '../../BaseModal';
 import { ConfirmationDialog } from '../../ConfirmationDialog';
 import { DeleteColumnForm } from '../../DeleteColumnForm';
 import { DeleteColumnValues } from '../../DeleteColumnForm/DeleteColumnForm.schema';
-import { ToDoForm } from '../../ToDoForm/ToDoForm';
 import { TodoValues } from '../../ToDoForm/ToDoForm.schema';
 import {
   BASE_COLUMN_MODAL_TYPES,

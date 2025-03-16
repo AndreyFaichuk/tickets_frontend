@@ -1,1 +1,0 @@
-export { AddNewComment } from './AddNewComment';

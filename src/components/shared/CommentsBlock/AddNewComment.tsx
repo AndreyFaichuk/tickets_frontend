@@ -4,7 +4,8 @@ import { Avatar, Box, Button, Stack, Tooltip, Typography } from '@mui/material';
 
 import DOMPurify from 'dompurify';
 
-import { useCommentsActions } from '../../../hooks/comments/useCommentsActions';
+import { useCommentsActions } from '@hooks/comments/useCommentsActions';
+
 import { Comment as CommentType } from '../CommentsBlock/AddNewComment.types';
 import { TextEditor } from '../TextEditor';
 
@@ -23,7 +24,7 @@ type CommentsBlockProps = {
   onClose: VoidFunction;
 };
 
-export const AddNewComment: FC<CommentsBlockProps> = ({
+const AddNewComment: FC<CommentsBlockProps> = ({
   isEditing,
   currentUserId,
   onClose,
@@ -151,3 +152,5 @@ export const AddNewComment: FC<CommentsBlockProps> = ({
     </StyledAddNewCommentRoot>
   );
 };
+
+export default AddNewComment;
