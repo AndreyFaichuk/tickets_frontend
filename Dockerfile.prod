@@ -10,7 +10,7 @@ COPY . .
 
 COPY .env.prod .env
 
-ENV NODE_OPTIONS="--max-old-space-size=4096"  # 4GB
+ENV NODE_OPTIONS="--max-old-space-size=4096"
 
 RUN npm run build
 
