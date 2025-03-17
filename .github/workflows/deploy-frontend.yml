@@ -21,7 +21,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t ghcr.io/username/tickets-frontend:latest -f Dockerfile.prod .
+          docker build -t ghcr.io/AndreyFaichuk/tickets-frontend:latest -f Dockerfile.prod .
           docker push ghcr.io/username/tickets-frontend:latest
 
       - name: Setup SSH key for VPS
@@ -34,6 +34,6 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-18-214-91-17.compute-1.amazonaws.com << 'EOF'
-            docker pull ghcr.io/username/tickets-frontend:latest
+            docker pull ghcr.io/AndreyFaichuk/tickets-frontend:latest
             docker-compose up -d --no-deps tickets_frontend_prod tickets_backend_prod
           EOF
