@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-COPY .env.prod .env
+COPY .env.frontend .env
 RUN npm run build
 
 FROM nginx:alpine AS prod
