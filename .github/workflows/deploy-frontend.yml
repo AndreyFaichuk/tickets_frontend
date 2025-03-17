@@ -9,6 +9,9 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
+    env:
+      FRONTEND_ENV: ${{ secrets.FRONTEND_ENV }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -20,6 +23,13 @@ jobs:
         run: |
           docker build -t ghcr.io/username/tickets-frontend:latest -f Dockerfile.prod .
           docker push ghcr.io/username/tickets-frontend:latest
+
+      - name: Setup SSH key for VPS
+        run: |
+          mkdir -p ~/.ssh
+          printf "%s" "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/tickets-pair.pem
+          chmod 600 ~/.ssh/tickets-pair.pem
+          ssh-keyscan -t rsa -H ec2-18-214-91-17.compute-1.amazonaws.com >> ~/.ssh/known_hosts
 
       - name: Deploy to VPS
         run: |
