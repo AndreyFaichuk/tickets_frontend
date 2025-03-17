@@ -22,7 +22,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build -t ghcr.io/AndreyFaichuk/tickets-frontend:latest -f Dockerfile.prod .
-          docker push ghcr.io/username/tickets-frontend:latest
+          docker push ghcr.io/AndreyFaichuk/tickets-frontend:latest
 
       - name: Setup SSH key for VPS
         run: |
