@@ -6,46 +6,24 @@ on:
       - 'v*'
 
 jobs:
-  test_and_deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run ESLint
-        run: npm run lint
-
-      - name: Run TypeScript types check
-        run: npm run type:check
-
-      - name: Run Vitest tests
-        run: npm run test
-
-      - name: Setup SSH key for VPS
+      - name: Build and push Docker image
         run: |
-          mkdir -p ~/.ssh
-          printf "%s" "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/tickets-pair.pem
-          chmod 600 ~/.ssh/tickets-pair.pem
-          ssh-keyscan -t rsa -H ec2-18-214-91-17.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+          docker build -t ghcr.io/username/tickets-frontend:latest -f Dockerfile.prod .
+          docker push ghcr.io/username/tickets-frontend:latest
 
       - name: Deploy to VPS
         run: |
           ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-18-214-91-17.compute-1.amazonaws.com << 'EOF'
-            cd project/tickets_frontend
-            git fetch --tags
-            git checkout ${{ github.ref }}
-            cd ..
-            docker-compose down --rmi all
-            chmod +x ./start-prod.sh
-            ./start-prod.sh
-            docker image prune -f
+            docker pull ghcr.io/username/tickets-frontend:latest
+            docker-compose up -d --no-deps tickets_frontend_prod tickets_backend_prod
           EOF
