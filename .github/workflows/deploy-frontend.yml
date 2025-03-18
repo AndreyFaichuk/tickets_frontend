@@ -34,8 +34,9 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-18-214-91-17.compute-1.amazonaws.com << 'EOF'
-            echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+            export FRONTEND_ENV="${{ secrets.FRONTEND_ENV }}"
+            echo "${{ secrets.GHCR_LOGIN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
             cd /home/ubuntu/project
             docker-compose pull
-            docker-compose up -d --remove-orphans
+            ./start-frontend.sh
           EOF
