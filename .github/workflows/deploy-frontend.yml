@@ -37,7 +37,7 @@ jobs:
             export FRONTEND_ENV="${{ secrets.FRONTEND_ENV }}"
             echo "${{ secrets.GHCR_LOGIN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
             cd /home/ubuntu/project
-            docker-compose pull
+            docker-compose -f docker-compose.frontend.yml pull
             chmod +x ./start-frontend.sh
             ./start-frontend.sh
           EOF
