@@ -33,7 +33,7 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-214-91-17.compute-1.amazonaws.com << 'EOF'
+          ssh -i ~/.ssh/tickets-pair.pem -o IdentitiesOnly=yes ubuntu@ec2-18-214-91-17.compute-1.amazonaws.com << 'EOF'
             echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
             cd /home/ubuntu/project
             docker-compose pull
