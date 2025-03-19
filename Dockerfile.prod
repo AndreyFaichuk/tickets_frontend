@@ -1,10 +1,14 @@
 FROM node:20 AS build
 WORKDIR /app
 COPY package*.json ./
-COPY .env.frontend .
 RUN npm install
-COPY . .
-RUN npm run build
+
+ARG FRONTEND_ENV
+ENV FRONTEND_ENV=$FRONTEND_ENV
+
+COPY . . 
+RUN echo "$FRONTEND_ENV" > .env
+RUN export $(grep -v '^#' .env | xargs) && npm run build
 
 FROM nginx AS prod
 COPY nginx.conf /etc/nginx/nginx.conf
