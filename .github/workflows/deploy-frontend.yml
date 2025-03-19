@@ -42,4 +42,4 @@ jobs:
              docker pull ghcr.io/andreyfaichuk/tickets-frontend:latest
              chmod +x ./start-prod.sh
              ./start-prod.sh
-           EOF
+          EOF
