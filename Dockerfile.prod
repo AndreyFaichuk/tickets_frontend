@@ -9,8 +9,6 @@ COPY . .
 RUN npm run build
 
 FROM nginx:alpine
-COPY ssl/fullchain.pem /etc/nginx/certs/fullchain.pem
-COPY ssl/privkey.pem /etc/nginx/certs/privkey.pem
 
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80 443
