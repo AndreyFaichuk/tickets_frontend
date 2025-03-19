@@ -15,6 +15,11 @@ export default function AuthPage() {
     handleRegisterUser(valuesWithoutRepeatPassword);
   };
 
+  console.log(
+    import.meta.env.VITE_BASE_BACKEND_URL,
+    'import.meta.env.VITE_BASE_BACKEND_URL',
+  );
+
   return (
     <DefaultAuthLayout
       subTitle={AUTH_CONTENT[AUTH.registration].subtitle}
